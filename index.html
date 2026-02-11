@@ -68,13 +68,12 @@
         }
 
         .main-btn:hover { background: var(--dark); }
+        .msg-box { margin-top: 10px; font-size: 13px; font-weight: bold; display: none; }
 
         .powered-tag {
             font-size: 12px; margin-top: 20px; color: #777;
             text-transform: uppercase; letter-spacing: 1px;
         }
-
-        #error-msg { color: red; font-size: 13px; margin-top: 5px; display: none; }
 
         /* --- Features --- */
         .features { display: flex; gap: 30px; padding: 60px 5%; justify-content: center; flex-wrap: wrap; }
@@ -112,11 +111,13 @@
                 <button class="tab-btn" id="signupBtn">Sign Up</button>
             </div>
 
-            <div class="auth-form" id="authBox">
+            <div class="auth-form">
                 <h2 id="formTitle">Farmer Login</h2>
-                <input type="text" id="user" placeholder="Mobile Number or Email" required>
-                <input type="password" id="pass" placeholder="Password" required>
-                <p id="error-msg">Invalid User or Password</p>
+                <input type="text" id="userInput" placeholder="Mobile Number or Email" required>
+                <input type="password" id="passInput" placeholder="Password" required>
+                
+                <div id="msgBox" class="msg-box"></div>
+
                 <button type="button" class="main-btn" id="submitBtn">Access Portal</button>
                 <p class="powered-tag">Powered by <strong>Pandey Traders</strong></p>
             </div>
@@ -124,14 +125,14 @@
     </header>
 
     <section class="features">
-        <div class="card"><h3>Digital Bahi-Khata</h3><p>Real-time tracking of credits.</p></div>
-        <div class="card"><h3>Market Rates</h3><p>Get daily Mandi prices.</p></div>
-        <div class="card"><h3>Direct Support</h3><p>Talk to Pandey Traders.</p></div>
+        <div class="card"><h3>Digital Bahi-Khata</h3><p>Seeds and fertilizers tracking.</p></div>
+        <div class="card"><h3>Market Rates</h3><p>Daily Mandi prices.</p></div>
+        <div class="card"><h3>Direct Support</h3><p>Talk to Manish & Jayant.</p></div>
     </section>
 
     <footer class="footer">
         <div class="footer-logo">Jaymani <span>Krishi Sewa</span></div>
-        <p>Project by Manish Pandey & Jayant Raj</p>
+        <p>Developed by Manish Pandey & Jayant Raj</p>
     </footer>
 
     <script>
@@ -139,58 +140,53 @@
         const signupBtn = document.getElementById('signupBtn');
         const formTitle = document.getElementById('formTitle');
         const submitBtn = document.getElementById('submitBtn');
-        const errorMsg = document.getElementById('error-msg');
+        const msgBox = document.getElementById('msgBox');
+        
+        let isLogin = true;
 
-        let isLoginMode = true;
-
-        // Switch Tabs
         loginBtn.onclick = () => {
-            isLoginMode = true;
+            isLogin = true;
             loginBtn.classList.add('active');
             signupBtn.classList.remove('active');
             formTitle.innerText = "Farmer Login";
             submitBtn.innerText = "Access Portal";
-            errorMsg.style.display = "none";
+            msgBox.style.display = "none";
         };
 
         signupBtn.onclick = () => {
-            isLoginMode = false;
+            isLogin = false;
             signupBtn.classList.add('active');
             loginBtn.classList.remove('active');
             formTitle.innerText = "Create Account";
             submitBtn.innerText = "Register Now";
-            errorMsg.style.display = "none";
+            msgBox.style.display = "none";
         };
 
-        // Logic without Page Reload (Prevents 404)
         submitBtn.onclick = () => {
-            const username = document.getElementById('user').value;
-            const password = document.getElementById('pass').value;
+            const user = document.getElementById('userInput').value;
+            const pass = document.getElementById('passInput').value;
 
-            if(!username || !password) {
+            if(!user || !pass) {
                 alert("Please fill all fields!");
                 return;
             }
 
-            if(isLoginMode) {
-                // Check if user exists in browser storage
-                const savedPass = localStorage.getItem(username);
-                if(savedPass === password) {
-                    alert("Login Successful! Welcome to Jaymani Krishi Sewa.");
-                    window.location.reload(); // Redirect logic can go here
+            if(isLogin) {
+                // Check in LocalStorage (Browser Memory)
+                const savedPass = localStorage.getItem(user);
+                if(savedPass === pass) {
+                    alert("Login Successful! Welcome to Krishi Sewa.");
+                    // Yahan aap dashboard ka link de sakte hain
                 } else {
-                    errorMsg.style.display = "block";
-                    errorMsg.innerText = "Invalid credentials!";
+                    msgBox.innerText = "Invalid credentials!";
+                    msgBox.style.color = "red";
+                    msgBox.style.display = "block";
                 }
             } else {
-                // Save user to browser storage
-                if(localStorage.getItem(username)) {
-                    alert("User already exists!");
-                } else {
-                    localStorage.setItem(username, password);
-                    alert("Account Created! You can now Login.");
-                    loginBtn.click();
-                }
+                // Save in LocalStorage
+                localStorage.setItem(user, pass);
+                alert("Account Created Successfully! Please login now.");
+                loginBtn.click();
             }
         };
     </script>
