@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaymani Krishi Sewa | Admin Portal</title>
+    <title>Jaymani Krishi Sewa | Admin Controlled Portal</title>
     <style>
         :root {
             --primary-green: #2d6a4f;
@@ -109,7 +109,7 @@
         <div class="auth-container">
             <div class="auth-form">
                 <h2>Farmer Login</h2>
-                <p class="subtitle">Authorized access via Pandey Traders</p>
+                <p class="subtitle">Authorized access only via Pandey Traders</p>
                 
                 <input type="text" id="farmerID" placeholder="Farmer ID / Mobile Number" required>
                 <input type="password" id="farmerPass" placeholder="Enter Password" required>
@@ -152,7 +152,10 @@
             "manish": "pandey786",
             "jayant": "raj123",
             "farmer01": "khet123",
-            "9876543210": "bihar2026"
+            "9876543210": "bihar2026",
+            "demo": "demo123"
+                        "hmp": "hmp"
+
         };
 
         const loginBtn = document.getElementById('loginBtn');
@@ -170,28 +173,37 @@
             }
 
             if (validUsers[id] && validUsers[id] === pass) {
-                // 1. Session status save karein (Security ke liye)
+                // 1. Session Status Save (Security check for other pages)
                 sessionStorage.setItem("isLoggedIn", "true");
                 sessionStorage.setItem("loggedUser", id);
                 
-                // 2. Alert dikhayein
+                // 2. Alert Success
                 alert("Login Safal! Pandey Traders portal mein swagat hai.");
                 
-                // 3. Redirect karein
+                // 3. Auto-Redirect to Dashboard
                 window.location.href = "FarmerFeedback.html"; 
                 
             } else {
                 errorMsg.style.display = "block";
+                
+                // Error Shake Effect
                 const container = document.querySelector('.auth-container');
                 container.style.transform = "translateX(10px)";
-                setTimeout(() => container.style.transform = "translateX(0)", 100);
+                setTimeout(() => container.style.transform = "translateX(-10px)", 100);
+                setTimeout(() => container.style.transform = "translateX(0)", 200);
             }
         };
 
-        // Keyboard support
-        document.onkeydown = (e) => { if (e.key === "Enter") loginBtn.click(); };
+        // UI Helpers
         farmerIDInput.oninput = () => errorMsg.style.display = "none";
         farmerPassInput.oninput = () => errorMsg.style.display = "none";
+
+        // Enter key support
+        document.onkeydown = (e) => {
+            if (e.key === "Enter") {
+                loginBtn.click();
+            }
+        };
     </script>
 </body>
 </html>
