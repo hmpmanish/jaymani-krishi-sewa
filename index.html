@@ -15,20 +15,15 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--bg-gray);
             color: #333;
         }
 
         /* --- Navigation --- */
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-            background: var(--dark);
-            color: white;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%; background: var(--dark); color: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
@@ -44,23 +39,14 @@
             height: 80vh;
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: white;
-            text-align: center;
+            background-size: cover; background-position: center;
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column; color: white; text-align: center;
         }
 
         .auth-container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            width: 350px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            color: #333;
+            background: white; padding: 2.5rem; border-radius: 15px;
+            width: 350px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); color: #333;
         }
 
         .tabs { display: flex; margin-bottom: 1.5rem; border-bottom: 2px solid #eee; }
@@ -78,11 +64,11 @@
         .main-btn {
             width: 100%; padding: 14px; background: var(--primary-green);
             color: white; border: none; border-radius: 8px; cursor: pointer;
-            font-size: 1rem; font-weight: bold; margin-top: 10px;
-            transition: 0.3s;
+            font-size: 1rem; font-weight: bold; margin-top: 10px; transition: 0.3s;
         }
 
         .main-btn:hover { background: var(--dark); }
+        .message { margin-top: 10px; font-size: 14px; color: #d63031; display: none; }
 
         .powered-tag {
             font-size: 12px; margin-top: 20px; color: #777;
@@ -90,31 +76,21 @@
         }
 
         /* --- Features --- */
-        .features {
-            display: flex; gap: 30px; padding: 60px 5%;
-            justify-content: center; flex-wrap: wrap;
-        }
-
+        .features { display: flex; gap: 30px; padding: 60px 5%; justify-content: center; flex-wrap: wrap; }
         .card {
             background: white; padding: 30px; border-radius: 12px;
-            width: 280px; text-align: center;
-            transition: transform 0.3s; border-bottom: 4px solid var(--primary-green);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            width: 280px; text-align: center; transition: transform 0.3s;
+            border-bottom: 4px solid var(--primary-green); box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-
         .card:hover { transform: translateY(-10px); }
         .card h3 { color: var(--primary-green); margin-bottom: 15px; }
 
         /* --- Footer --- */
         .footer {
-            background: var(--dark); color: white;
-            padding: 40px 5%; text-align: center; border-top: 4px solid var(--light-green);
+            background: var(--dark); color: white; padding: 40px 5%;
+            text-align: center; border-top: 4px solid var(--light-green);
         }
-
-        .footer-logo { font-size: 1.2rem; margin-bottom: 10px; }
-        .footer-logo span { color: var(--light-green); }
         .dev-info { font-size: 0.85rem; color: #bbb; margin-top: 15px; line-height: 1.6; }
-        
     </style>
 </head>
 <body>
@@ -136,72 +112,88 @@
                 <button class="tab-btn" id="signupBtn">Sign Up</button>
             </div>
 
-            <form action="/auth" method="POST" class="auth-form" id="authForm">
+            <div class="auth-form">
                 <h2 id="formTitle">Farmer Login</h2>
-                
-                <input type="hidden" name="action" id="authAction" value="login">
-                
-                <input type="text" name="identifier" placeholder="Mobile Number or Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                
-                <button type="submit" class="main-btn" id="submitBtn">Access Portal</button>
-                
+                <input type="text" id="userInput" placeholder="Mobile Number or Email" required>
+                <input type="password" id="passInput" placeholder="Password" required>
+                <button class="main-btn" id="submitBtn">Access Portal</button>
+                <div id="msg" class="message"></div>
                 <p class="powered-tag">Powered by <strong>Pandey Traders</strong></p>
-            </form>
+            </div>
         </div>
     </header>
 
     <section class="features">
-        <div class="card">
-            <h3>Digital Bahi-Khata</h3>
-            <p>Real-time tracking of your seeds, fertilizers, and equipment credits.</p>
-        </div>
-        <div class="card">
-            <h3>Market Rates</h3>
-            <p>Get daily Mandi prices and expert crop analysis instantly.</p>
-        </div>
-        <div class="card">
-            <h3>Direct Support</h3>
-            <p>Connect directly with Pandey Traders for emergency farming needs.</p>
-        </div>
+        <div class="card"><h3>Digital Bahi-Khata</h3><p>Real-time tracking of credits.</p></div>
+        <div class="card"><h3>Market Rates</h3><p>Daily Mandi prices instantly.</p></div>
+        <div class="card"><h3>Direct Support</h3><p>Connect with Pandey Traders.</p></div>
     </section>
 
     <footer class="footer">
         <div class="footer-logo">Jaymani <span>Krishi Sewa</span></div>
-        <p>Providing digital strength to our local farmers.</p>
-        <p><strong>Official Partner: Pandey Traders</strong></p>
-        
-        <div class="dev-info">
-            Project for CSCR1504: Design & Creativity Lab<br>
-            <strong>Developed by: Manish Pandey & Jayant Raj</strong>
-        </div>
+        <div class="dev-info">Developed by: Manish Pandey & Jayant Raj</div>
     </footer>
 
     <script>
         const loginBtn = document.getElementById('loginBtn');
         const signupBtn = document.getElementById('signupBtn');
         const formTitle = document.getElementById('formTitle');
-        const authAction = document.getElementById('authAction');
         const submitBtn = document.getElementById('submitBtn');
+        const msg = document.getElementById('msg');
+        
+        let isLogin = true;
 
-        // Switch to Login
         loginBtn.addEventListener('click', () => {
+            isLogin = true;
             loginBtn.classList.add('active');
             signupBtn.classList.remove('active');
             formTitle.innerText = "Farmer Login";
-            authAction.value = "login";
             submitBtn.innerText = "Access Portal";
+            msg.style.display = "none";
         });
 
-        // Switch to Sign Up
         signupBtn.addEventListener('click', () => {
+            isLogin = false;
             signupBtn.classList.add('active');
             loginBtn.classList.remove('active');
             formTitle.innerText = "Create Account";
-            authAction.value = "signup";
             submitBtn.innerText = "Register Now";
+            msg.style.display = "none";
         });
-    </script>
 
+        submitBtn.addEventListener('click', () => {
+            const user = document.getElementById('userInput').value;
+            const pass = document.getElementById('passInput').value;
+
+            if(!user || !pass) {
+                showMsg("Please fill all fields");
+                return;
+            }
+
+            if(isLogin) {
+                // Login Logic
+                const storedPass = localStorage.getItem(user);
+                if(storedPass === pass) {
+                    alert("Login Successful! Welcome to Krishi Sewa.");
+                } else {
+                    showMsg("Invalid credentials!");
+                }
+            } else {
+                // Signup Logic
+                if(localStorage.getItem(user)) {
+                    showMsg("User already exists!");
+                } else {
+                    localStorage.setItem(user, pass);
+                    alert("Registration Successful! Now please login.");
+                    loginBtn.click();
+                }
+            }
+        });
+
+        function showMsg(text) {
+            msg.innerText = text;
+            msg.style.display = "block";
+        }
+    </script>
 </body>
 </html>
