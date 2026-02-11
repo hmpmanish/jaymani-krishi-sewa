@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaymani Krishi Sewa | Admin Controlled</title>
+    <title>Jaymani Krishi Sewa | Admin Controlled Portal</title>
     <style>
         :root {
             --primary-green: #2d6a4f;
@@ -14,32 +14,43 @@
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0; background-color: var(--bg-gray);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0;
+            background-color: var(--bg-gray);
+            color: #333;
         }
 
+        /* --- Navigation --- */
         .navbar {
             display: flex; justify-content: space-between; align-items: center;
             padding: 1rem 5%; background: var(--dark); color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .logo { font-size: 1.5rem; font-weight: bold; }
         .logo span { color: var(--light-green); }
 
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links a { color: white; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--light-green); }
+
+        /* --- Hero & Login Section --- */
         .hero {
             height: 80vh;
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80');
             background-size: cover; background-position: center;
             display: flex; justify-content: center; align-items: center;
+            flex-direction: column; color: white; text-align: center;
         }
 
         .auth-container {
             background: white; padding: 2.5rem; border-radius: 15px;
-            width: 350px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            width: 350px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); color: #333;
         }
 
-        .auth-form h2 { color: var(--primary-green); margin-bottom: 20px; }
+        .auth-form h2 { color: var(--primary-green); margin-bottom: 5px; }
+        .auth-form p.subtitle { font-size: 12px; color: #666; margin-bottom: 20px; }
 
         .auth-form input {
             width: 100%; padding: 12px; margin: 10px 0;
@@ -49,15 +60,35 @@
         .main-btn {
             width: 100%; padding: 14px; background: var(--primary-green);
             color: white; border: none; border-radius: 8px; cursor: pointer;
-            font-size: 1rem; font-weight: bold; transition: 0.3s;
+            font-size: 1rem; font-weight: bold; margin-top: 10px; transition: 0.3s;
         }
 
         .main-btn:hover { background: var(--dark); }
 
-        #error-msg { color: red; font-size: 13px; margin-top: 10px; display: none; }
+        #error-msg { 
+            color: #d63031; font-size: 13px; font-weight: bold; 
+            margin-top: 10px; display: none; background: #ffeaa7; 
+            padding: 5px; border-radius: 5px;
+        }
 
+        .powered-tag {
+            font-size: 11px; margin-top: 20px; color: #777;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* --- Features --- */
+        .features { display: flex; gap: 30px; padding: 60px 5%; justify-content: center; flex-wrap: wrap; }
+        .card {
+            background: white; padding: 30px; border-radius: 12px;
+            width: 280px; text-align: center; transition: transform 0.3s;
+            border-bottom: 4px solid var(--primary-green); box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .card:hover { transform: translateY(-10px); }
+        .card h3 { color: var(--primary-green); margin-bottom: 15px; }
+
+        /* --- Footer --- */
         .footer {
-            background: var(--dark); color: white; padding: 20px;
+            background: var(--dark); color: white; padding: 40px 5%;
             text-align: center; border-top: 4px solid var(--light-green);
         }
     </style>
@@ -66,54 +97,90 @@
 
     <nav class="navbar">
         <div class="logo">Jaymani <span>Krishi Sewa</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Marketplace</a></li>
+            <li><a href="#">Bahi-Khata</a></li>
+            <li><a href="#">Support</a></li>
+        </ul>
     </nav>
 
     <header class="hero">
         <div class="auth-container">
             <div class="auth-form">
                 <h2>Farmer Login</h2>
-                <p style="font-size: 13px; color: #666;">(Provided by Pandey Traders)</p>
+                <p class="subtitle">Authorized access only via Pandey Traders</p>
                 
-                <input type="text" id="userInput" placeholder="Enter Farmer ID">
-                <input type="password" id="passInput" placeholder="Enter Password">
+                <input type="text" id="farmerID" placeholder="Enter Farmer ID / Mobile" required>
+                <input type="password" id="farmerPass" placeholder="Enter Password" required>
                 
-                <p id="error-msg">Aapka ID ya Password galat hai!</p>
+                <div id="error-msg">⚠ Galat ID ya Password!</div>
 
-                <button type="button" class="main-btn" id="loginBtn">Login Portal</button>
+                <button type="button" class="main-btn" id="loginBtn">Access Portal</button>
+                
+                <p class="powered-tag">Powered by <strong>Pandey Traders</strong></p>
             </div>
         </div>
     </header>
 
+    <section class="features">
+        <div class="card">
+            <h3>Digital Bahi-Khata</h3>
+            <p>Aapke khate ka pura hisab-kitab ab digital form mein.</p>
+        </div>
+        <div class="card">
+            <h3>Market Rates</h3>
+            <p>Mandi ka bhav aur expert kheti ki salah.</p>
+        </div>
+        <div class="card">
+            <h3>Direct Support</h3>
+            <p>Pandey Traders se seedha sampark karein.</p>
+        </div>
+    </section>
+
     <footer class="footer">
-        <p>Official Partner: <strong>Pandey Traders</strong></p>
-        <p style="font-size: 12px;">Developed by Manish Pandey & Jayant Raj</p>
+        <div class="footer-logo">Jaymani <span>Krishi Sewa</span></div>
+        <p>Providing digital strength to local farmers.</p>
+        <div style="font-size: 0.8rem; color: #bbb; margin-top: 10px;">
+            Developed by Manish Pandey & Jayant Raj
+        </div>
     </footer>
 
     <script>
-        // --- ADMIN: Yahan aap Farmers ki ID aur Password set karein ---
+        // --- ADMIN DATABASE (Yahan aap Farmer ki ID aur Password add karein) ---
         const validUsers = {
-            "farmer001": "pass123",
-            "manish": "pandey786",
-            "jayant": "raj123",
-            "9988776655": "bihar123" // Mobile number bhi ID ho sakti hai
+            "manish": "pandey786",      // Admin
+            "jayant": "raj123",        // Admin
+            "farmer01": "khet123",     // Example Farmer 1
+            "9876543210": "bihar2026", // Mobile ID Example
+            "demo": "demo123"          // Testing ke liye
         };
 
         const loginBtn = document.getElementById('loginBtn');
         const errorMsg = document.getElementById('error-msg');
 
         loginBtn.onclick = () => {
-            const user = document.getElementById('userInput').value;
-            const pass = document.getElementById('passInput').value;
+            const id = document.getElementById('farmerID').value;
+            const pass = document.getElementById('farmerPass').value;
 
-            // Check if ID exists and password matches
-            if (validUsers[user] && validUsers[user] === pass) {
-                alert("Namaste! Login Safal Raha.");
-                // Yahan aap Dashboard par bhej sakte hain
+            // Logic to check credentials
+            if (validUsers[id] && validUsers[id] === pass) {
+                errorMsg.style.display = "none";
+                alert("Login Safal! Namaste, Pandey Traders portal mein swagat hai.");
+                
+                // Redirect to Feedback or Dashboard
                 window.location.href = "FarmerFeedback.html"; 
             } else {
                 errorMsg.style.display = "block";
+                // Input shake effect (Optional)
+                document.querySelector('.auth-container').style.animation = "shake 0.2s ease-in-out 0s 2";
             }
         };
+
+        // Input clear error msg on type
+        document.getElementById('farmerID').oninput = () => errorMsg.style.display = "none";
+        document.getElementById('farmerPass').oninput = () => errorMsg.style.display = "none";
     </script>
+
 </body>
 </html>
