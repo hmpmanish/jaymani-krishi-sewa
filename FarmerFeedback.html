@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmer Dashboard | Order Summary</title>
+    <title>Farmer Dashboard | Jaymani Krishi Sewa</title>
     <style>
         :root {
             --primary: #2d6a4f;
             --secondary: #40916c;
             --bg: #f0f2f5;
             --white: #ffffff;
+            --danger: #e74c3c;
         }
 
         body {
@@ -18,20 +19,26 @@
             margin: 0; padding: 20px;
         }
 
+        /* --- Header Section --- */
         .dashboard-header {
             background: var(--primary);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
+        .header-info h2 { margin: 0; font-size: 22px; }
+        .header-info p { margin: 5px 0 0; opacity: 0.9; }
+
+        /* --- Cards Section --- */
         .summary-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -40,67 +47,79 @@
             background: var(--white);
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-left: 5px solid var(--primary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--primary);
+            transition: 0.3s;
         }
 
-        .card h3 { margin: 0; color: #666; font-size: 14px; }
-        .card p { margin: 10px 0 0; font-size: 24px; font-weight: bold; color: var(--primary); }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { margin: 0; color: #666; font-size: 14px; text-transform: uppercase; }
+        .card p { margin: 10px 0 0; font-size: 26px; font-weight: bold; color: var(--primary); }
 
+        /* --- Table Section --- */
         .order-section {
             background: var(--white);
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow-x: auto;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+        .order-section h3 { margin-bottom: 20px; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
 
         th {
             background: #f8f9fa;
             text-align: left;
-            padding: 12px;
-            border-bottom: 2px solid #eee;
+            padding: 15px;
+            font-weight: 600;
             color: var(--primary);
+            border-bottom: 2px solid #dee2e6;
         }
 
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-        }
+        td { padding: 15px; border-bottom: 1px solid #eee; font-size: 14px; }
 
+        /* --- Status Tags --- */
         .status {
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: bold;
         }
-
         .paid { background: #d1e7dd; color: #0f5132; }
         .credit { background: #fff3cd; color: #856404; }
 
+        /* --- Buttons --- */
         .btn-logout {
-            background: #e74c3c;
+            background: var(--danger);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
+            transition: 0.3s;
         }
+        .btn-logout:hover { background: #c0392b; }
+
     </style>
 </head>
 <body>
 
+    <script>
+        if (sessionStorage.getItem("isLoggedIn") !== "true") {
+            alert("Kripya pehle login karein!");
+            window.location.href = "index.html"; 
+        }
+    </script>
+
     <div class="dashboard-header">
-        <div>
-            <h2>Jaymani Krishi Sewa Dashboard</h2>
-            <p>Welcome back, Farmer ID: <span id="displayID">Farmer001</span></p>
+        <div class="header-info">
+            <h2>Namaste, <span id="userName">Farmer</span>!</h2>
+            <p>Jaymani Krishi Sewa - Pandey Traders Portal</p>
         </div>
-        <button class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
+        <button class="btn-logout" onclick="logout()">Log Out</button>
     </div>
 
     <div class="summary-cards">
@@ -113,13 +132,13 @@
             <p>₹ 4,500</p>
         </div>
         <div class="card">
-            <h3>Last Order Date</h3>
+            <h3>Last Order</h3>
             <p>10 Feb 2026</p>
         </div>
     </div>
 
     <div class="order-section">
-        <h3>Recent Orders (Seeds, Fertilizers & Pesticides)</h3>
+        <h3>Recent Order Summary (Seeds & Fertilizers)</h3>
         <table>
             <thead>
                 <tr>
@@ -131,7 +150,7 @@
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody id="orderTableBody">
+            <tbody>
                 <tr>
                     <td>08 Feb 2026</td>
                     <td>Seeds</td>
@@ -159,6 +178,19 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        // User ka naam set karna
+        document.getElementById("userName").innerText = sessionStorage.getItem("loggedUser") || "Farmer";
+
+        // Logout Function
+        function logout() {
+            if(confirm("Kya aap logout karna chahte hain?")) {
+                sessionStorage.clear();
+                window.location.href = "index.html";
+            }
+        }
+    </script>
 
 </body>
 </html>
