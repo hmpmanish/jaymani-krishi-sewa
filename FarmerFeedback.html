@@ -103,13 +103,23 @@
         }
         .btn-logout:hover { background: #c0392b; }
 
+        .market-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
     </style>
 </head>
 <body>
 
     <script>
-        // --- Security Check ---
-        // Agar user login nahi hai, to redirect index page par
+        // Direct link se aane walo ko rokhne ke liye
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
             alert("Kripya pehle login karein!");
             window.location.href = "index.html"; 
@@ -119,9 +129,12 @@
     <div class="dashboard-header">
         <div class="header-info">
             <h2>Namaste, <span id="userName">Farmer</span>!</h2>
-            <p>Jaymani Krishi Sewa - Pandey Traders Portal</p>
+            <p>Bahi-Khata & Order Summary | Pandey Traders</p>
         </div>
-        <button class="btn-logout" onclick="logout()">Log Out</button>
+        <div>
+            <a href="Marketplace.html" class="market-btn">🛒 Marketplace</a>
+            <button class="btn-logout" onclick="logout()">Log Out</button>
+        </div>
     </div>
 
     <div class="summary-cards">
@@ -134,13 +147,13 @@
             <p>₹ 4,500</p>
         </div>
         <div class="card">
-            <h3>Last Order</h3>
+            <h3>Last Visit</h3>
             <p>10 Feb 2026</p>
         </div>
     </div>
 
     <div class="order-section">
-        <h3>Recent Order Summary (Seeds & Fertilizers)</h3>
+        <h3>Recent Transactions (Seeds, Fertilizers & Pesticides)</h3>
         <table>
             <thead>
                 <tr>
@@ -182,15 +195,15 @@
     </div>
 
     <script>
-        // User ka naam display karna
-        const currentUser = sessionStorage.getItem("loggedUser") || "Farmer";
-        document.getElementById("userName").innerText = currentUser;
+        // 1. Farmer ka naam display karna jo login karke aaya hai
+        const currentFarmer = sessionStorage.getItem("loggedUser") || "Farmer";
+        document.getElementById("userName").innerText = currentFarmer;
 
-        // Logout Function
+        // 2. Logout Function
         function logout() {
             if(confirm("Kya aap logout karna chahte hain?")) {
-                sessionStorage.clear(); // Session data clear karein
-                window.location.href = "index.html"; // Redirect to login
+                sessionStorage.clear(); // Session clear karein
+                window.location.href = "index.html"; // Wapas login page par
             }
         }
     </script>
