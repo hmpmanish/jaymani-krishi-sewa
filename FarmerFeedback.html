@@ -1,161 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jaymani Krishi Sewa - Farmer Feedback</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f6f6f6;
-    margin: 0;
-    padding: 20px;
-  }
-  .container {
-    max-width: 700px;
-    margin: auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  h1 {
-    text-align: center;
-    color: #2c3e50;
-  }
-  p {
-    text-align: center;
-    color: #555;
-  }
-  label {
-    display: block;
-    margin: 15px 0 5px;
-    font-weight: bold;
-  }
-  input[type="text"],
-  input[type="tel"],
-  textarea,
-  select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  input[type="checkbox"], input[type="radio"] {
-    margin-right: 10px;
-  }
-  .option-group {
-    margin-top: 5px;
-  }
-  button {
-    background-color: #27ae60;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-  }
-  button:hover {
-    background-color: #219150;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard | Order Summary</title>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --secondary: #40916c;
+            --bg: #f0f2f5;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            margin: 0; padding: 20px;
+        }
+
+        .dashboard-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--primary);
+        }
+
+        .card h3 { margin: 0; color: #666; font-size: 14px; }
+        .card p { margin: 10px 0 0; font-size: 24px; font-weight: bold; color: var(--primary); }
+
+        .order-section {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background: #f8f9fa;
+            text-align: left;
+            padding: 12px;
+            border-bottom: 2px solid #eee;
+            color: var(--primary);
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .paid { background: #d1e7dd; color: #0f5132; }
+        .credit { background: #fff3cd; color: #856404; }
+
+        .btn-logout {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>Jaymani Krishi Sewa - Farmer Feedback</h1>
-  <p>This survey is conducted by Manish Pandey and Jayant Raj from Sharda University to understand challenges faced by farmers in rural agriculture.</p>
-
-  <form id="farmerForm">
-    <!-- Section 1: Farmer Info -->
-    <label for="name">Full Name *</label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="village">Village</label>
-    <input type="text" id="village" name="village">
-
-    <label for="mobile">Mobile Number</label>
-    <input type="tel" id="mobile" name="mobile">
-
-    <label for="crops">Crops Grown</label>
-    <input type="text" id="crops" name="crops" placeholder="e.g., Wheat, Rice">
-
-    <!-- Section 2: Problem Identification -->
-    <label>1. Market Distance</label>
-    <div class="option-group">
-      <input type="radio" name="market_distance" value="0-5 km" required> 0–5 km<br>
-      <input type="radio" name="market_distance" value="5-10 km"> 5–10 km<br>
-      <input type="radio" name="market_distance" value="10 km+"> More than 10 km
+    <div class="dashboard-header">
+        <div>
+            <h2>Jaymani Krishi Sewa Dashboard</h2>
+            <p>Welcome back, Farmer ID: <span id="displayID">Farmer001</span></p>
+        </div>
+        <button class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
     </div>
 
-    <label>2. Stock Issues</label>
-    <div class="option-group">
-      <input type="radio" name="stock_issue" value="Frequently" required> Frequently<br>
-      <input type="radio" name="stock_issue" value="Sometimes"> Sometimes<br>
-      <input type="radio" name="stock_issue" value="No"> No
+    <div class="summary-cards">
+        <div class="card">
+            <h3>Total Orders</h3>
+            <p>12</p>
+        </div>
+        <div class="card">
+            <h3>Total Due (Udhaari)</h3>
+            <p>₹ 4,500</p>
+        </div>
+        <div class="card">
+            <h3>Last Order Date</h3>
+            <p>10 Feb 2026</p>
+        </div>
     </div>
 
-    <label>3. Resource Loss (Time/Money)</label>
-    <input type="text" name="resource_loss" placeholder="e.g., ₹100, 2 hours">
-
-    <label>4. Pricing Transparency</label>
-    <div class="option-group">
-      <input type="radio" name="pricing" value="Yes" required> Yes<br>
-      <input type="radio" name="pricing" value="No"> No<br>
-      <input type="radio" name="pricing" value="Unsure"> Unsure
+    <div class="order-section">
+        <h3>Recent Orders (Seeds, Fertilizers & Pesticides)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="orderTableBody">
+                <tr>
+                    <td>08 Feb 2026</td>
+                    <td>Seeds</td>
+                    <td>Hybrid Wheat Seeds</td>
+                    <td>50 Kg</td>
+                    <td>₹ 2,200</td>
+                    <td><span class="status paid">Paid</span></td>
+                </tr>
+                <tr>
+                    <td>05 Feb 2026</td>
+                    <td>Fertilizer</td>
+                    <td>Urea (IFFCO)</td>
+                    <td>2 Bags</td>
+                    <td>₹ 600</td>
+                    <td><span class="status credit">Credit</span></td>
+                </tr>
+                <tr>
+                    <td>28 Jan 2026</td>
+                    <td>Pesticide</td>
+                    <td>Neem Oil Spray</td>
+                    <td>5 Liters</td>
+                    <td>₹ 1,500</td>
+                    <td><span class="status paid">Paid</span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <label>5. Current Practice</label>
-    <div class="option-group">
-      <input type="checkbox" name="practice" value="Phone Calls"> Phone calls<br>
-      <input type="checkbox" name="practice" value="Word of Mouth"> Word of mouth<br>
-      <input type="checkbox" name="practice" value="Direct Visit"> Direct visit to market<br>
-      <input type="checkbox" name="practice" value="Other"> Other
-    </div>
-
-    <label>6. Prefer SMS for stock info if no internet?</label>
-    <div class="option-group">
-      <input type="radio" name="sms_access" value="Yes" required> Yes<br>
-      <input type="radio" name="sms_access" value="No"> No<br>
-      <input type="radio" name="sms_access" value="Maybe"> Maybe
-    </div>
-
-    <label>7. Advance Reservation of stock?</label>
-    <div class="option-group">
-      <input type="radio" name="advance_reserve" value="Yes" required> Yes<br>
-      <input type="radio" name="advance_reserve" value="No"> No
-    </div>
-
-    <label>8. Connect digitally with verified local shops?</label>
-    <div class="option-group">
-      <input type="radio" name="local_shops" value="Yes" required> Yes<br>
-      <input type="radio" name="local_shops" value="No"> No
-    </div>
-
-    <label>9. Suggestions (Optional)</label>
-    <textarea name="suggestions" rows="4" placeholder="Your suggestions..."></textarea>
-
-    <label>10. Willingness to use Jaymani Krishi Sewa?</label>
-    <div class="option-group">
-      <input type="radio" name="willingness" value="Yes, definitely" required> Yes, definitely<br>
-      <input type="radio" name="willingness" value="Maybe, if easy"> Maybe, if it is easy<br>
-      <input type="radio" name="willingness" value="No"> No
-    </div>
-
-    <button type="submit">Submit Feedback</button>
-  </form>
-</div>
-
-<script>
-  document.getElementById("farmerForm").addEventListener("submit", function(e){
-    e.preventDefault();
-    alert("Thank you for your feedback! Form submitted successfully.");
-    this.reset();
-  });
-</script>
 
 </body>
 </html>
