@@ -108,6 +108,8 @@
 <body>
 
     <script>
+        // --- Security Check ---
+        // Agar user login nahi hai, to redirect index page par
         if (sessionStorage.getItem("isLoggedIn") !== "true") {
             alert("Kripya pehle login karein!");
             window.location.href = "index.html"; 
@@ -180,14 +182,15 @@
     </div>
 
     <script>
-        // User ka naam set karna
-        document.getElementById("userName").innerText = sessionStorage.getItem("loggedUser") || "Farmer";
+        // User ka naam display karna
+        const currentUser = sessionStorage.getItem("loggedUser") || "Farmer";
+        document.getElementById("userName").innerText = currentUser;
 
         // Logout Function
         function logout() {
             if(confirm("Kya aap logout karna chahte hain?")) {
-                sessionStorage.clear();
-                window.location.href = "index.html";
+                sessionStorage.clear(); // Session data clear karein
+                window.location.href = "index.html"; // Redirect to login
             }
         }
     </script>
