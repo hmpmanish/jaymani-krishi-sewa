@@ -127,7 +127,7 @@
     <section class="features">
         <div class="card"><h3>Digital Bahi-Khata</h3><p>Seeds and fertilizers tracking.</p></div>
         <div class="card"><h3>Market Rates</h3><p>Daily Mandi prices.</p></div>
-        <div class="card"><h3>Direct Support</h3><p>Talk to Manish & Jayant.</p></div>
+        <div class="card"><h3>Direct Support</h3><p>Connect with Pandey Traders.</p></div>
     </section>
 
     <footer class="footer">
@@ -172,21 +172,25 @@
             }
 
             if(isLogin) {
-                // Check in LocalStorage (Browser Memory)
+                // Check if user exists in LocalStorage
                 const savedPass = localStorage.getItem(user);
                 if(savedPass === pass) {
                     alert("Login Successful! Welcome to Krishi Sewa.");
-                    // Yahan aap dashboard ka link de sakte hain
+                    // In a real app, you'd redirect here
                 } else {
-                    msgBox.innerText = "Invalid credentials!";
+                    msgBox.innerText = "User not found or wrong password!";
                     msgBox.style.color = "red";
                     msgBox.style.display = "block";
                 }
             } else {
-                // Save in LocalStorage
-                localStorage.setItem(user, pass);
-                alert("Account Created Successfully! Please login now.");
-                loginBtn.click();
+                // Save user to LocalStorage (Acts as your database)
+                if(localStorage.getItem(user)) {
+                    alert("User already exists! Try logging in.");
+                } else {
+                    localStorage.setItem(user, pass);
+                    alert("Account Created! Now you can Login.");
+                    loginBtn.click();
+                }
             }
         };
     </script>
