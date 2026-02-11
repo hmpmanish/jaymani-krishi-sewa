@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaymani Krishi Sewa | Admin Controlled Portal</title>
+    <title>Jaymani Krishi Sewa | Admin Portal</title>
     <style>
         :root {
             --primary-green: #2d6a4f;
@@ -87,7 +87,6 @@
         .card:hover { transform: translateY(-10px); }
         .card h3 { color: var(--primary-green); margin-bottom: 15px; }
 
-        /* --- Footer --- */
         .footer {
             background: var(--dark); color: white; padding: 40px 5%;
             text-align: center; border-top: 4px solid var(--light-green);
@@ -100,8 +99,8 @@
         <div class="logo">Jaymani <span>Krishi Sewa</span></div>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Marketplace</a></li>
-            <li><a href="#">Bahi-Khata</a></li>
+            <li><a href="Marketplace.html">Marketplace</a></li>
+            <li><a href="FarmerFeedback.html">Bahi-Khata</a></li>
             <li><a href="#">Support</a></li>
         </ul>
     </nav>
@@ -110,9 +109,9 @@
         <div class="auth-container">
             <div class="auth-form">
                 <h2>Farmer Login</h2>
-                <p class="subtitle">Authorized access only via Pandey Traders</p>
+                <p class="subtitle">Authorized access via Pandey Traders</p>
                 
-                <input type="text" id="farmerID" placeholder="Enter Farmer ID / Mobile" required>
+                <input type="text" id="farmerID" placeholder="Farmer ID / Mobile Number" required>
                 <input type="password" id="farmerPass" placeholder="Enter Password" required>
                 
                 <div id="error-msg">⚠ Galat ID ya Password!</div>
@@ -127,11 +126,11 @@
     <section class="features">
         <div class="card">
             <h3>Digital Bahi-Khata</h3>
-            <p>Aapke khate ka pura hisab-kitab ab digital form mein.</p>
+            <p>Aapke khate ka pura hisab ab digital form mein.</p>
         </div>
         <div class="card">
             <h3>Market Rates</h3>
-            <p>Mandi ka bhav aur expert kheti ki salah.</p>
+            <p>Mandi ka bhav aur expert kheti salah.</p>
         </div>
         <div class="card">
             <h3>Direct Support</h3>
@@ -153,8 +152,7 @@
             "manish": "pandey786",
             "jayant": "raj123",
             "farmer01": "khet123",
-            "9876543210": "bihar2026",
-            "demo": "demo123"
+            "9876543210": "bihar2026"
         };
 
         const loginBtn = document.getElementById('loginBtn');
@@ -172,39 +170,28 @@
             }
 
             if (validUsers[id] && validUsers[id] === pass) {
-                errorMsg.style.display = "none";
-                
-                // ⭐ SESSION SECURITY: Isse Dashboard access milega ⭐
+                // 1. Session status save karein (Security ke liye)
                 sessionStorage.setItem("isLoggedIn", "true");
                 sessionStorage.setItem("loggedUser", id);
                 
-                alert("Login Safal! Namaste, Pandey Traders portal mein swagat hai.");
+                // 2. Alert dikhayein
+                alert("Login Safal! Pandey Traders portal mein swagat hai.");
                 
-                // Redirect exactly to Dashboard file
+                // 3. Redirect karein
                 window.location.href = "FarmerFeedback.html"; 
                 
             } else {
                 errorMsg.style.display = "block";
-                
-                // Shake effect for error highlight
                 const container = document.querySelector('.auth-container');
                 container.style.transform = "translateX(10px)";
-                setTimeout(() => container.style.transform = "translateX(-10px)", 100);
-                setTimeout(() => container.style.transform = "translateX(0)", 200);
+                setTimeout(() => container.style.transform = "translateX(0)", 100);
             }
         };
 
-        // Hide error message when user starts typing again
+        // Keyboard support
+        document.onkeydown = (e) => { if (e.key === "Enter") loginBtn.click(); };
         farmerIDInput.oninput = () => errorMsg.style.display = "none";
         farmerPassInput.oninput = () => errorMsg.style.display = "none";
-
-        // Login on pressing Enter Key
-        document.onkeydown = (e) => {
-            if (e.key === "Enter") {
-                loginBtn.click();
-            }
-        };
     </script>
-
 </body>
 </html>
