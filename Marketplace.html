@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace | Jaymani Krishi Sewa</title>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --secondary: #40916c;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --accent: #ff9f43;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            margin: 0; padding: 20px;
+        }
+
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--primary); color: white; padding: 15px 30px;
+            border-radius: 10px; margin-bottom: 30px;
+        }
+
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover { transform: scale(1.03); }
+
+        .product-img {
+            height: 180px;
+            background-color: #e9ecef;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 50px;
+        }
+
+        .product-info { padding: 20px; }
+        .category { font-size: 12px; color: var(--secondary); font-weight: bold; text-transform: uppercase; }
+        .name { font-size: 18px; font-weight: bold; margin: 10px 0; color: #333; }
+        .price { font-size: 20px; color: var(--primary); font-weight: bold; }
+        .stock { font-size: 13px; color: #777; margin-bottom: 15px; }
+
+        .buy-btn {
+            width: 100%; padding: 12px;
+            background: var(--primary); color: white;
+            border: none; border-radius: 8px; cursor: pointer;
+            font-weight: bold; transition: 0.3s;
+        }
+
+        .buy-btn:hover { background: var(--secondary); }
+
+        .nav-btn {
+            color: white; text-decoration: none; font-weight: bold;
+            padding: 10px 15px; border-radius: 5px; background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2>Krishi Marketplace</h2>
+        <a href="FarmerFeedback.html" class="nav-btn">← Back to Dashboard</a>
+    </div>
+
+    <div class="market-grid">
+        <div class="product-card">
+            <div class="product-img">🌾</div>
+            <div class="product-info">
+                <span class="category">Seeds</span>
+                <div class="name">Pioneer Hybrid Mustard (Sarson)</div>
+                <div class="price">₹ 850 <small>/ 1kg</small></div>
+                <p class="stock">Available Stock: 150 Pkts</p>
+                <button class="buy-btn" onclick="order('Mustard Seeds')">Order Now</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">🧪</div>
+            <div class="product-info">
+                <span class="category">Fertilizer</span>
+                <div class="name">IFFCO Nano Urea Liquid</div>
+                <div class="price">₹ 240 <small>/ 500ml</small></div>
+                <p class="stock">Available Stock: 500 Bottles</p>
+                <button class="buy-btn" onclick="order('Nano Urea')">Order Now</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">🛡️</div>
+            <div class="product-info">
+                <span class="category">Pesticide</span>
+                <div class="name">Syngenta Matador Insecticide</div>
+                <div class="price">₹ 1,200 <small>/ 1L</small></div>
+                <p class="stock">Available Stock: 40 Bottles</p>
+                <button class="buy-btn" onclick="order('Matador')">Order Now</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">🥔</div>
+            <div class="product-info">
+                <span class="category">Seeds</span>
+                <div class="name">Kufri Jyoti Potato Seeds</div>
+                <div class="price">₹ 1,800 <small>/ 50kg Bag</small></div>
+                <p class="stock">Available Stock: 20 Bags</p>
+                <button class="buy-btn" onclick="order('Potato Seeds')">Order Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function order(pName) {
+            alert(pName + " ke liye aapka request Pandey Traders ko bhej diya gaya hai. Ham jald hi aapse sampark karenge!");
+        }
+
+        // Security Check
+        if (sessionStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "index.html"; 
+        }
+    </script>
+
+</body>
+</html>
