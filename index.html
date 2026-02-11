@@ -55,6 +55,7 @@
         .auth-form input {
             width: 100%; padding: 12px; margin: 10px 0;
             border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;
+            outline: none;
         }
 
         .main-btn {
@@ -68,7 +69,7 @@
         #error-msg { 
             color: #d63031; font-size: 13px; font-weight: bold; 
             margin-top: 10px; display: none; background: #ffeaa7; 
-            padding: 5px; border-radius: 5px;
+            padding: 8px; border-radius: 5px;
         }
 
         .powered-tag {
@@ -147,65 +148,63 @@
     </footer>
 
     <script>
-    // --- ADMIN DATABASE (Yahan aap Farmers ki ID aur Password set karte hain) ---
-    const validUsers = {
-        "manish": "pandey786",      // Admin 1
-        "jayant": "raj123",        // Admin 2
-        "farmer01": "khet123",     // Example Farmer
-        "9876543210": "bihar2026", // Mobile Number as ID
-        "demo": "demo123"          // Testing ke liye
-    };
+        // --- ADMIN DATABASE ---
+        const validUsers = {
+            "manish": "pandey786",
+            "jayant": "raj123",
+            "farmer01": "khet123",
+            "9876543210": "bihar2026",
+            "demo": "demo123"
+        };
 
-    const loginBtn = document.getElementById('loginBtn');
-    const errorMsg = document.getElementById('error-msg');
-    const farmerIDInput = document.getElementById('farmerID');
-    const farmerPassInput = document.getElementById('farmerPass');
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMsg = document.getElementById('error-msg');
+        const farmerIDInput = document.getElementById('farmerID');
+        const farmerPassInput = document.getElementById('farmerPass');
 
-    // Login Function
-    loginBtn.onclick = () => {
-        const id = farmerIDInput.value.trim();
-        const pass = farmerPassInput.value.trim();
+        loginBtn.onclick = () => {
+            const id = farmerIDInput.value.trim();
+            const pass = farmerPassInput.value.trim();
 
-        // 1. Check karein ki fields khali to nahi hain
-        if (id === "" || pass === "") {
-            alert("Kripya ID aur Password dono bharein!");
-            return;
-        }
+            if (id === "" || pass === "") {
+                alert("Kripya ID aur Password dono bharein!");
+                return;
+            }
 
-        // 2. Credentials match karein
-        if (validUsers[id] && validUsers[id] === pass) {
-            errorMsg.style.display = "none";
-            
-            // 3. Success Message
-            alert("Login Safal! Namaste, Pandey Traders portal mein swagat hai.");
-            
-            // 4. Redirect to Dashboard (FarmerFeedback.html)
-            // Note: Make sure file name is exactly 'FarmerFeedback.html' in GitHub
-            window.location.href = "FarmerFeedback.html"; 
-            
-        } else {
-            // 5. Error handling
-            errorMsg.style.display = "block";
-            
-            // Input fields ko thoda shake karne ka effect (Optional)
-            const container = document.querySelector('.auth-container');
-            container.style.transform = "translateX(10px)";
-            setTimeout(() => container.style.transform = "translateX(-10px)", 100);
-            setTimeout(() => container.style.transform = "translateX(0)", 200);
-        }
-    };
+            if (validUsers[id] && validUsers[id] === pass) {
+                errorMsg.style.display = "none";
+                
+                // ⭐ SESSION SECURITY: Isse Dashboard access milega ⭐
+                sessionStorage.setItem("isLoggedIn", "true");
+                sessionStorage.setItem("loggedUser", id);
+                
+                alert("Login Safal! Namaste, Pandey Traders portal mein swagat hai.");
+                
+                // Redirect exactly to Dashboard file
+                window.location.href = "FarmerFeedback.html"; 
+                
+            } else {
+                errorMsg.style.display = "block";
+                
+                // Shake effect for error highlight
+                const container = document.querySelector('.auth-container');
+                container.style.transform = "translateX(10px)";
+                setTimeout(() => container.style.transform = "translateX(-10px)", 100);
+                setTimeout(() => container.style.transform = "translateX(0)", 200);
+            }
+        };
 
-    // Typing ke waqt error message chhupane ke liye
-    farmerIDInput.oninput = () => errorMsg.style.display = "none";
-    farmerPassInput.oninput = () => errorMsg.style.display = "none";
+        // Hide error message when user starts typing again
+        farmerIDInput.oninput = () => errorMsg.style.display = "none";
+        farmerPassInput.oninput = () => errorMsg.style.display = "none";
 
-    // 'Enter' key se login karne ke liye
-    document.onkeydown = (e) => {
-        if (e.key === "Enter") {
-            loginBtn.click();
-        }
-    };
-</script>
+        // Login on pressing Enter Key
+        document.onkeydown = (e) => {
+            if (e.key === "Enter") {
+                loginBtn.click();
+            }
+        };
+    </script>
 
 </body>
 </html>
