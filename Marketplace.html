@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketplace | Jaymani Krishi Sewa</title>
+    <title>Krishi Marketplace | Jaymani Krishi Sewa</title>
     <style>
         :root {
             --primary: #2d6a4f;
@@ -11,81 +11,147 @@
             --bg: #f4f7f6;
             --white: #ffffff;
             --accent: #ff9f43;
+            --danger: #e74c3c;
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg);
             margin: 0; padding: 20px;
         }
 
-        .header {
-            display: flex; justify-content: space-between; align-items: center;
-            background: var(--primary); color: white; padding: 15px 30px;
-            border-radius: 10px; margin-bottom: 30px;
+        /* --- Header --- */
+        .market-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px 5%;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
 
+        .header-btns { display: flex; gap: 10px; }
+        
+        .btn-nav {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .btn-nav:hover { background: var(--white); color: var(--primary); }
+
+        /* --- Product Grid --- */
         .market-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
+            padding-bottom: 50px;
         }
 
         .product-card {
             background: var(--white);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: 0.3s;
-            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
-        .product-card:hover { transform: scale(1.03); }
+        .product-card:hover { transform: translateY(-8px); }
 
         .product-img {
             height: 180px;
-            background-color: #e9ecef;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 50px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
         }
 
-        .product-info { padding: 20px; }
-        .category { font-size: 12px; color: var(--secondary); font-weight: bold; text-transform: uppercase; }
-        .name { font-size: 18px; font-weight: bold; margin: 10px 0; color: #333; }
-        .price { font-size: 20px; color: var(--primary); font-weight: bold; }
-        .stock { font-size: 13px; color: #777; margin-bottom: 15px; }
+        .product-info { padding: 20px; flex-grow: 1; }
+        
+        .category { 
+            font-size: 11px; 
+            color: var(--secondary); 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .product-name { 
+            font-size: 18px; 
+            font-weight: bold; 
+            margin: 8px 0; 
+            color: #333; 
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .price { font-size: 22px; color: var(--primary); font-weight: bold; }
+        .stock { font-size: 12px; color: #888; }
 
         .buy-btn {
-            width: 100%; padding: 12px;
-            background: var(--primary); color: white;
-            border: none; border-radius: 8px; cursor: pointer;
-            font-weight: bold; transition: 0.3s;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
         .buy-btn:hover { background: var(--secondary); }
 
-        .nav-btn {
-            color: white; text-decoration: none; font-weight: bold;
-            padding: 10px 15px; border-radius: 5px; background: rgba(255,255,255,0.2);
-        }
+        /* --- Footer --- */
+        .footer { text-align: center; color: #777; font-size: 13px; margin-top: 40px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h2>Krishi Marketplace</h2>
-        <a href="FarmerFeedback.html" class="nav-btn">← Back to Dashboard</a>
-    </div>
+    <script>
+        if (sessionStorage.getItem("isLoggedIn") !== "true") {
+            alert("Kripya pehle login karein!");
+            window.location.href = "index.html"; 
+        }
+    </script>
+
+    <header class="market-header">
+        <div>
+            <h2 style="margin:0;">Krishi Marketplace</h2>
+            <p style="margin:5px 0 0; font-size: 14px; opacity: 0.9;">Powered by Pandey Traders</p>
+        </div>
+        <div class="header-btns">
+            <a href="FarmerFeedback.html" class="btn-nav">🏠 Dashboard</a>
+            <button onclick="logout()" class="btn-nav" style="border:none; cursor:pointer; background:var(--danger);">Log Out</button>
+        </div>
+    </header>
 
     <div class="market-grid">
         <div class="product-card">
             <div class="product-img">🌾</div>
             <div class="product-info">
                 <span class="category">Seeds</span>
-                <div class="name">Pioneer Hybrid Mustard (Sarson)</div>
-                <div class="price">₹ 850 <small>/ 1kg</small></div>
-                <p class="stock">Available Stock: 150 Pkts</p>
-                <button class="buy-btn" onclick="order('Mustard Seeds')">Order Now</button>
+                <div class="product-name">Hybrid Wheat Seeds (Genhu)</div>
+                <div class="price-row">
+                    <div class="price">₹ 1,850 <small>/ 40kg</small></div>
+                    <div class="stock">In Stock</div>
+                </div>
+                <button class="buy-btn" onclick="placeOrder('Wheat Seeds')">Order Now</button>
             </div>
         </div>
 
@@ -93,44 +159,54 @@
             <div class="product-img">🧪</div>
             <div class="product-info">
                 <span class="category">Fertilizer</span>
-                <div class="name">IFFCO Nano Urea Liquid</div>
-                <div class="price">₹ 240 <small>/ 500ml</small></div>
-                <p class="stock">Available Stock: 500 Bottles</p>
-                <button class="buy-btn" onclick="order('Nano Urea')">Order Now</button>
+                <div class="product-name">Urea (IFFCO Brand)</div>
+                <div class="price-row">
+                    <div class="price">₹ 266 <small>/ Bag</small></div>
+                    <div class="stock">High Demand</div>
+                </div>
+                <button class="buy-btn" onclick="placeOrder('Urea Bag')">Order Now</button>
             </div>
         </div>
 
         <div class="product-card">
-            <div class="product-img">🛡️</div>
+            <div class="product-img">🚜</div>
+            <div class="product-info">
+                <span class="category">Tools</span>
+                <div class="product-name">Agricultural Hand Tools Set</div>
+                <div class="price-row">
+                    <div class="price">₹ 1,200 <small>/ Set</small></div>
+                    <div class="stock">Available</div>
+                </div>
+                <button class="buy-btn" onclick="placeOrder('Hand Tools')">Order Now</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">💧</div>
             <div class="product-info">
                 <span class="category">Pesticide</span>
-                <div class="name">Syngenta Matador Insecticide</div>
-                <div class="price">₹ 1,200 <small>/ 1L</small></div>
-                <p class="stock">Available Stock: 40 Bottles</p>
-                <button class="buy-btn" onclick="order('Matador')">Order Now</button>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-img">🥔</div>
-            <div class="product-info">
-                <span class="category">Seeds</span>
-                <div class="name">Kufri Jyoti Potato Seeds</div>
-                <div class="price">₹ 1,800 <small>/ 50kg Bag</small></div>
-                <p class="stock">Available Stock: 20 Bags</p>
-                <button class="buy-btn" onclick="order('Potato Seeds')">Order Now</button>
+                <div class="product-name">Neem Oil Insecticide (Organic)</div>
+                <div class="price-row">
+                    <div class="price">₹ 450 <small>/ 1L</small></div>
+                    <div class="stock">50+ Left</div>
+                </div>
+                <button class="buy-btn" onclick="placeOrder('Neem Oil')">Order Now</button>
             </div>
         </div>
     </div>
 
+    <footer class="footer">
+        © 2026 Jaymani Krishi Sewa | Developed by Manish & Jayant
+    </footer>
+
     <script>
-        function order(pName) {
-            alert(pName + " ke liye aapka request Pandey Traders ko bhej diya gaya hai. Ham jald hi aapse sampark karenge!");
+        function placeOrder(itemName) {
+            alert("Dhanyawad! " + itemName + " ka order Pandey Traders ko mil gaya hai. Ham jald hi aapse sampark karenge.");
         }
 
-        // Security Check
-        if (sessionStorage.getItem("isLoggedIn") !== "true") {
-            window.location.href = "index.html"; 
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = "index.html";
         }
     </script>
 
