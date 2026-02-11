@@ -147,40 +147,65 @@
     </footer>
 
     <script>
-        // --- ADMIN DATABASE (Yahan aap Farmer ki ID aur Password add karein) ---
-        const validUsers = {
-            "manish": "pandey786",      // Admin
-            "jayant": "raj123",        // Admin
-            "farmer01": "khet123",     // Example Farmer 1
-            "9876543210": "bihar2026", // Mobile ID Example
-            "demo": "demo123"          // Testing ke liye
-        };
+    // --- ADMIN DATABASE (Yahan aap Farmers ki ID aur Password set karte hain) ---
+    const validUsers = {
+        "manish": "pandey786",      // Admin 1
+        "jayant": "raj123",        // Admin 2
+        "farmer01": "khet123",     // Example Farmer
+        "9876543210": "bihar2026", // Mobile Number as ID
+        "demo": "demo123"          // Testing ke liye
+    };
 
-        const loginBtn = document.getElementById('loginBtn');
-        const errorMsg = document.getElementById('error-msg');
+    const loginBtn = document.getElementById('loginBtn');
+    const errorMsg = document.getElementById('error-msg');
+    const farmerIDInput = document.getElementById('farmerID');
+    const farmerPassInput = document.getElementById('farmerPass');
 
-        loginBtn.onclick = () => {
-            const id = document.getElementById('farmerID').value;
-            const pass = document.getElementById('farmerPass').value;
+    // Login Function
+    loginBtn.onclick = () => {
+        const id = farmerIDInput.value.trim();
+        const pass = farmerPassInput.value.trim();
 
-            // Logic to check credentials
-            if (validUsers[id] && validUsers[id] === pass) {
-                errorMsg.style.display = "none";
-                alert("Login Safal! Namaste, Pandey Traders portal mein swagat hai.");
-                
-                // Redirect to Feedback or Dashboard
-                window.location.href = "FarmerFeedback.html"; 
-            } else {
-                errorMsg.style.display = "block";
-                // Input shake effect (Optional)
-                document.querySelector('.auth-container').style.animation = "shake 0.2s ease-in-out 0s 2";
-            }
-        };
+        // 1. Check karein ki fields khali to nahi hain
+        if (id === "" || pass === "") {
+            alert("Kripya ID aur Password dono bharein!");
+            return;
+        }
 
-        // Input clear error msg on type
-        document.getElementById('farmerID').oninput = () => errorMsg.style.display = "none";
-        document.getElementById('farmerPass').oninput = () => errorMsg.style.display = "none";
-    </script>
+        // 2. Credentials match karein
+        if (validUsers[id] && validUsers[id] === pass) {
+            errorMsg.style.display = "none";
+            
+            // 3. Success Message
+            alert("Login Safal! Namaste, Pandey Traders portal mein swagat hai.");
+            
+            // 4. Redirect to Dashboard (FarmerFeedback.html)
+            // Note: Make sure file name is exactly 'FarmerFeedback.html' in GitHub
+            window.location.href = "FarmerFeedback.html"; 
+            
+        } else {
+            // 5. Error handling
+            errorMsg.style.display = "block";
+            
+            // Input fields ko thoda shake karne ka effect (Optional)
+            const container = document.querySelector('.auth-container');
+            container.style.transform = "translateX(10px)";
+            setTimeout(() => container.style.transform = "translateX(-10px)", 100);
+            setTimeout(() => container.style.transform = "translateX(0)", 200);
+        }
+    };
+
+    // Typing ke waqt error message chhupane ke liye
+    farmerIDInput.oninput = () => errorMsg.style.display = "none";
+    farmerPassInput.oninput = () => errorMsg.style.display = "none";
+
+    // 'Enter' key se login karne ke liye
+    document.onkeydown = (e) => {
+        if (e.key === "Enter") {
+            loginBtn.click();
+        }
+    };
+</script>
 
 </body>
 </html>
