@@ -68,12 +68,13 @@
         }
 
         .main-btn:hover { background: var(--dark); }
-        .message { margin-top: 10px; font-size: 14px; color: #d63031; display: none; }
 
         .powered-tag {
             font-size: 12px; margin-top: 20px; color: #777;
             text-transform: uppercase; letter-spacing: 1px;
         }
+
+        #error-msg { color: red; font-size: 13px; margin-top: 5px; display: none; }
 
         /* --- Features --- */
         .features { display: flex; gap: 30px; padding: 60px 5%; justify-content: center; flex-wrap: wrap; }
@@ -90,7 +91,6 @@
             background: var(--dark); color: white; padding: 40px 5%;
             text-align: center; border-top: 4px solid var(--light-green);
         }
-        .dev-info { font-size: 0.85rem; color: #bbb; margin-top: 15px; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -112,12 +112,12 @@
                 <button class="tab-btn" id="signupBtn">Sign Up</button>
             </div>
 
-            <div class="auth-form">
+            <div class="auth-form" id="authBox">
                 <h2 id="formTitle">Farmer Login</h2>
-                <input type="text" id="userInput" placeholder="Mobile Number or Email" required>
-                <input type="password" id="passInput" placeholder="Password" required>
-                <button class="main-btn" id="submitBtn">Access Portal</button>
-                <div id="msg" class="message"></div>
+                <input type="text" id="user" placeholder="Mobile Number or Email" required>
+                <input type="password" id="pass" placeholder="Password" required>
+                <p id="error-msg">Invalid User or Password</p>
+                <button type="button" class="main-btn" id="submitBtn">Access Portal</button>
                 <p class="powered-tag">Powered by <strong>Pandey Traders</strong></p>
             </div>
         </div>
@@ -125,13 +125,13 @@
 
     <section class="features">
         <div class="card"><h3>Digital Bahi-Khata</h3><p>Real-time tracking of credits.</p></div>
-        <div class="card"><h3>Market Rates</h3><p>Daily Mandi prices instantly.</p></div>
-        <div class="card"><h3>Direct Support</h3><p>Connect with Pandey Traders.</p></div>
+        <div class="card"><h3>Market Rates</h3><p>Get daily Mandi prices.</p></div>
+        <div class="card"><h3>Direct Support</h3><p>Talk to Pandey Traders.</p></div>
     </section>
 
     <footer class="footer">
         <div class="footer-logo">Jaymani <span>Krishi Sewa</span></div>
-        <div class="dev-info">Developed by: Manish Pandey & Jayant Raj</div>
+        <p>Project by Manish Pandey & Jayant Raj</p>
     </footer>
 
     <script>
@@ -139,61 +139,60 @@
         const signupBtn = document.getElementById('signupBtn');
         const formTitle = document.getElementById('formTitle');
         const submitBtn = document.getElementById('submitBtn');
-        const msg = document.getElementById('msg');
-        
-        let isLogin = true;
+        const errorMsg = document.getElementById('error-msg');
 
-        loginBtn.addEventListener('click', () => {
-            isLogin = true;
+        let isLoginMode = true;
+
+        // Switch Tabs
+        loginBtn.onclick = () => {
+            isLoginMode = true;
             loginBtn.classList.add('active');
             signupBtn.classList.remove('active');
             formTitle.innerText = "Farmer Login";
             submitBtn.innerText = "Access Portal";
-            msg.style.display = "none";
-        });
+            errorMsg.style.display = "none";
+        };
 
-        signupBtn.addEventListener('click', () => {
-            isLogin = false;
+        signupBtn.onclick = () => {
+            isLoginMode = false;
             signupBtn.classList.add('active');
             loginBtn.classList.remove('active');
             formTitle.innerText = "Create Account";
             submitBtn.innerText = "Register Now";
-            msg.style.display = "none";
-        });
+            errorMsg.style.display = "none";
+        };
 
-        submitBtn.addEventListener('click', () => {
-            const user = document.getElementById('userInput').value;
-            const pass = document.getElementById('passInput').value;
+        // Logic without Page Reload (Prevents 404)
+        submitBtn.onclick = () => {
+            const username = document.getElementById('user').value;
+            const password = document.getElementById('pass').value;
 
-            if(!user || !pass) {
-                showMsg("Please fill all fields");
+            if(!username || !password) {
+                alert("Please fill all fields!");
                 return;
             }
 
-            if(isLogin) {
-                // Login Logic
-                const storedPass = localStorage.getItem(user);
-                if(storedPass === pass) {
-                    alert("Login Successful! Welcome to Krishi Sewa.");
+            if(isLoginMode) {
+                // Check if user exists in browser storage
+                const savedPass = localStorage.getItem(username);
+                if(savedPass === password) {
+                    alert("Login Successful! Welcome to Jaymani Krishi Sewa.");
+                    window.location.reload(); // Redirect logic can go here
                 } else {
-                    showMsg("Invalid credentials!");
+                    errorMsg.style.display = "block";
+                    errorMsg.innerText = "Invalid credentials!";
                 }
             } else {
-                // Signup Logic
-                if(localStorage.getItem(user)) {
-                    showMsg("User already exists!");
+                // Save user to browser storage
+                if(localStorage.getItem(username)) {
+                    alert("User already exists!");
                 } else {
-                    localStorage.setItem(user, pass);
-                    alert("Registration Successful! Now please login.");
+                    localStorage.setItem(username, password);
+                    alert("Account Created! You can now Login.");
                     loginBtn.click();
                 }
             }
-        });
-
-        function showMsg(text) {
-            msg.innerText = text;
-            msg.style.display = "block";
-        }
+        };
     </script>
 </body>
 </html>
