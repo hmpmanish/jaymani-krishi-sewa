@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support | Jaymani Krishi Sewa</title>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --secondary: #40916c;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --whatsapp: #25d366;
+            --dark: #1b4332;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0; padding: 0;
+            color: #333;
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            background: var(--dark);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; }
+
+        /* --- Support Hero --- */
+        .support-hero {
+            background: linear-gradient(rgba(45, 106, 79, 0.9), rgba(27, 67, 50, 0.9)), 
+                        url('https://images.unsplash.com/photo-1595067331631-f8518a0a998e?auto=format&fit=crop&q=80');
+            background-size: cover;
+            padding: 60px 5%;
+            text-align: center;
+            color: white;
+        }
+
+        .support-hero h1 { margin: 0; font-size: 2.5rem; }
+        .support-hero p { opacity: 0.9; margin-top: 10px; }
+
+        /* --- Contact Cards --- */
+        .support-container {
+            max-width: 1000px;
+            margin: -40px auto 50px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .support-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .support-card:hover { transform: translateY(-5px); }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+        }
+
+        .btn-contact {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-wa { background: var(--whatsapp); color: white; }
+        .btn-call { background: var(--primary); color: white; }
+
+        /* --- FAQ Section --- */
+        .faq-section {
+            padding: 40px 5%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            padding: 15px 20px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .faq-item h4 { margin: 0 0 10px; color: var(--primary); }
+        .faq-item p { margin: 0; font-size: 14px; color: #666; line-height: 1.5; }
+
+        .footer { text-align: center; padding: 40px; color: #777; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div style="font-size: 1.2rem; font-weight: bold;">Jaymani <span>Support</span></div>
+        <div>
+            <a href="Marketplace.html">Marketplace</a> | 
+            <a href="FarmerFeedback.html">Dashboard</a>
+        </div>
+    </nav>
+
+    <header class="support-hero">
+        <h1>Hamari Sahayata Kendra</h1>
+        <p>Pandey Traders se seedha sampark karein aur kheti ki samasyaon ka samadhan payein.</p>
+    </header>
+
+    <div class="support-container">
+        <div class="support-card">
+            <div class="icon-circle">🔬</div>
+            <h3>Technical Sahayata</h3>
+            <p>Fasal mein rog (disease) ya keet (pests) ki jankari ke liye photo bhejein.</p>
+            <a href="https://wa.me/919876543210?text=Sir, meri fasal mein bimari hai, kripya salah dein." class="btn-contact btn-wa">WhatsApp Salah</a>
+        </div>
+
+        <div class="support-card">
+            <div class="icon-circle">📦</div>
+            <h3>Order & Khata</h3>
+            <p>Apne order status ya Bahi-Khata ke hisab ke liye call karein.</p>
+            <a href="tel:+919876543210" class="btn-contact btn-call">Direct Call Karein</a>
+        </div>
+    </div>
+
+    <section class="faq-section">
+        <h2 style="text-align: center; color: var(--dark);">Samanaya Sawal (FAQs)</h2>
+        
+        <div class="faq-item">
+            <h4>Bahi-Khata kaise dekhein?</h4>
+            <p>Dashboard mein jakar 'Bahi-Khata' button par click karein. Wahan aapka pura len-den dikh jayega.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Kya delivery ghar par hoti hai?</h4>
+            <p>Haan, Pandey Traders dwara bade orders ki delivery khet ya ghar tak ki jati hai.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Pesticide ka galat asar hone par kya karein?</h4>
+            <p>Turant upar diye gaye call button par click karein aur hamare expert se baat karein.</p>
+        </div>
+    </section>
+
+    
+
+    <footer class="footer">
+        © 2026 Jaymani Krishi Sewa | Developed by Manish & Jayant <br>
+        Authorized IIL Tractor Brand Dealer
+    </footer>
+
+</body>
+</html>
