@@ -3,194 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishi Marketplace | Jaymani Krishi Sewa</title>
+    <title>IIL Marketplace | Jaymani Krishi Sewa</title>
     <style>
         :root {
             --primary: #2d6a4f;
             --secondary: #40916c;
             --bg: #f4f7f6;
             --white: #ffffff;
-            --accent: #ff9f43;
             --danger: #e74c3c;
+            --tag-insect: #ebf5fb;
+            --tag-herb: #fef9e7;
+            --tag-fungi: #f4ecf7;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: var(--bg);
-            margin: 0; padding: 20px;
+            margin: 0; padding: 0;
         }
 
-        /* --- Header --- */
+        /* --- Header & Search --- */
         .market-header {
             background: var(--primary);
             color: white;
+            padding: 15px 5%;
+            position: sticky; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .search-box {
+            background: white;
             padding: 20px 5%;
-            border-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        .header-btns { display: flex; gap: 10px; }
-        
-        .btn-nav {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 14px;
-            transition: 0.3s;
+        #searchInput {
+            width: 100%; max-width: 600px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+            font-size: 16px; outline: none;
         }
-        .btn-nav:hover { background: var(--white); color: var(--primary); }
 
-        /* --- Product Grid --- */
+        /* --- Grid System --- */
         .market-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding-bottom: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px; padding: 25px 5%;
         }
 
-        .product-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
+        .card {
+            background: white; border-radius: 12px;
+            overflow: hidden; border: 1px solid #eee;
+            transition: 0.3s; display: flex; flex-direction: column;
         }
 
-        .product-card:hover { transform: translateY(-8px); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        .product-img {
-            height: 180px;
-            background: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
+        .brand-banner {
+            background: #f8f9fa; height: 120px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            border-bottom: 1px solid #eee;
         }
 
-        .product-info { padding: 20px; flex-grow: 1; }
+        .product-content { padding: 15px; flex-grow: 1; }
+
+        .tag {
+            font-size: 10px; font-weight: bold; padding: 4px 8px;
+            border-radius: 4px; text-transform: uppercase;
+        }
+
+        .tag-insecticide { background: var(--tag-insect); color: #2980b9; }
+        .tag-herbicide { background: var(--tag-herb); color: #9a7d0a; }
+        .tag-fungicide { background: var(--tag-fungi); color: #8e44ad; }
+
+        .title { font-size: 18px; font-weight: bold; margin: 10px 0 5px; color: #222; }
+        .technical { font-size: 12px; color: #666; font-style: italic; margin-bottom: 10px; }
         
-        .category { 
-            font-size: 11px; 
-            color: var(--secondary); 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
+        .order-btn {
+            width: 100%; padding: 12px;
+            background: var(--primary); color: white;
+            border: none; border-radius: 6px;
+            font-weight: bold; cursor: pointer; transition: 0.3s;
         }
 
-        .product-name { 
-            font-size: 18px; 
-            font-weight: bold; 
-            margin: 8px 0; 
-            color: #333; 
-        }
+        .order-btn:hover { background: var(--secondary); }
 
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 15px 0;
-        }
-
-        .price { font-size: 22px; color: var(--primary); font-weight: bold; }
-        .stock { font-size: 12px; color: #888; }
-
-        .buy-btn {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .buy-btn:hover { background: var(--secondary); }
-
-        /* --- Footer --- */
-        .footer { text-align: center; color: #777; font-size: 13px; margin-top: 40px; }
+        .footer { text-align: center; padding: 20px; color: #888; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <script>
-        if (sessionStorage.getItem("isLoggedIn") !== "true") {
-            alert("Kripya pehle login karein!");
-            window.location.href = "index.html"; 
-        }
-    </script>
-
     <header class="market-header">
         <div>
-            <h2 style="margin:0;">Krishi Marketplace</h2>
-            <p style="margin:5px 0 0; font-size: 14px; opacity: 0.9;">Powered by Pandey Traders</p>
+            <h2 style="margin:0;">IIL Tractor Brand</h2>
+            <small>Authorized Dealer: Pandey Traders</small>
         </div>
-        <div class="header-btns">
-            <a href="FarmerFeedback.html" class="btn-nav">🏠 Dashboard</a>
-            <button onclick="logout()" class="btn-nav" style="border:none; cursor:pointer; background:var(--danger);">Log Out</button>
+        <div>
+            <a href="FarmerFeedback.html" style="color:white; text-decoration:none; font-weight:bold; margin-right:15px;">Dashboard</a>
+            <button onclick="logout()" style="background:var(--danger); border:none; color:white; padding:5px 10px; border-radius:4px; cursor:pointer;">Logout</button>
         </div>
     </header>
 
-    <div class="market-grid">
-        <div class="product-card">
-            <div class="product-img">🌾</div>
-            <div class="product-info">
-                <span class="category">Seeds</span>
-                <div class="product-name">Hybrid Wheat Seeds (Genhu)</div>
-                <div class="price-row">
-                    <div class="price">₹ 1,850 <small>/ 40kg</small></div>
-                    <div class="stock">In Stock</div>
-                </div>
-                <button class="buy-btn" onclick="placeOrder('Wheat Seeds')">Order Now</button>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search by name (e.g. Mission) or problem (e.g. Borer)..." onkeyup="search()">
+    </div>
+
+    <div class="market-grid" id="productGrid">
+        <div class="card" data-name="mission borer control" data-cat="insecticide">
+            <div class="brand-banner"><span style="font-size:40px;">🛡️</span><strong>MISSION</strong></div>
+            <div class="product-content">
+                <span class="tag tag-insecticide">Insecticide</span>
+                <div class="title">IIL Mission</div>
+                <div class="technical">Chlorantraniliprole 0.4 GR</div>
+                <p style="font-size:13px; color:#444;">Best for Stem Borer in Rice and Sugarcane.</p>
+                <button class="order-btn" onclick="sendOrder('Mission')">Order via WhatsApp</button>
             </div>
         </div>
 
-        <div class="product-card">
-            <div class="product-img">🧪</div>
-            <div class="product-info">
-                <span class="category">Fertilizer</span>
-                <div class="product-name">Urea (IFFCO Brand)</div>
-                <div class="price-row">
-                    <div class="price">₹ 266 <small>/ Bag</small></div>
-                    <div class="stock">High Demand</div>
-                </div>
-                <button class="buy-btn" onclick="placeOrder('Urea Bag')">Order Now</button>
+        <div class="card" data-name="aikido rice cotton bph" data-cat="insecticide">
+            <div class="brand-banner"><span style="font-size:40px;">🪲</span><strong>AIKIDO</strong></div>
+            <div class="product-content">
+                <span class="tag tag-insecticide">Insecticide</span>
+                <div class="title">IIL Aikido</div>
+                <div class="technical">Buprofezin 22% + Fipronil 3%</div>
+                <p style="font-size:13px; color:#444;">Controls BPH and Leaf Folder in Rice.</p>
+                <button class="order-btn" onclick="sendOrder('Aikido')">Order via WhatsApp</button>
             </div>
         </div>
 
-        <div class="product-card">
-            <div class="product-img">🚜</div>
-            <div class="product-info">
-                <span class="category">Tools</span>
-                <div class="product-name">Agricultural Hand Tools Set</div>
-                <div class="price-row">
-                    <div class="price">₹ 1,200 <small>/ Set</small></div>
-                    <div class="stock">Available</div>
-                </div>
-                <button class="buy-btn" onclick="placeOrder('Hand Tools')">Order Now</button>
+        <div class="card" data-name="torry super maize weed" data-cat="herbicide">
+            <div class="brand-banner"><span style="font-size:40px;">🌿</span><strong>TORRY SUPER</strong></div>
+            <div class="product-content">
+                <span class="tag tag-herbicide">Herbicide</span>
+                <div class="title">Torry Super</div>
+                <div class="technical">Tembotrione + Atrazine</div>
+                <p style="font-size:13px; color:#444;">Complete weed solution for Maize (Makka).</p>
+                <button class="order-btn" onclick="sendOrder('Torry Super')">Order via WhatsApp</button>
             </div>
         </div>
 
-        <div class="product-card">
-            <div class="product-img">💧</div>
-            <div class="product-info">
-                <span class="category">Pesticide</span>
-                <div class="product-name">Neem Oil Insecticide (Organic)</div>
-                <div class="price-row">
-                    <div class="price">₹ 450 <small>/ 1L</small></div>
-                    <div class="stock">50+ Left</div>
-                </div>
-                <button class="buy-btn" onclick="placeOrder('Neem Oil')">Order Now</button>
+        <div class="card" data-name="hakama soybean pulses weed" data-cat="herbicide">
+            <div class="brand-banner"><span style="font-size:40px;">🌱</span><strong>HAKAMA</strong></div>
+            <div class="product-content">
+                <span class="tag tag-herbicide">Herbicide</span>
+                <div class="title">IIL Hakama</div>
+                <div class="technical">Quizalofop Ethyl 5% EC</div>
+                <p style="font-size:13px; color:#444;">Specialist for weeds in Soybean & Pulses.</p>
+                <button class="order-btn" onclick="sendOrder('Hakama')">Order via WhatsApp</button>
+            </div>
+        </div>
+
+        <div class="card" data-name="pulsor sheath blight rice" data-cat="fungicide">
+            <div class="brand-banner"><span style="font-size:40px;">🍄</span><strong>PULSOR</strong></div>
+            <div class="product-content">
+                <span class="tag tag-fungicide">Fungicide</span>
+                <div class="title">IIL Pulsor</div>
+                <div class="technical">Thifluzamide 24 SC</div>
+                <p style="font-size:13px; color:#444;">Expert control for Sheath Blight in Rice.</p>
+                <button class="order-btn" onclick="sendOrder('Pulsor')">Order via WhatsApp</button>
             </div>
         </div>
     </div>
@@ -200,8 +173,20 @@
     </footer>
 
     <script>
-        function placeOrder(itemName) {
-            alert("Dhanyawad! " + itemName + " ka order Pandey Traders ko mil gaya hai. Ham jald hi aapse sampark karenge.");
+        function search() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getAttribute('data-name');
+                cards[i].style.display = name.includes(input) ? "" : "none";
+            }
+        }
+
+        function sendOrder(product) {
+            let user = sessionStorage.getItem("loggedUser") || "Farmer";
+            let msg = `Namaste Pandey Traders, Main ${user} bol raha hoon. Mujhe IIL Tractor Brand ka *${product}* chahiye. Kripya rate aur delivery bataiye.`;
+            window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`);
         }
 
         function logout() {
@@ -209,6 +194,5 @@
             window.location.href = "index.html";
         }
     </script>
-
 </body>
 </html>
