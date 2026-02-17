@@ -59,7 +59,7 @@
         .auth-form input {
             width: 100%; padding: 12px; margin: 10px 0;
             border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;
-            outline: none; font-size: 16px; /* Prevents auto-zoom on iOS */
+            outline: none; font-size: 16px; /* Prevents auto-zoom on mobile */
         }
 
         .main-btn {
@@ -85,7 +85,7 @@
         .features { display: flex; gap: 30px; padding: 60px 5%; justify-content: center; flex-wrap: wrap; }
         .card {
             background: white; padding: 30px; border-radius: 12px;
-            width: 280px; text-align: center; transition: transform 0.3s;
+            width: 280px; text-align: center; transition: 0.3s;
             border-bottom: 4px solid var(--primary-green); box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         .card:hover { transform: translateY(-10px); }
@@ -102,10 +102,10 @@
     <nav class="navbar">
         <div class="logo">Jaymani <span>Krishi Sewa</span></div>
         <ul class="nav-links">
-            <li><a href="#">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="Marketplace.html">Marketplace</a></li>
             <li><a href="FarmerFeedback.html">Bahi-Khata</a></li>
-            <li><a href="#">Support</a></li>
+            <li><a href="Support.html">Support</a></li>
         </ul>
     </nav>
 
@@ -133,12 +133,12 @@
             <p>Aapke khate ka pura hisab ab digital form mein.</p>
         </div>
         <div class="card">
-            <h3>Market Rates</h3>
-            <p>Mandi ka bhav aur expert kheti salah.</p>
+            <h3>IIL Tractor Brand</h3>
+            <p>Best quality insecticides aur herbicides ka marketplace.</p>
         </div>
         <div class="card">
             <h3>Direct Support</h3>
-            <p>Pandey Traders se seedha sampark karein.</p>
+            <p>Pandey Traders se seedha WhatsApp sampark karein.</p>
         </div>
     </section>
 
@@ -152,7 +152,7 @@
 
     <script>
         // --- ADMIN DATABASE ---
-        // Note: In a real app, never store passwords in plain text like this!
+        // Note: For production, consider using a real backend like Firebase.
         const validUsers = {
             "manish": "pandey786",
             "jayant": "raj123",
@@ -178,39 +178,39 @@
             }
 
             if (validUsers[id] && validUsers[id] === pass) {
-                // 1. Session Status Save (Helps restrict access on other pages)
+                // 1. Session Storage (Protects sub-pages)
                 sessionStorage.setItem("isLoggedIn", "true");
                 sessionStorage.setItem("loggedUser", id);
                 
                 // 2. Alert Success
                 alert("Login Safal! Pandey Traders portal mein swagat hai.");
                 
-                // 3. Auto-Redirect to Dashboard
+                // 3. Redirect to Dashboard
                 window.location.href = "FarmerFeedback.html"; 
                 
             } else {
                 // Show Error
                 errorMsg.style.display = "block";
                 
-                // Improved Error Shake Effect
+                // Error Shake Effect
                 loginBox.style.transform = "translateX(10px)";
                 setTimeout(() => loginBox.style.transform = "translateX(-10px)", 80);
                 setTimeout(() => loginBox.style.transform = "translateX(10px)", 160);
                 setTimeout(() => loginBox.style.transform = "translateX(0)", 240);
 
-                // Optional: Clear password for security
+                // Clear password for security
                 farmerPassInput.value = "";
             }
         };
 
-        // UI Helpers: Hide error message when user starts re-typing
+        // Reset error message on typing
         [farmerIDInput, farmerPassInput].forEach(input => {
             input.oninput = () => {
                 errorMsg.style.display = "none";
             };
         });
 
-        // Enter key support for better UX
+        // Enter key support
         document.addEventListener('keydown', (e) => {
             if (e.key === "Enter") {
                 loginBtn.click();
