@@ -14,131 +14,149 @@
             --bg: #f1f2f6;
         }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--bg); }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--bg); height: 100vh; overflow: hidden; }
 
         /* --- Sidebar --- */
-        .sidebar { width: 260px; background: var(--admin-dark); color: white; height: 100vh; position: fixed; padding: 20px; box-sizing: border-box; }
-        .sidebar h2 { color: var(--admin-blue); border-bottom: 1px solid #3d3d3d; padding-bottom: 15px; margin-top: 0; }
+        .sidebar { width: 260px; background: var(--admin-dark); color: white; height: 100vh; padding: 20px; box-sizing: border-box; flex-shrink: 0; }
+        .sidebar h2 { color: var(--admin-blue); border-bottom: 1px solid #3d3d3d; padding-bottom: 15px; margin-top: 0; font-size: 20px; }
+        
         .menu-item { 
-            padding: 15px; cursor: pointer; border-radius: 8px; 
-            transition: 0.3s; margin-bottom: 5px; font-size: 14px;
+            padding: 12px 15px; cursor: pointer; border-radius: 8px; 
+            transition: 0.3s; margin-bottom: 8px; font-size: 14px;
+            display: flex; align-items: center; gap: 10px;
         }
         .menu-item:hover, .active { background: var(--admin-blue); color: white; }
 
         /* --- Main Content --- */
-        .main { margin-left: 260px; width: calc(100% - 260px); padding: 30px; box-sizing: border-box; }
+        .main { flex-grow: 1; padding: 30px; box-sizing: border-box; overflow-y: auto; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
 
-        /* --- Analytics Cards --- */
-        .card-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        /* --- Stats Card --- */
+        .card-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 5px solid transparent; }
-        .card h4 { margin: 0; color: #7f8c8d; font-size: 12px; text-transform: uppercase; }
-        .card .val { font-size: 24px; font-weight: bold; margin-top: 10px; display: block; }
+        .card h4 { margin: 0; color: #7f8c8d; font-size: 11px; text-transform: uppercase; }
+        .card .val { font-size: 22px; font-weight: bold; margin-top: 8px; display: block; }
 
-        /* --- Table Section --- */
+        /* --- Interactive Section --- */
         .section-box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th { text-align: left; padding: 12px; border-bottom: 2px solid #eee; color: #555; background: #fafafa; }
         td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
 
-        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
-        .verified { background: #dff9fb; color: #0097e6; }
-        
-        .btn-view { background: var(--admin-blue); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; background: #dff9fb; color: #0097e6; }
+        .btn-action { background: var(--admin-blue); color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+
+        .logout-btn { margin-top: 40px; border: 1px solid #ff7675; color: #ff7675; justify-content: center; font-weight: bold; }
+        .logout-btn:hover { background: #ff7675; color: white; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
         <h2>Jaymani Admin</h2>
-        <div class="menu-item active" onclick="location.reload()">🏠 Dashboard Overview</div>
-        <div class="menu-item" onclick="location.href='Vendor-Dashboard.html'">🏪 Manage Vendors</div>
-        <div class="menu-item" onclick="alert('Opening Farmer Database...')">🚜 Farmer Registry</div>
-        <div class="menu-item" onclick="showCommission()">💰 Commission Reports</div>
-        <div class="menu-item" onclick="alert('Market Analytics: Sales are up by 15% this week!')">📈 Market Analytics</div>
         
-        <div class="menu-item" onclick="location.href='index.html'" style="margin-top: 50px; border: 1px solid #ff7675; color: #ff7675; text-align: center;">Logout</div>
+        <div class="menu-item active" onclick="location.href='Admin-Panel.html'">
+            📊 Dashboard Overview
+        </div>
+
+        <div class="menu-item" onclick="location.href='Inventory-Manage.html'">
+            📦 Manage Inventory
+        </div>
+
+        <div class="menu-item" onclick="showOrderDetails()">
+            🧾 Order Requests
+        </div>
+
+        <div class="menu-item" onclick="showCommissionReport()">
+            💰 Payments & Commission
+        </div>
+
+        <div class="menu-item logout-btn" onclick="location.href='index.html'">
+            Logout
+        </div>
     </div>
 
     <div class="main">
         <div class="header">
-            <h1>Admin Dashboard</h1>
-            <div style="font-weight: bold; color: var(--admin-blue);">Logged in as: <span id="adminName">Admin</span></div>
+            <h1>Business Statistics</h1>
+            <div style="font-weight: bold; color: var(--admin-blue);">Admin: <span id="adminNameDisplay">Manish</span></div>
         </div>
 
         <div class="card-row">
             <div class="card" style="border-left-color: var(--admin-blue);">
-                <h4>Total Farmers</h4>
+                <h4>Total Registered Farmers</h4>
                 <span class="val">1,240</span>
             </div>
             <div class="card" style="border-left-color: var(--admin-green);">
-                <h4>Gross Sales</h4>
+                <h4>Gross Sales (IIL Products)</h4>
                 <span class="val">₹ 2,45,000</span>
             </div>
             <div class="card" style="border-left-color: var(--admin-orange);">
-                <h4>Platform Earnings</h4>
-                <span class="val" id="platformEarn">₹ 4,900</span>
-            </div>
-            <div class="card" style="border-left-color: #9b59b6;">
-                <h4>Active Vendors</h4>
-                <span class="val">18</span>
+                <h4>Admin Revenue (2%)</h4>
+                <span class="val">₹ 4,900</span>
             </div>
         </div>
 
         
 
-        <div class="section-box" id="contentArea">
-            <h3>Registered Retailers (Live Status)</h3>
+        <div class="section-box" id="dynamicContent">
+            <h3>Retailer Network (Pandey Traders & Others)</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Shop Name</th>
+                        <th>Vendor Name</th>
                         <th>Location</th>
                         <th>Status</th>
-                        <th>Monthly Sales</th>
-                        <th>Commission (2%)</th>
+                        <th>Total Sales</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><b>Pandey Traders</b></td>
-                        <td>GB Nagar</td>
-                        <td><span class="status-badge verified">Verified</span></td>
+                        <td>GB Nagar (UP)</td>
+                        <td><span class="status-badge">Active</span></td>
                         <td>₹ 85,000</td>
-                        <td style="color: var(--admin-orange); font-weight: bold;">₹ 1,700</td>
-                        <td><button class="btn-view" onclick="location.href='Vendor-Dashboard.html'">View</button></td>
+                        <td><button class="btn-action" onclick="location.href='Vendor-Dashboard.html'">View Sales</button></td>
                     </tr>
                     <tr>
-                        <td><b>Kisan Seva Kendra</b></td>
-                        <td>Jewar</td>
-                        <td><span class="status-badge verified">Verified</span></td>
+                        <td><b>Kisan Sewa Kendra</b></td>
+                        <td>Bihar Sharif</td>
+                        <td><span class="status-badge">Active</span></td>
                         <td>₹ 42,000</td>
-                        <td style="color: var(--admin-orange); font-weight: bold;">₹ 840</td>
-                        <td><button class="btn-view" onclick="alert('Opening Kendra Dashboard...')">View</button></td>
+                        <td><button class="btn-action" onclick="alert('Opening Bihar Kendra Reports...')">View Sales</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <p style="text-align: center; color: #888; font-size: 12px; margin-top: 40px;">
+            Sharda University DCL Project | Developed by Manish Pandey (hmpmanish)
+        </p>
     </div>
 
     <script>
-        // Set Admin Name from session
-        const admin = sessionStorage.getItem("loggedUser") || "Manish/Jayant";
-        document.getElementById("adminName").innerText = admin.toUpperCase();
+        // Personalized Admin Name
+        const admin = sessionStorage.getItem("loggedUser") || "Manish";
+        document.getElementById("adminNameDisplay").innerText = admin.toUpperCase();
 
-        function showCommission() {
-            const earn = document.getElementById("platformEarn").innerText;
-            alert("Current Platform Commission Rate: 2%\nTotal Revenue Generated: " + earn);
+        // 🧾 Order Request Logic
+        function showOrderDetails() {
+            document.getElementById('dynamicContent').innerHTML = `
+                <h3>Recent Order Requests (Live)</h3>
+                <p style="color: #666;">Showing pending orders from all vendors...</p>
+                <table>
+                    <tr><th>Order ID</th><th>Farmer</th><th>Vendor</th><th>Status</th></tr>
+                    <tr><td>#JK990</td><td>Jayant Raj</td><td>Pandey Traders</td><td><b style="color:orange">Pending</b></td></tr>
+                    <tr><td>#JK989</td><td>Kisan Ram</td><td>Kisan Sewa</td><td><b style="color:green">Completed</b></td></tr>
+                </table>
+                <button class="btn-action" style="margin-top:15px" onclick="location.reload()">Back to Stats</button>
+            `;
         }
 
-        // Check if unauthorized user is trying to access
-        window.onload = function() {
-            const user = sessionStorage.getItem("loggedUser");
-            if(user !== "manish" && user !== "jayant" && user !== "hmp") {
-                // alert("Access Denied! Admins Only.");
-                // window.location.href = "Login.html";
-            }
+        // 💰 Commission Logic
+        function showCommissionReport() {
+            alert("Jaymani Krishi Sewa Revenue Report:\n\nTotal Sales: ₹ 2,45,000\nCommission Rate: 2%\nNet Profit: ₹ 4,900\n\nStatus: All payments verified.");
         }
     </script>
 </body>
