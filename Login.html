@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Jaymani Krishi Sewa</title>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --dark: #1b4332;
+            --bg: #f0f2f1;
+            --error: #d63031;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        .tab-container { display: flex; background: #eee; border-radius: 10px; margin-bottom: 20px; padding: 5px; }
+        .tab { flex: 1; padding: 10px; cursor: pointer; border-radius: 8px; font-weight: bold; transition: 0.3s; color: #666; }
+        .tab.active { background: var(--primary); color: white; }
+        .input-group { text-align: left; margin-bottom: 15px; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; outline: none; }
+        .login-btn { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        #error-msg { color: var(--error); font-size: 13px; margin-bottom: 15px; display: none; background: #ffeaa7; padding: 8px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2 style="color: var(--dark); margin-bottom: 5px;">Jaymani Krishi</h2>
+        <p id="role-label" style="font-size: 14px; color: #666; margin-bottom: 20px;">Farmer Login</p>
+
+        <div class="tab-container">
+            <div id="tab-farmer" class="tab active" onclick="switchRole('farmer')">Kisan</div>
+            <div id="tab-vendor" class="tab" onclick="switchRole('vendor')">Vendor</div>
+        </div>
+
+        <div id="error-msg">⚠ Galat ID ya Password!</div>
+
+        <div class="input-group">
+            <input type="text" id="userId" placeholder="ID / Mobile Number">
+        </div>
+        <div class="input-group">
+            <input type="password" id="userPass" placeholder="Password">
+        </div>
+
+        <button class="login-btn" id="loginBtn">Access Portal</button>
+        
+        <p style="font-size: 12px; margin-top: 20px;">Powered by <b>Pandey Traders</b></p>
+    </div>
+
+    <script>
+        // --- AAPKA OLD ADMIN DATABASE ---
+        const validUsers = {
+            "manish": "pandey786",
+            "jayant": "raj123",
+            "farmer01": "khet123",
+            "9876543210": "bihar2026",
+            "demo": "demo123",
+            "hmp": "hmp"
+        };
+
+        let currentRole = 'farmer';
+
+        function switchRole(role) {
+            currentRole = role;
+            document.getElementById('tab-farmer').classList.toggle('active', role === 'farmer');
+            document.getElementById('tab-vendor').classList.toggle('active', role === 'vendor');
+            document.getElementById('role-label').innerText = role === 'farmer' ? 'Farmer Login' : 'Vendor Login';
+            document.getElementById('error-msg').style.display = 'none';
+        }
+
+        const loginBtn = document.getElementById('loginBtn');
+        
+        loginBtn.onclick = () => {
+            const id = document.getElementById('userId').value.trim().toLowerCase();
+            const pass = document.getElementById('userPass').value.trim();
+
+            if (validUsers[id] && validUsers[id] === pass) {
+                // Success
+                sessionStorage.setItem("isLoggedIn", "true");
+                sessionStorage.setItem("loggedUser", id);
+                sessionStorage.setItem("userRole", currentRole);
+                
+                alert("Login Safal! Swagat hai: " + id);
+
+                // Role ke hisab se redirection
+                if (currentRole === 'farmer') {
+                    window.location.href = "Marketplace.html";
+                } else {
+                    window.location.href = "Vendor-Dashboard.html";
+                }
+            } else {
+                // Error
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        };
+
+        // Enter key support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Enter") loginBtn.click();
+        });
+    </script>
+</body>
+</html>
