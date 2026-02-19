@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Jaymani Krishi Sewa</title>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --dark: #1b4332;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --accent: #ff9f43;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); }
+
+        header { background: var(--dark); color: white; padding: 15px 5%; display: flex; align-items: center; }
+        .back-btn { color: white; text-decoration: none; font-size: 20px; margin-right: 20px; }
+
+        .container { padding: 20px 5%; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+
+        .product-image-box {
+            background: white; padding: 40px; border-radius: 20px;
+            width: 300px; text-align: center; font-size: 80px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .details-box { background: white; padding: 30px; border-radius: 20px; flex: 1; min-width: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+        .prod-title { font-size: 28px; font-weight: bold; color: var(--dark); margin-bottom: 5px; }
+        .vendor-tag { background: #e8f5e9; color: var(--primary); padding: 5px 12px; border-radius: 15px; font-size: 14px; font-weight: bold; }
+
+        .section-title { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 25px; color: #555; font-size: 18px; }
+        
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .info-item b { display: block; color: #888; font-size: 12px; text-transform: uppercase; }
+
+        .order-section { margin-top: 30px; background: #fff8e1; padding: 20px; border-radius: 15px; border: 1px dashed var(--accent); }
+
+        .btn-whatsapp {
+            background: #25D366; color: white; border: none; padding: 15px;
+            width: 100%; border-radius: 10px; font-weight: bold; font-size: 16px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="Marketplace.html" class="back-btn">←</a>
+        <h2>Dawai ki Jankari</h2>
+    </header>
+
+    <div class="container">
+        <div class="product-image-box" id="prodIcon">📦</div>
+
+        <div class="details-box">
+            <span class="vendor-tag" id="vendorName">Retailer Name</span>
+            <div class="prod-title" id="prodTitle">Product Name</div>
+            
+            <div class="section-title">Technical Specification</div>
+            <div class="info-grid">
+                <div class="info-item"><b>Chemical Name</b><span id="chemical">Loading...</span></div>
+                <div class="info-item"><b>Fasal (Crops)</b><span id="crops">Rice, Wheat, Maize</span></div>
+                <div class="info-item"><b>Matra (Dose)</b><span>150ml / Acre</span></div>
+                <div class="info-item"><b>Expiry Date</b><span>Oct 2027</span></div>
+            </div>
+
+            
+
+            <div class="section-title">Istemal ka Tarika (Usage)</div>
+            <p style="color: #666; font-size: 14px;">15 litre paani ki tanki mein 15ml dawai milayein aur dhyaan rahe ki hawa ki disha mein hi spray karein.</p>
+
+            <div class="order-section">
+                <p style="margin-top: 0; font-weight: bold;">Order Summary:</p>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span>Price Per Unit:</span>
+                    <b id="price">₹ 0.00</b>
+                </div>
+                <button class="btn-whatsapp" onclick="sendWhatsApp()">
+                    Order via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Getting data from previous page (sessionStorage)
+        const pName = sessionStorage.getItem("selectedProduct") || "Product";
+        const vName = sessionStorage.getItem("selectedVendor") || "Local Dealer";
+
+        document.getElementById("prodTitle").innerText = pName;
+        document.getElementById("vendorName").innerText = "🏪 " + vName;
+
+        // Simple Data Logic based on product name
+        if(pName.includes("Mission")) {
+            document.getElementById("chemical").innerText = "Chlorantraniliprole 18.5% SC";
+            document.getElementById("price").innerText = "₹ 1,850";
+            document.getElementById("prodIcon").innerText = "🛡️";
+            document.getElementById("crops").innerText = "Paddy, Sugarcane";
+        } else if(pName.includes("Urea")) {
+            document.getElementById("chemical").innerText = "Nitrogen 46%";
+            document.getElementById("price").innerText = "₹ 266";
+            document.getElementById("prodIcon").innerText = "🌱";
+        } else {
+            document.getElementById("chemical").innerText = "Standard Agri Formula";
+            document.getElementById("price").innerText = "₹ 500";
+        }
+
+        function sendWhatsApp() {
+            const phone = "919876543210"; // Pandey Traders Number
+            const msg = `Namaste ${vName}, main Jaymani Krishi Sewa se bol raha hoon. Mujhe ${pName} ki zarurat hai. Kripya stock confirm karein.`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
