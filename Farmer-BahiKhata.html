@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahi-Khata | Jaymani Krishi Sewa</title>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --dark: #1b4332;
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --bg: #f4f7f6;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); }
+
+        /* --- Header --- */
+        header { 
+            background: var(--primary); color: white; padding: 25px 5%; 
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .user-profile { display: flex; align-items: center; gap: 15px; }
+        .avatar { width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: bold; }
+
+        /* --- Stats Row --- */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px 5%; }
+        .stat-card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; }
+        .stat-card h4 { margin: 0; color: #888; font-size: 14px; text-transform: uppercase; }
+        .stat-card .val { font-size: 24px; font-weight: bold; margin-top: 10px; }
+
+        /* --- Ledger Table --- */
+        .ledger-container { background: white; margin: 20px 5%; border-radius: 15px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { text-align: left; padding: 15px; background: #f8f9fa; color: #555; }
+        td { padding: 15px; border-bottom: 1px solid #eee; font-size: 14px; }
+
+        .status { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .status-paid { background: #e8f5e9; color: var(--success); }
+        .status-due { background: #ffebee; color: var(--danger); }
+
+        .btn-pay { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="user-profile">
+            <div class="avatar" id="userInitial">U</div>
+            <div>
+                <h3 style="margin:0" id="welcomeUser">Namaste, Kisan</h3>
+                <small>Farmer ID: <span id="displayID">JK-001</span></small>
+            </div>
+        </div>
+        <a href="Marketplace.html" style="color:white; text-decoration:none; font-weight:bold;">🛒 Market</a>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card" style="border-top: 5px solid var(--danger);">
+            <h4>Baki Rashi (Total Due)</h4>
+            <div class="val" style="color: var(--danger);">₹ 4,250</div>
+        </div>
+        <div class="stat-card" style="border-top: 5px solid var(--success);">
+            <h4>Kul Kharid (Total Paid)</h4>
+            <div class="val" style="color: var(--success);">₹ 12,800</div>
+        </div>
+        <div class="stat-card" style="border-top: 5px solid #3498db;">
+            <h4>Last Visit</h4>
+            <div class="val">12 Feb 2026</div>
+        </div>
+    </div>
+
+    
+
+    <div class="ledger-container">
+        <h3>Transactions History (Pandey Traders)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Product Details</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>10 Feb 2026</td>
+                    <td><b>IIL Mission</b> (5 Litre)</td>
+                    <td>₹ 1,850</td>
+                    <td><span class="status status-due">Due (Udhaar)</span></td>
+                    <td><button class="btn-pay" onclick="alert('Proceeding to Payment...')">Pay Now</button></td>
+                </tr>
+                <tr>
+                    <td>05 Feb 2026</td>
+                    <td><b>DAP Fertilizer</b> (2 Bags)</td>
+                    <td>₹ 2,400</td>
+                    <td><span class="status status-due">Due (Udhaar)</span></td>
+                    <td><button class="btn-pay">Pay Now</button></td>
+                </tr>
+                <tr>
+                    <td>28 Jan 2026</td>
+                    <td><b>Urea</b> (1 Bag)</td>
+                    <td>₹ 266</td>
+                    <td><span class="status status-paid">Paid (Nagad)</span></td>
+                    <td>✅</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Personalizing the page
+        const user = sessionStorage.getItem("loggedUser") || "Kisan";
+        document.getElementById("welcomeUser").innerText = "Namaste, " + user.charAt(0).toUpperCase() + user.slice(1);
+        document.getElementById("userInitial").innerText = user.charAt(0).toUpperCase();
+        document.getElementById("displayID").innerText = "JK-" + Math.floor(1000 + Math.random() * 9000);
+    </script>
+</body>
+</html>
