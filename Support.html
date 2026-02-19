@@ -7,168 +7,89 @@
     <style>
         :root {
             --primary: #2d6a4f;
-            --secondary: #40916c;
+            --dark: #1b4332;
+            --accent: #ff9f43;
             --bg: #f4f7f6;
             --white: #ffffff;
-            --whatsapp: #25d366;
-            --dark: #1b4332;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            margin: 0; padding: 0;
-            color: #333;
-        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); }
 
-        /* --- Navigation --- */
-        .navbar {
-            background: var(--dark);
-            color: white;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        header { background: var(--dark); color: white; padding: 20px 5%; text-align: center; }
+        
+        .support-container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
 
-        .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; }
-
-        /* --- Support Hero --- */
-        .support-hero {
-            background: linear-gradient(rgba(45, 106, 79, 0.9), rgba(27, 67, 50, 0.9)), 
-                        url('https://images.unsplash.com/photo-1595067331631-f8518a0a998e?auto=format&fit=crop&q=80');
-            background-size: cover;
-            padding: 60px 5%;
-            text-align: center;
-            color: white;
-        }
-
-        .support-hero h1 { margin: 0; font-size: 2.5rem; }
-        .support-hero p { opacity: 0.9; margin-top: 10px; }
-
-        /* --- Contact Cards --- */
-        .support-container {
-            max-width: 1000px;
-            margin: -40px auto 50px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
+        .support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
 
         .support-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: 0.3s;
+            background: white; padding: 30px; border-radius: 15px; text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;
         }
-
         .support-card:hover { transform: translateY(-5px); }
+        .icon { font-size: 40px; margin-bottom: 15px; display: block; }
 
-        .icon-circle {
-            width: 70px;
-            height: 70px;
-            background: var(--bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 30px;
+        /* --- SMS Simulation Box --- */
+        .sms-box {
+            background: #e1f5fe; padding: 25px; border-radius: 15px; margin-top: 40px;
+            border: 2px dashed #039be5; position: relative;
+        }
+        .sms-box h3 { color: #0277bd; margin-top: 0; }
+        .sms-preview {
+            background: white; padding: 15px; border-radius: 10px; font-family: 'Courier New', monospace;
+            margin-top: 15px; border-left: 5px solid #039be5;
         }
 
         .btn-contact {
-            display: inline-block;
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+            display: inline-block; margin-top: 15px; padding: 10px 25px;
+            background: var(--primary); color: white; text-decoration: none;
+            border-radius: 8px; font-weight: bold;
         }
-
-        .btn-wa { background: var(--whatsapp); color: white; }
-        .btn-call { background: var(--primary); color: white; }
-
-        /* --- FAQ Section --- */
-        .faq-section {
-            padding: 40px 5%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: white;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            padding: 15px 20px;
-            border-left: 5px solid var(--primary);
-        }
-
-        .faq-item h4 { margin: 0 0 10px; color: var(--primary); }
-        .faq-item p { margin: 0; font-size: 14px; color: #666; line-height: 1.5; }
-
-        .footer { text-align: center; padding: 40px; color: #777; font-size: 13px; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div style="font-size: 1.2rem; font-weight: bold;">Jaymani <span>Support</span></div>
-        <div>
-            <a href="Marketplace.html">Marketplace</a> | 
-            <a href="FarmerFeedback.html">Dashboard</a>
-        </div>
-    </nav>
-
-    <header class="support-hero">
-        <h1>Hamari Sahayata Kendra</h1>
-        <p>Pandey Traders se seedha sampark karein aur kheti ki samasyaon ka samadhan payein.</p>
+    <header>
+        <h1>Jaymani Sahayata Kendra</h1>
+        <p>Kisanon aur Retailers ke liye 24/7 Support</p>
     </header>
 
     <div class="support-container">
-        <div class="support-card">
-            <div class="icon-circle">🔬</div>
-            <h3>Technical Sahayata</h3>
-            <p>Fasal mein rog (disease) ya keet (pests) ki jankari ke liye photo bhejein.</p>
-            <a href="https://wa.me/919876543210?text=Sir, meri fasal mein bimari hai, kripya salah dein." class="btn-contact btn-wa">WhatsApp Salah</a>
+        <div class="support-grid">
+            <div class="support-card">
+                <span class="icon">💬</span>
+                <h3>WhatsApp Chat</h3>
+                <p>Pandey Traders se seedha WhatsApp par baat karein.</p>
+                <a href="https://wa.me/919876543210" class="btn-contact" style="background: #25D366;">Chat Now</a>
+            </div>
+
+            <div class="support-card">
+                <span class="icon">📞</span>
+                <h3>Helpline Number</h3>
+                <p>Kisi bhi samasya ke liye humein call karein.</p>
+                <a href="tel:+919876543210" class="btn-contact">Call Support</a>
+            </div>
         </div>
 
-        <div class="support-card">
-            <div class="icon-circle">📦</div>
-            <h3>Order & Khata</h3>
-            <p>Apne order status ya Bahi-Khata ke hisab ke liye call karein.</p>
-            <a href="tel:+919876543210" class="btn-contact btn-call">Direct Call Karein</a>
+        <div class="sms-box">
+            <h3>Offline SMS Service (Bina Internet)</h3>
+            <p>Agar internet nahi hai, toh niche diye gaye tarike se stock check karein:</p>
+            <div class="sms-preview">
+                <strong>Type karein:</strong> STOCK [Product Name] [Pin Code]<br>
+                <strong>Example:</strong> STOCK UREA 201301<br>
+                <strong>Bhejein:</strong> 1800-XXX-XXXX
+            </div>
+            <p style="font-size: 12px; color: #555; margin-top: 10px;">*Yeh suvidha Jayant aur Manish dwara rural connectivity ke liye banayi gayi hai.</p>
+        </div>
+
+        
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="index.html" style="color: var(--dark); font-weight: bold; text-decoration: none;">← Back to Home Page</a>
         </div>
     </div>
 
-    <section class="faq-section">
-        <h2 style="text-align: center; color: var(--dark);">Samanaya Sawal (FAQs)</h2>
-        
-        <div class="faq-item">
-            <h4>Bahi-Khata kaise dekhein?</h4>
-            <p>Dashboard mein jakar 'Bahi-Khata' button par click karein. Wahan aapka pura len-den dikh jayega.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>Kya delivery ghar par hoti hai?</h4>
-            <p>Haan, Pandey Traders dwara bade orders ki delivery khet ya ghar tak ki jati hai.</p>
-        </div>
-
-        <div class="faq-item">
-            <h4>Pesticide ka galat asar hone par kya karein?</h4>
-            <p>Turant upar diye gaye call button par click karein aur hamare expert se baat karein.</p>
-        </div>
-    </section>
-
-    
-
-    <footer class="footer">
-        © 2026 Jaymani Krishi Sewa | Developed by Manish & Jayant <br>
-        Authorized IIL Tractor Brand Dealer
+    <footer style="text-align: center; padding: 40px; color: #888; font-size: 13px;">
+        Jaymani Krishi Sewa Support System | Sharda University DCL Project
     </footer>
 
 </body>
