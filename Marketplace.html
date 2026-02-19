@@ -3,195 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IIL Marketplace | Jaymani Krishi Sewa</title>
+    <title>Marketplace | Jaymani Krishi Sewa</title>
     <style>
         :root {
             --primary: #2d6a4f;
             --secondary: #40916c;
+            --dark: #1b4332;
             --bg: #f4f7f6;
             --white: #ffffff;
-            --danger: #e74c3c;
-            --tag-insect: #ebf5fb;
-            --tag-herb: #fef9e7;
-            --tag-fungi: #f4ecf7;
+            --accent: #ff9f43;
         }
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg);
-            margin: 0; padding: 0;
+            margin: 0; background: var(--bg);
         }
 
-        /* --- Header & Search --- */
-        .market-header {
-            background: var(--primary);
+        /* --- Global Header --- */
+        header {
+            background: var(--dark);
             color: white;
             padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: sticky; top: 0; z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center;
         }
 
-        .search-box {
-            background: white;
+        .search-container {
             padding: 20px 5%;
-            text-align: center;
+            background: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
         }
 
         #searchInput {
             width: 100%; max-width: 600px;
-            padding: 12px 25px;
-            border-radius: 30px;
+            padding: 12px 20px;
             border: 2px solid var(--primary);
-            font-size: 16px; outline: none;
+            border-radius: 25px;
+            outline: none;
         }
 
-        /* --- Grid System --- */
+        /* --- Product Grid --- */
         .market-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px; padding: 25px 5%;
+            gap: 20px;
+            padding: 30px 5%;
         }
 
         .card {
-            background: white; border-radius: 12px;
-            overflow: hidden; border: 1px solid #eee;
-            transition: 0.3s; display: flex; flex-direction: column;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border: 1px solid #eee;
         }
 
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card:hover { transform: translateY(-5px); }
 
-        .brand-banner {
-            background: #f8f9fa; height: 120px;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            border-bottom: 1px solid #eee;
+        .product-img {
+            height: 150px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
         }
 
-        .product-content { padding: 15px; flex-grow: 1; }
+        .content { padding: 20px; }
 
         .tag {
-            font-size: 10px; font-weight: bold; padding: 4px 8px;
-            border-radius: 4px; text-transform: uppercase;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 5px;
+            text-transform: uppercase;
         }
 
-        .tag-insecticide { background: var(--tag-insect); color: #2980b9; }
-        .tag-herbicide { background: var(--tag-herb); color: #9a7d0a; }
-        .tag-fungicide { background: var(--tag-fungi); color: #8e44ad; }
+        .tag-pesticide { background: #ffeaa7; color: #d35400; }
+        .tag-fertilizer { background: #dff9fb; color: #0984e3; }
 
-        .title { font-size: 18px; font-weight: bold; margin: 10px 0 5px; color: #222; }
-        .technical { font-size: 12px; color: #666; font-style: italic; margin-bottom: 10px; }
+        .title { font-size: 18px; font-weight: bold; margin: 10px 0 5px; }
         
-        .order-btn {
-            width: 100%; padding: 12px;
-            background: var(--primary); color: white;
-            border: none; border-radius: 6px;
-            font-weight: bold; cursor: pointer; transition: 0.3s;
+        /* Multi-Vendor Info */
+        .vendor-info {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 12px;
         }
 
-        .order-btn:hover { background: var(--secondary); }
+        .stock-status { color: var(--primary); font-weight: bold; }
 
-        .footer { text-align: center; padding: 20px; color: #888; font-size: 12px; }
+        .btn-order {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-order:hover { background: var(--secondary); }
     </style>
 </head>
 <body>
 
-    <header class="market-header">
-        <div>
-            <h2 style="margin:0;">IIL Tractor Brand</h2>
-            <small>Authorized Dealer: Pandey Traders</small>
-        </div>
-        <div>
-            <a href="FarmerFeedback.html" style="color:white; text-decoration:none; font-weight:bold; margin-right:15px;">Dashboard</a>
-            <button onclick="logout()" style="background:var(--danger); border:none; color:white; padding:5px 10px; border-radius:4px; cursor:pointer;">Logout</button>
-        </div>
+    <header>
+        <div style="font-size: 20px; font-weight: bold;">Jaymani <span>Market</span></div>
+        <div id="userGreeting" style="font-size: 14px;">Namaste, Farmer</div>
+        <a href="index.html" style="color:white; text-decoration:none; font-size:12px;">Logout</a>
     </header>
 
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search (e.g. Mission, Borer, Rice, Weeds)..." onkeyup="search()">
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search products (e.g. Urea, Mission, Pandey Traders)..." onkeyup="filterProducts()">
     </div>
 
-    <div class="market-grid" id="productGrid">
-        <div class="card" data-search="mission insecticide borer rice sugarcane chlorantraniliprole">
-            <div class="brand-banner"><span style="font-size:40px;">🛡️</span><strong>MISSION</strong></div>
-            <div class="product-content">
-                <span class="tag tag-insecticide">Insecticide</span>
+    
+
+    <div class="market-grid" id="marketGrid">
+        
+        <div class="card" data-search="mission insecticide rice borer pandey traders">
+            <div class="product-img">🛡️</div>
+            <div class="content">
+                <span class="tag tag-pesticide">Insecticide</span>
                 <div class="title">IIL Mission</div>
-                <div class="technical">Chlorantraniliprole 0.4 GR</div>
-                <p style="font-size:13px; color:#444;">Stem Borer control for Rice and Sugarcane.</p>
-                <button class="order-btn" onclick="sendOrder('Mission')">Order via WhatsApp</button>
+                <div class="vendor-info">
+                    🏪 Vendor: <b>Pandey Traders</b><br>
+                    📦 Stock: <span class="stock-status">45 Units Available</span>
+                </div>
+                <div style="font-size: 14px; margin-bottom: 15px;">Best for Rice Stem Borer control.</div>
+                <button class="btn-order" onclick="openProduct('IIL Mission', 'Pandey Traders')">View Details</button>
             </div>
         </div>
 
-        <div class="card" data-search="aikido insecticide bph leaf folder rice cotton">
-            <div class="brand-banner"><span style="font-size:40px;">🪲</span><strong>AIKIDO</strong></div>
-            <div class="product-content">
-                <span class="tag tag-insecticide">Insecticide</span>
+        <div class="card" data-search="urea fertilizer iffco kisan seva kendra">
+            <div class="product-img">🌱</div>
+            <div class="content">
+                <span class="tag tag-fertilizer">Fertilizer</span>
+                <div class="title">Urea (IFFCO)</div>
+                <div class="vendor-info">
+                    🏪 Vendor: <b>Kisan Seva Kendra</b><br>
+                    📦 Stock: <span class="stock-status">120 Bags Available</span>
+                </div>
+                <div style="font-size: 14px; margin-bottom: 15px;">High-quality Nitrogen fertilizer.</div>
+                <button class="btn-order" onclick="openProduct('Urea', 'Kisan Seva Kendra')">View Details</button>
+            </div>
+        </div>
+
+        <div class="card" data-search="aikido insecticide bph rice pandey traders">
+            <div class="product-img">🪲</div>
+            <div class="content">
+                <span class="tag tag-pesticide">Insecticide</span>
                 <div class="title">IIL Aikido</div>
-                <div class="technical">Buprofezin 22% + Fipronil 3%</div>
-                <p style="font-size:13px; color:#444;">Expert control for BPH in Paddy.</p>
-                <button class="order-btn" onclick="sendOrder('Aikido')">Order via WhatsApp</button>
+                <div class="vendor-info">
+                    🏪 Vendor: <b>Pandey Traders</b><br>
+                    📦 Stock: <span class="stock-status">22 Units Available</span>
+                </div>
+                <div style="font-size: 14px; margin-bottom: 15px;">Effective against BPH in Paddy.</div>
+                <button class="btn-order" onclick="openProduct('Aikido', 'Pandey Traders')">View Details</button>
             </div>
         </div>
 
-        <div class="card" data-search="torry super herbicide maize makka weed tembotrione">
-            <div class="brand-banner"><span style="font-size:40px;">🌿</span><strong>TORRY SUPER</strong></div>
-            <div class="product-content">
-                <span class="tag tag-herbicide">Herbicide</span>
-                <div class="title">Torry Super</div>
-                <div class="technical">Tembotrione 9% + Atrazine 45%</div>
-                <p style="font-size:13px; color:#444;">Powerful weed control for Maize (Makka).</p>
-                <button class="order-btn" onclick="sendOrder('Torry Super')">Order via WhatsApp</button>
-            </div>
-        </div>
-
-        <div class="card" data-search="hakama herbicide soybean pulses weed quizalofop">
-            <div class="brand-banner"><span style="font-size:40px;">🌱</span><strong>HAKAMA</strong></div>
-            <div class="product-content">
-                <span class="tag tag-herbicide">Herbicide</span>
-                <div class="title">IIL Hakama</div>
-                <div class="technical">Quizalofop Ethyl 5% EC</div>
-                <p style="font-size:13px; color:#444;">For grassy weeds in Soybean and Pulses.</p>
-                <button class="order-btn" onclick="sendOrder('Hakama')">Order via WhatsApp</button>
-            </div>
-        </div>
-
-        <div class="card" data-search="pulsor fungicide sheath blight rice paddy">
-            <div class="brand-banner"><span style="font-size:40px;">🍄</span><strong>PULSOR</strong></div>
-            <div class="product-content">
-                <span class="tag tag-fungicide">Fungicide</span>
-                <div class="title">IIL Pulsor</div>
-                <div class="technical">Thifluzamide 24 SC</div>
-                <p style="font-size:13px; color:#444;">Targeted control for Sheath Blight in Rice.</p>
-                <button class="order-btn" onclick="sendOrder('Pulsor')">Order via WhatsApp</button>
-            </div>
-        </div>
     </div>
-
-    <footer class="footer">
-        © 2026 Jaymani Krishi Sewa | Authorized IIL Tractor Brand Partner
-    </footer>
 
     <script>
-        function search() {
+        // Display logged in user name
+        const user = sessionStorage.getItem("loggedUser") || "Farmer";
+        document.getElementById("userGreeting").innerText = `Namaste, ${user.toUpperCase()}`;
+
+        // Search Filter Logic
+        function filterProducts() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('card');
             
             for (let i = 0; i < cards.length; i++) {
-                let searchData = cards[i].getAttribute('data-search');
-                cards[i].style.display = searchData.includes(input) ? "" : "none";
+                let text = cards[i].getAttribute('data-search');
+                cards[i].style.display = text.includes(input) ? "" : "none";
             }
         }
 
-        function sendOrder(product) {
-            let user = sessionStorage.getItem("loggedUser") || "Farmer";
-            let msg = `Namaste Pandey Traders, Main *${user}* bol raha hoon. Mujhe IIL Tractor Brand ka *${product}* chahiye. Kripya details bhejein.`;
-            window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`);
-        }
-
-        function logout() {
-            sessionStorage.clear();
-            window.location.href = "index.html";
+        // Redirect to Details Page
+        function openProduct(name, vendor) {
+            sessionStorage.setItem("selectedProduct", name);
+            sessionStorage.setItem("selectedVendor", vendor);
+            window.location.href = "Product-View.html";
         }
     </script>
 </body>
