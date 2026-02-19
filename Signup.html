@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | Jaymani Krishi Sewa</title>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --dark: #1b4332;
+            --bg: #f0f2f1;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0; padding: 20px;
+        }
+
+        .signup-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .logo-text {
+            font-size: 24px; font-weight: bold; color: var(--dark);
+            text-align: center; margin-bottom: 20px;
+        }
+
+        .role-selector {
+            display: flex; background: #eee; border-radius: 10px;
+            margin-bottom: 20px; padding: 5px;
+        }
+
+        .role-tab {
+            flex: 1; text-align: center; padding: 10px;
+            cursor: pointer; border-radius: 8px; font-weight: bold;
+        }
+
+        .role-tab.active { background: var(--primary); color: white; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; color: #666; margin-bottom: 5px; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 12px; border: 1px solid #ddd;
+            border-radius: 8px; outline: none; box-sizing: border-box;
+        }
+
+        .vendor-fields { display: none; background: #f9f9f9; padding: 15px; border-radius: 10px; margin-top: 10px; }
+
+        .signup-btn {
+            width: 100%; padding: 14px; background: var(--primary);
+            color: white; border: none; border-radius: 8px;
+            font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+
+        .signup-btn:hover { background: var(--dark); }
+    </style>
+</head>
+<body>
+
+    <div class="signup-card">
+        <div class="logo-text">Jaymani <span>Krishi Sewa</span></div>
+        <p style="text-align:center; color:#666; font-size:14px;">Naya account banayein</p>
+
+        <div class="role-selector">
+            <div id="tab-farmer" class="role-tab active" onclick="setRole('farmer')">Kisan</div>
+            <div id="tab-vendor" class="role-tab" onclick="setRole('vendor')">Retailer</div>
+        </div>
+
+        <form onsubmit="event.preventDefault(); handleSignup();">
+            <div class="form-group">
+                <label>Poora Naam (Full Name)</label>
+                <input type="text" id="name" placeholder="E.g. Manish Pandey" required>
+            </div>
+
+            <div class="form-group">
+                <label>Mobile Number</label>
+                <input type="tel" id="mobile" placeholder="9876XXXXXX" required>
+            </div>
+
+            <div id="vendorSection" class="vendor-fields">
+                <div class="form-group">
+                    <label>Dukan ka Naam (Shop Name)</label>
+                    <input type="text" id="shopName" placeholder="E.g. Pandey Traders">
+                </div>
+                <div class="form-group">
+                    <label>GST/License Number</label>
+                    <input type="text" id="license" placeholder="Optional for Prototype">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Password Set Karein</label>
+                <input type="password" id="pass" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="signup-btn">Account Banayein</button>
+        </form>
+
+        <p style="text-align:center; font-size:14px; margin-top:20px;">
+            Pehle se account hai? <a href="Login.html" style="color:var(--primary); text-decoration:none; font-weight:bold;">Login karein</a>
+        </p>
+    </div>
+
+    <script>
+        let currentRole = 'farmer';
+
+        function setRole(role) {
+            currentRole = role;
+            document.getElementById('tab-farmer').classList.toggle('active', role === 'farmer');
+            document.getElementById('tab-vendor').classList.toggle('active', role === 'vendor');
+            document.getElementById('vendorSection').style.display = role === 'vendor' ? 'block' : 'none';
+        }
+
+        function handleSignup() {
+            const name = document.getElementById('name').value;
+            alert(`Swagat hai, ${name}! Aapka registration safal raha. Ab aap login kar sakte hain.`);
+            window.location.href = "Login.html";
+        }
+    </script>
+</body>
+</html>
