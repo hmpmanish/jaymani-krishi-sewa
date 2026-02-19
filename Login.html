@@ -3,101 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Jaymani Krishi Sewa</title>
+    <title>Jaymani Krishi | Secure Login</title>
     <style>
         :root {
             --primary: #2d6a4f;
             --dark: #1b4332;
-            --bg: #f0f2f1;
+            --bg: #f4f7f6;
+            --white: #ffffff;
             --error: #d63031;
         }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 350px; text-align: center; }
-        .tab-container { display: flex; background: #eee; border-radius: 10px; margin-bottom: 20px; padding: 5px; }
-        .tab { flex: 1; padding: 10px; cursor: pointer; border-radius: 8px; font-weight: bold; transition: 0.3s; color: #666; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg);
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0;
+        }
+
+        .login-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+
+        .tab-container {
+            display: flex; background: #eee; border-radius: 10px;
+            margin-bottom: 25px; padding: 5px;
+        }
+
+        .tab {
+            flex: 1; padding: 10px; cursor: pointer;
+            border-radius: 8px; font-weight: bold; transition: 0.3s; color: #666;
+        }
+
         .tab.active { background: var(--primary); color: white; }
+
         .input-group { text-align: left; margin-bottom: 15px; }
-        .input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; outline: none; }
-        .login-btn { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        #error-msg { color: var(--error); font-size: 13px; margin-bottom: 15px; display: none; background: #ffeaa7; padding: 8px; border-radius: 5px; }
+        .input-group input {
+            width: 100%; padding: 12px; border: 1px solid #ddd;
+            border-radius: 8px; outline: none; box-sizing: border-box;
+        }
+
+        .login-btn {
+            width: 100%; padding: 14px; background: var(--primary);
+            color: white; border: none; border-radius: 8px;
+            font-size: 16px; font-weight: bold; cursor: pointer;
+        }
+
+        #error-msg {
+            color: var(--error); font-size: 13px; margin-bottom: 15px;
+            display: none; background: #ffeaa7; padding: 8px; border-radius: 5px;
+        }
     </style>
 </head>
 <body>
 
     <div class="login-card">
-        <h2 style="color: var(--dark); margin-bottom: 5px;">Jaymani Krishi</h2>
-        <p id="role-label" style="font-size: 14px; color: #666; margin-bottom: 20px;">Farmer Login</p>
+        <h2 style="color: var(--dark);">Jaymani Krishi</h2>
+        <p id="role-text" style="color: #666; font-size: 14px; margin-bottom: 20px;">Farmer Access</p>
 
         <div class="tab-container">
             <div id="tab-farmer" class="tab active" onclick="switchRole('farmer')">Kisan</div>
             <div id="tab-vendor" class="tab" onclick="switchRole('vendor')">Vendor</div>
+            <div id="tab-admin" class="tab" onclick="switchRole('admin')">Admin</div>
         </div>
 
         <div id="error-msg">⚠ Galat ID ya Password!</div>
 
         <div class="input-group">
-            <input type="text" id="userId" placeholder="ID / Mobile Number">
+            <input type="text" id="userId" placeholder="Username / Mobile">
         </div>
         <div class="input-group">
             <input type="password" id="userPass" placeholder="Password">
         </div>
 
-        <button class="login-btn" id="loginBtn">Access Portal</button>
+        <button class="login-btn" id="loginBtn">Sign In</button>
         
-        <p style="font-size: 12px; margin-top: 20px;">Powered by <b>Pandey Traders</b></p>
+        <p style="font-size: 12px; margin-top: 20px; color: #888;">Sharda University DCL Project</p>
     </div>
 
+    
+
     <script>
-        // --- AAPKA OLD ADMIN DATABASE ---
+        // --- AAPKA DATABASE ---
         const validUsers = {
-            "manish": "pandey786",
-            "jayant": "raj123",
-            "farmer01": "khet123",
-            "9876543210": "bihar2026",
-            "demo": "demo123",
-            "hmp": "hmp"
+            "manish": "pandey786", // Admin 1
+            "jayant": "raj123",    // Admin 2
+            "farmer01": "khet123", // Farmer
+            "hmp": "hmp",          // Farmer / Vendor
+            "9876543210": "bihar2026"
         };
 
         let currentRole = 'farmer';
 
         function switchRole(role) {
             currentRole = role;
-            document.getElementById('tab-farmer').classList.toggle('active', role === 'farmer');
-            document.getElementById('tab-vendor').classList.toggle('active', role === 'vendor');
-            document.getElementById('role-label').innerText = role === 'farmer' ? 'Farmer Login' : 'Vendor Login';
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + role).classList.add('active');
+            document.getElementById('role-text').innerText = role.charAt(0).toUpperCase() + role.slice(1) + " Access";
             document.getElementById('error-msg').style.display = 'none';
         }
 
-        const loginBtn = document.getElementById('loginBtn');
-        
-        loginBtn.onclick = () => {
+        document.getElementById('loginBtn').onclick = () => {
             const id = document.getElementById('userId').value.trim().toLowerCase();
             const pass = document.getElementById('userPass').value.trim();
 
             if (validUsers[id] && validUsers[id] === pass) {
-                // Success
-                sessionStorage.setItem("isLoggedIn", "true");
                 sessionStorage.setItem("loggedUser", id);
-                sessionStorage.setItem("userRole", currentRole);
                 
-                alert("Login Safal! Swagat hai: " + id);
-
-                // Role ke hisab se redirection
-                if (currentRole === 'farmer') {
-                    window.location.href = "Marketplace.html";
-                } else {
+                // REDIRECTION LOGIC
+                if (currentRole === 'admin' && (id === 'manish' || id === 'jayant')) {
+                    alert("Admin Dashboard khul raha hai...");
+                    window.location.href = "Admin-Panel.html";
+                } 
+                else if (currentRole === 'vendor') {
                     window.location.href = "Vendor-Dashboard.html";
+                } 
+                else if (currentRole === 'farmer') {
+                    window.location.href = "Marketplace.html";
+                } 
+                else {
+                    alert("Kripya sahi Role select karein!");
                 }
             } else {
-                // Error
                 document.getElementById('error-msg').style.display = 'block';
             }
         };
-
-        // Enter key support
-        document.addEventListener('keydown', (e) => {
-            if (e.key === "Enter") loginBtn.click();
-        });
     </script>
 </body>
 </html>
