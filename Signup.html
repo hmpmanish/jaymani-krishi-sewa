@@ -1,128 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup | Jaymani Krishi Sewa</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Join the Revolution | Jaymani Krishi Sewa</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2f7f33",
+                        "background-dark": "#0a110b",
+                    }
+                },
+            },
+        }
+    </script>
     <style>
-        :root {
-            --primary: #2d6a4f;
-            --dark: #1b4332;
-            --bg: #f0f2f1;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: var(--bg);
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; margin: 0; padding: 20px;
-        }
-
-        .signup-card {
-            background: var(--white);
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 450px;
-        }
-
-        .logo-text {
-            font-size: 24px; font-weight: bold; color: var(--dark);
-            text-align: center; margin-bottom: 20px;
-        }
-
-        .role-selector {
-            display: flex; background: #eee; border-radius: 10px;
-            margin-bottom: 20px; padding: 5px;
-        }
-
-        .role-tab {
-            flex: 1; text-align: center; padding: 10px;
-            cursor: pointer; border-radius: 8px; font-weight: bold;
-        }
-
-        .role-tab.active { background: var(--primary); color: white; }
-
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 13px; color: #666; margin-bottom: 5px; }
-        .form-group input, .form-group select {
-            width: 100%; padding: 12px; border: 1px solid #ddd;
-            border-radius: 8px; outline: none; box-sizing: border-box;
-        }
-
-        .vendor-fields { display: none; background: #f9f9f9; padding: 15px; border-radius: 10px; margin-top: 10px; }
-
-        .signup-btn {
-            width: 100%; padding: 14px; background: var(--primary);
-            color: white; border: none; border-radius: 8px;
-            font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
-
-        .signup-btn:hover { background: var(--dark); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Lexend', sans-serif; }
+        .auth-bg { background: radial-gradient(circle at top right, rgba(47, 127, 51, 0.15), transparent), radial-gradient(circle at bottom left, rgba(47, 127, 51, 0.05), transparent); }
     </style>
 </head>
-<body>
+<body class="bg-white dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen auth-bg flex flex-col">
 
-    <div class="signup-card">
-        <div class="logo-text">Jaymani <span>Krishi Sewa</span></div>
-        <p style="text-align:center; color:#666; font-size:14px;">Naya account banayein</p>
-
-        <div class="role-selector">
-            <div id="tab-farmer" class="role-tab active" onclick="setRole('farmer')">Kisan</div>
-            <div id="tab-vendor" class="role-tab" onclick="setRole('vendor')">Retailer</div>
+    <header class="px-8 py-6 flex justify-between items-center">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+            <div class="bg-primary p-1.5 rounded-lg text-white">
+                <span class="material-symbols-outlined text-xl">agriculture</span>
+            </div>
+            <h2 class="text-primary text-xl font-black tracking-tighter uppercase">Jaymani</h2>
         </div>
+        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Step 01: Identity</p>
+    </header>
 
-        <form onsubmit="event.preventDefault(); handleSignup();">
-            <div class="form-group">
-                <label>Poora Naam (Full Name)</label>
-                <input type="text" id="name" placeholder="E.g. Manish Pandey" required>
+    <main class="flex-1 flex items-center justify-center p-6">
+        <div class="w-full max-w-xl">
+            <div class="flex gap-2 mb-10">
+                <div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+                <div class="h-1.5 flex-1 bg-slate-200 dark:bg-white/10 rounded-full"></div>
+                <div class="h-1.5 flex-1 bg-slate-200 dark:bg-white/10 rounded-full"></div>
             </div>
 
-            <div class="form-group">
-                <label>Mobile Number</label>
-                <input type="tel" id="mobile" placeholder="9876XXXXXX" required>
+            <div class="mb-10 text-center">
+                <h1 class="text-4xl font-black tracking-tight mb-2">Create your <span class="text-primary">Digital Pehchan</span></h1>
+                <p class="text-slate-500 font-medium">Join 5000+ farmers across the region.</p>
             </div>
 
-            <div id="vendorSection" class="vendor-fields">
-                <div class="form-group">
-                    <label>Dukan ka Naam (Shop Name)</label>
-                    <input type="text" id="shopName" placeholder="E.g. Pandey Traders">
+            <div class="bg-white dark:bg-slate-900/50 p-8 md:p-12 rounded-[3rem] border border-slate-200 dark:border-white/5 shadow-2xl backdrop-blur-xl">
+                <form onsubmit="handleSignup(event)" class="space-y-6">
+                    <div class="bg-slate-100 dark:bg-white/5 p-1.5 rounded-2xl flex gap-2">
+                        <button type="button" onclick="setRole('farmer')" id="role-farmer" class="flex-1 py-3 text-xs font-black rounded-xl transition-all bg-white dark:bg-white/10 shadow-sm text-primary">FARMER</button>
+                        <button type="button" onclick="setRole('vendor')" id="role-vendor" class="flex-1 py-3 text-xs font-black rounded-xl transition-all text-slate-400">RETAILER</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+                            <input type="text" required placeholder="Enter Name" class="w-full mt-2 px-5 py-4 bg-slate-50 dark:bg-white/5 border-none rounded-2xl ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Mobile Number</label>
+                            <input type="tel" required placeholder="+91" class="w-full mt-2 px-5 py-4 bg-slate-50 dark:bg-white/5 border-none rounded-2xl ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">ID Number (Aadhaar / Kisan Card)</label>
+                        <div class="relative mt-2">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">badge</span>
+                            <input type="text" required placeholder="XXXX-XXXX-XXXX" class="w-full pl-12 pr-5 py-4 bg-slate-50 dark:bg-white/5 border-none rounded-2xl ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="w-full py-5 bg-primary text-white text-xs font-black rounded-[2rem] shadow-xl shadow-primary/20 hover:bg-primary-dark transition-all active:scale-95 flex items-center justify-center gap-3">
+                            CONTINUE TO VERIFY <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-8 text-center">
+                    <p class="text-sm text-slate-500 font-medium">Already have an account? <a href="Login.html" class="text-primary font-bold hover:underline">Sign In</a></p>
                 </div>
-                <div class="form-group">
-                    <label>GST/License Number</label>
-                    <input type="text" id="license" placeholder="Optional for Prototype">
-                </div>
             </div>
+        </div>
+    </main>
 
-            <div class="form-group">
-                <label>Password Set Karein</label>
-                <input type="password" id="pass" placeholder="••••••••" required>
-            </div>
-
-            <button type="submit" class="signup-btn">Account Banayein</button>
-        </form>
-
-        <p style="text-align:center; font-size:14px; margin-top:20px;">
-            Pehle se account hai? <a href="Login.html" style="color:var(--primary); text-decoration:none; font-weight:bold;">Login karein</a>
-        </p>
-    </div>
+    <footer class="p-8 text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">
+        Secured by Jaymani Encryption Protocol
+    </footer>
 
     <script>
-        let currentRole = 'farmer';
+        let selectedRole = 'farmer';
 
         function setRole(role) {
-            currentRole = role;
-            document.getElementById('tab-farmer').classList.toggle('active', role === 'farmer');
-            document.getElementById('tab-vendor').classList.toggle('active', role === 'vendor');
-            document.getElementById('vendorSection').style.display = role === 'vendor' ? 'block' : 'none';
+            selectedRole = role;
+            const fBtn = document.getElementById('role-farmer');
+            const vBtn = document.getElementById('role-vendor');
+
+            if (role === 'farmer') {
+                fBtn.className = "flex-1 py-3 text-xs font-black rounded-xl transition-all bg-white dark:bg-white/10 shadow-sm text-primary";
+                vBtn.className = "flex-1 py-3 text-xs font-black rounded-xl transition-all text-slate-400";
+            } else {
+                vBtn.className = "flex-1 py-3 text-xs font-black rounded-xl transition-all bg-white dark:bg-white/10 shadow-sm text-primary";
+                fBtn.className = "flex-1 py-3 text-xs font-black rounded-xl transition-all text-slate-400";
+            }
         }
 
-        function handleSignup() {
-            const name = document.getElementById('name').value;
-            alert(`Swagat hai, ${name}! Aapka registration safal raha. Ab aap login kar sakte hain.`);
-            window.location.href = "Login.html";
+        function handleSignup(e) {
+            e.preventDefault();
+            // Store role in session to help the next page
+            sessionStorage.setItem("pendingRole", selectedRole);
+            alert("Verification OTP sent to your mobile!");
+            window.location.href = "Login.html"; 
         }
     </script>
 </body>
