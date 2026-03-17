@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Jaymani Krishi Sewa | Sharda University</title>
+    <title>JAYMANI | Digital Agri-Intelligence</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -18,9 +18,6 @@
                         "primary-dark": "#1b4d1f",
                         "background-light": "#f8faf8",
                         "background-dark": "#0a110b",
-                    },
-                    backgroundImage: {
-                        'grid-pattern': "url('https://www.transparenttextures.com/patterns/carbon-fibre.png')",
                     }
                 },
             },
@@ -28,35 +25,44 @@
     </script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        body { font-family: 'Lexend', sans-serif; }
-        .hero-gradient { background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(10,17,11,0.9) 100%); }
+        body { font-family: 'Lexend', sans-serif; opacity: 0; transition: opacity 0.8s ease-in-out; }
+        body.loaded { opacity: 1; }
+        .hero-gradient { background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(10,17,11,0.95) 100%); }
         .text-gradient {
             background: linear-gradient(to right, #ffffff, #95d5b2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .pulse-live { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-500">
 
-    <header class="flex items-center justify-between border-b border-white/10 bg-white/70 dark:bg-background-dark/70 backdrop-blur-xl px-6 md:px-12 py-4 sticky top-0 z-50">
+    <header class="flex items-center justify-between border-b border-white/5 bg-white/70 dark:bg-background-dark/70 backdrop-blur-xl px-6 md:px-12 py-4 sticky top-0 z-50">
         <div class="flex items-center gap-3">
-            <div class="bg-primary p-2 rounded-xl text-white shadow-lg shadow-primary/30 rotate-3">
+            <div class="bg-primary p-2 rounded-xl text-white shadow-xl shadow-primary/30 rotate-3">
                 <span class="material-symbols-outlined text-2xl">agriculture</span>
             </div>
-            <h2 class="text-primary text-2xl font-black tracking-tighter">JAYMANI</h2>
+            <div>
+                <h2 class="text-primary text-2xl font-black tracking-tighter leading-none">JAYMANI</h2>
+                <div class="flex items-center gap-1.5 mt-1">
+                    <span class="size-1.5 bg-green-500 rounded-full pulse-live"></span>
+                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">System Live</span>
+                </div>
+            </div>
         </div>
         
         <div class="flex items-center gap-6">
             <nav class="hidden md:flex gap-8">
                 <a class="font-bold text-primary border-b-2 border-primary" href="index.html">Home</a>
-                <a class="font-medium hover:text-primary transition-all" href="About-DCL.html">Design Process</a>
-                <a class="font-medium hover:text-primary transition-all" href="Support.html">Support</a>
+                <a class="font-medium hover:text-primary transition-all text-sm" href="About-DCL.html">Design Process</a>
+                <a class="font-medium hover:text-primary transition-all text-sm" href="Support.html">Support</a>
             </nav>
             <button onclick="document.documentElement.classList.toggle('dark')" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 border border-slate-200 dark:border-white/10 transition-all">
                 <span class="material-symbols-outlined">light_mode</span>
@@ -67,45 +73,45 @@
     <main>
         <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-background-dark">
             <div class="absolute inset-0 z-0">
-                <img class="w-full h-full object-cover opacity-50 scale-110" src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=1470&auto=format&fit=crop" alt="Agriculture">
+                <img class="w-full h-full object-cover opacity-40 scale-110" src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=1470&auto=format&fit=crop" alt="Agriculture">
                 <div class="absolute inset-0 hero-gradient"></div>
             </div>
 
             <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
                 <div data-aos="zoom-in">
-                    <span class="px-4 py-1.5 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest border border-primary/30 mb-6 inline-block">
-                        Sharda University • CSCR1504
+                    <span class="px-4 py-1.5 rounded-full bg-primary/20 text-primary text-[10px] font-black uppercase tracking-widest border border-primary/30 mb-8 inline-block">
+                        Sharda University • CSCR1504 • DCL
                     </span>
-                    <h1 class="text-5xl md:text-8xl font-black mb-8 leading-[1.1]">
+                    <h1 class="text-5xl md:text-8xl font-black mb-8 leading-[1.1] tracking-tighter">
                         <span class="text-gradient">Apni Kheti,</span><br/>
                         <span class="text-primary">Digital Pehchan</span>
                     </h1>
-                    <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-                        Verified Retailers like <span class="text-white font-semibold">Pandey Traders</span> se judiye aur apni fasal ki har zarurat poori karein digital madhyam se.
+                    <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-16 font-light leading-relaxed">
+                        Verified Retailers like <span class="text-white font-semibold underline decoration-primary decoration-2 underline-offset-4">Pandey Traders</span> se judiye aur apni fasal ki har zarurat poori karein digital madhyam se.
                     </p>
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-8 justify-center items-stretch" data-aos="fade-up" data-aos-delay="200">
-                    <a href="Login.html?role=farmer" class="glass-card group p-10 rounded-[2.5rem] w-full md:w-80 hover:bg-white transition-all duration-500 hover:shadow-[0_20px_50px_rgba(47,127,51,0.3)]">
-                        <div class="bg-primary/20 group-hover:bg-primary text-primary group-hover:text-white w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-110 group-hover:rotate-6">
+                    <a href="Login.html?role=farmer" class="glass-card group p-10 rounded-[2.5rem] w-full md:w-80 hover:bg-white transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(47,127,51,0.4)] hover:-translate-y-2">
+                        <div class="bg-primary/20 group-hover:bg-primary text-primary group-hover:text-white size-16 rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-110 group-hover:rotate-6">
                             <span class="material-symbols-outlined text-4xl">agriculture</span>
                         </div>
-                        <h3 class="text-white group-hover:text-slate-900 text-2xl font-bold mb-4">Main Kisan Hoon</h3>
-                        <p class="text-slate-400 group-hover:text-slate-600 text-sm leading-relaxed">Khatoni, Bahi-Khata aur online orders ke liye yahan click karein.</p>
+                        <h3 class="text-white group-hover:text-slate-900 text-2xl font-black mb-4 text-left">Main Kisan Hoon</h3>
+                        <p class="text-slate-400 group-hover:text-slate-600 text-sm leading-relaxed text-left">Khatoni, Bahi-Khata aur online orders ke liye yahan click karein.</p>
                     </a>
 
-                    <a href="Login.html?role=vendor" class="glass-card group p-10 rounded-[2.5rem] w-full md:w-80 hover:bg-white transition-all duration-500 hover:shadow-[0_20px_50px_rgba(47,127,51,0.3)]">
-                        <div class="bg-primary/20 group-hover:bg-primary text-primary group-hover:text-white w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-110 group-hover:rotate-6">
+                    <a href="Login.html?role=vendor" class="glass-card group p-10 rounded-[2.5rem] w-full md:w-80 hover:bg-white transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(47,127,51,0.4)] hover:-translate-y-2">
+                        <div class="bg-primary/20 group-hover:bg-primary text-primary group-hover:text-white size-16 rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-110 group-hover:rotate-6">
                             <span class="material-symbols-outlined text-4xl">storefront</span>
                         </div>
-                        <h3 class="text-white group-hover:text-slate-900 text-2xl font-bold mb-4">Main Retailer Hoon</h3>
-                        <p class="text-slate-400 group-hover:text-slate-600 text-sm leading-relaxed">Apni inventory manage karein aur naye grahakon se judiye.</p>
+                        <h3 class="text-white group-hover:text-slate-900 text-2xl font-black mb-4 text-left">Main Retailer Hoon</h3>
+                        <p class="text-slate-400 group-hover:text-slate-600 text-sm leading-relaxed text-left">Apni inventory manage karein aur naye grahakon se judiye.</p>
                     </a>
                 </div>
             </div>
         </section>
 
-        <section class="py-32 px-6 bg-white dark:bg-slate-900">
+        <section class="py-32 px-6 bg-white dark:bg-[#0d150e]">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-20" data-aos="fade-up">
                     <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">Design & Creativity Lab</h2>
@@ -113,57 +119,112 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div class="group p-8 bg-slate-50 dark:bg-slate-800/50 rounded-3xl border border-slate-200 dark:border-white/5 hover:border-primary transition-all duration-500 shadow-sm" data-aos="fade-right">
-                        <span class="text-primary font-bold text-xs tracking-widest uppercase mb-4 block">Lead Developer</span>
-                        <h4 class="text-2xl font-black text-slate-900 dark:text-white">Manish Pandey</h4>
-                        <p class="text-slate-500 mt-2">System ID: 2025266286</p>
-                        <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm">code</span></div>
-                            <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm">terminal</span></div>
+                    <div class="group p-10 bg-slate-50 dark:bg-white/5 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-primary transition-all duration-500 shadow-sm" data-aos="fade-right">
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="text-primary font-black text-[10px] tracking-[0.2em] uppercase block">Lead Developer</span>
+                            <div class="flex gap-2 opacity-30 group-hover:opacity-100 transition-opacity">
+                                <span class="material-symbols-outlined text-sm text-primary">code</span>
+                                <span class="material-symbols-outlined text-sm text-primary">terminal</span>
+                            </div>
                         </div>
+                        <h4 class="text-3xl font-black text-slate-900 dark:text-white leading-tight">Manish Pandey</h4>
+                        <p class="text-slate-500 mt-2 font-medium">System ID: 2025266286</p>
                     </div>
 
-                    <div class="group p-8 bg-slate-50 dark:bg-slate-800/50 rounded-3xl border border-slate-200 dark:border-white/5 hover:border-primary transition-all duration-500 shadow-sm" data-aos="fade-left">
-                        <span class="text-primary font-bold text-xs tracking-widest uppercase mb-4 block">Co-Researcher</span>
-                        <h4 class="text-2xl font-black text-slate-900 dark:text-white">Jayant Raj</h4>
-                        <p class="text-slate-500 mt-2">System ID: 2025298708</p>
-                        <div class="mt-6 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm">palette</span></div>
-                            <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-sm">draw</span></div>
+                    <div class="group p-10 bg-slate-50 dark:bg-white/5 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-primary transition-all duration-500 shadow-sm" data-aos="fade-left">
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="text-primary font-black text-[10px] tracking-[0.2em] uppercase block">Co-Researcher</span>
+                            <div class="flex gap-2 opacity-30 group-hover:opacity-100 transition-opacity">
+                                <span class="material-symbols-outlined text-sm text-primary">palette</span>
+                                <span class="material-symbols-outlined text-sm text-primary">draw</span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="mt-20 text-center" data-aos="zoom-in">
-                    <div class="inline-flex items-center gap-4 px-8 py-4 bg-slate-900 text-white dark:bg-primary/10 dark:text-primary rounded-2xl border border-white/10 shadow-2xl">
-                        <span class="material-symbols-outlined">verified_user</span>
-                        <p class="font-bold">Guided by: <span class="text-primary dark:text-white">Ms. Sheenam Naaz</span></p>
+                        <h4 class="text-3xl font-black text-slate-900 dark:text-white leading-tight">Jayant Raj</h4>
+                        <p class="text-slate-500 mt-2 font-medium">System ID: 2025298708</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-background-dark py-12 px-6 border-t border-white/5">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-slate-500 text-sm">
-            <div class="flex items-center gap-2">
-                <span class="font-bold text-white tracking-widest">JAYMANI</span>
-                <span>© 2026</span>
+    <footer class="bg-background-dark py-20 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-primary p-1.5 rounded-lg text-white">
+                            <span class="material-symbols-outlined text-xl">agriculture</span>
+                        </div>
+                        <h2 class="text-white text-xl font-black tracking-tighter uppercase">Jaymani Krishi</h2>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Empowering farmers with modern digital tools to access agricultural supplies from their trusted local shops like <span class="text-slate-300 font-bold">Pandey Traders</span>.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="size-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined text-sm">public</span></a>
+                        <a href="#" class="size-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined text-sm">share</span></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-8">Quick Links</h4>
+                    <ul class="space-y-4 text-slate-500 text-sm font-medium">
+                        <li><a href="#" class="hover:text-primary transition-colors">Find Seeds</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Fertilisers Catalog</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Retailer Login</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Register as Farmer</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-8">Support</h4>
+                    <ul class="space-y-4 text-slate-500 text-sm font-medium">
+                        <li><a href="Support.html" class="hover:text-primary transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Shipping Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-8">Contact Us</h4>
+                    <div class="space-y-4 mb-8">
+                        <a href="tel:+9118001234567" class="flex items-center gap-3 text-slate-500 text-sm hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-primary text-lg">call</span> +91 1800 123 4567
+                        </a>
+                        <a href="mailto:support@jaymanikrishi.in" class="flex items-center gap-3 text-slate-500 text-sm hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-primary text-lg">mail</span> support@jaymanikrishi.in
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-3 px-4 py-2 bg-white/5 rounded-xl border border-white/10 cursor-pointer hover:bg-white/10 transition-all">
+                        <span class="material-symbols-outlined text-2xl text-primary">ad_units</span>
+                        <div>
+                            <p class="text-[8px] text-slate-500 font-black uppercase leading-none">Download on</p>
+                            <p class="text-[10px] text-white font-bold mt-1">Google Play</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>Aatmanirbhar Bharat Initiative | Sharda University Project Submission</p>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-primary">Docs</a>
-                <a href="#" class="hover:text-primary">Privacy</a>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em]">© 2026 Jaymani Krishi Sewa Private Limited. All rights reserved.</p>
+                <div class="flex items-center gap-2">
+                    <span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Server: India West-1</span>
+                </div>
             </div>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            easing: 'ease-out-back'
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            AOS.init({
+                duration: 1200,
+                once: true,
+                easing: 'ease-out-back'
+            });
         });
     </script>
 </body>
