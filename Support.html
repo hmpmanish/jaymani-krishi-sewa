@@ -1,95 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Support | Jaymani Krishi Sewa</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2f7f33",
+                        "background-dark": "#0a110b",
+                    }
+                },
+            },
+        }
+    </script>
     <style>
-        :root {
-            --primary: #2d6a4f;
-            --dark: #1b4332;
-            --accent: #ff9f43;
-            --bg: #f4f7f6;
-            --white: #ffffff;
-        }
-
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); }
-
-        header { background: var(--dark); color: white; padding: 20px 5%; text-align: center; }
-        
-        .support-container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
-
-        .support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-
-        .support-card {
-            background: white; padding: 30px; border-radius: 15px; text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;
-        }
-        .support-card:hover { transform: translateY(-5px); }
-        .icon { font-size: 40px; margin-bottom: 15px; display: block; }
-
-        /* --- SMS Simulation Box --- */
-        .sms-box {
-            background: #e1f5fe; padding: 25px; border-radius: 15px; margin-top: 40px;
-            border: 2px dashed #039be5; position: relative;
-        }
-        .sms-box h3 { color: #0277bd; margin-top: 0; }
-        .sms-preview {
-            background: white; padding: 15px; border-radius: 10px; font-family: 'Courier New', monospace;
-            margin-top: 15px; border-left: 5px solid #039be5;
-        }
-
-        .btn-contact {
-            display: inline-block; margin-top: 15px; padding: 10px 25px;
-            background: var(--primary); color: white; text-decoration: none;
-            border-radius: 8px; font-weight: bold;
-        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Lexend', sans-serif; }
+        .support-card { transition: all 0.4s ease; }
+        .support-card:hover { transform: translateY(-10px); }
+        .sms-gradient { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); }
     </style>
 </head>
-<body>
+<body class="bg-[#f8fafc] dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
 
-    <header>
-        <h1>Jaymani Sahayata Kendra</h1>
-        <p>Kisanon aur Retailers ke liye 24/7 Support</p>
+    <header class="flex items-center justify-between border-b border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl px-6 md:px-12 py-4 sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <div class="bg-primary p-2 rounded-2xl text-white shadow-xl shadow-primary/30 rotate-3">
+                <span class="material-symbols-outlined text-2xl">support_agent</span>
+            </div>
+            <div>
+                <h2 class="text-primary text-xl font-black tracking-tighter leading-none">JAYMANI</h2>
+                <span class="text-[10px] font-bold text-slate-400 tracking-[0.2em] uppercase text-gradient">Sahayata Kendra</span>
+            </div>
+        </div>
+        <a href="index.html" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-primary transition-all">
+            <span class="material-symbols-outlined text-lg">home</span> Home
+        </a>
     </header>
 
-    <div class="support-container">
-        <div class="support-grid">
-            <div class="support-card">
-                <span class="icon">💬</span>
-                <h3>WhatsApp Chat</h3>
-                <p>Pandey Traders se seedha WhatsApp par baat karein.</p>
-                <a href="https://wa.me/919876543210" class="btn-contact" style="background: #25D366;">Chat Now</a>
+    <main class="max-w-5xl mx-auto px-6 py-16">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-4">How can we <span class="text-primary">Help you?</span></h1>
+            <p class="text-slate-500 dark:text-slate-400 font-medium">24/7 Dedicated Support for Farmers and Retailers.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div class="support-card group bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-sm hover:shadow-2xl">
+                <div class="size-16 bg-[#25D366]/10 text-[#25D366] rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-110 group-hover:rotate-6">
+                    <span class="material-symbols-outlined text-4xl">chat</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">WhatsApp Chat</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mb-8 leading-relaxed">Pandey Traders se seedha WhatsApp par baat karein aur product ki jankari payein.</p>
+                <a href="https://wa.me/919876543210" class="inline-flex items-center gap-3 px-8 py-4 bg-[#25D366] text-white font-black rounded-2xl shadow-lg shadow-[#25D366]/20 hover:brightness-110 transition-all active:scale-95">
+                    CHAT NOW <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                </a>
             </div>
 
-            <div class="support-card">
-                <span class="icon">📞</span>
-                <h3>Helpline Number</h3>
-                <p>Kisi bhi samasya ke liye humein call karein.</p>
-                <a href="tel:+919876543210" class="btn-contact">Call Support</a>
+            <div class="support-card group bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-sm hover:shadow-2xl">
+                <div class="size-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-110 group-hover:rotate-6">
+                    <span class="material-symbols-outlined text-4xl">call</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Helpline Number</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mb-8 leading-relaxed">Kisi bhi samasya ke liye humein call karein. Humari team aapki madad ke liye taiyar hai.</p>
+                <a href="tel:+919876543210" class="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-black rounded-2xl shadow-lg shadow-primary/20 hover:bg-primary-dark transition-all active:scale-95">
+                    CALL SUPPORT <span class="material-symbols-outlined text-lg">phone_in_talk</span>
+                </a>
             </div>
         </div>
 
-        <div class="sms-box">
-            <h3>Offline SMS Service (Bina Internet)</h3>
-            <p>Agar internet nahi hai, toh niche diye gaye tarike se stock check karein:</p>
-            <div class="sms-preview">
-                <strong>Type karein:</strong> STOCK [Product Name] [Pin Code]<br>
-                <strong>Example:</strong> STOCK UREA 201301<br>
-                <strong>Bhejein:</strong> 1800-XXX-XXXX
+        <div class="sms-gradient rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
+            <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
+                <div class="flex-1">
+                    <div class="inline-block px-4 py-1.5 bg-white/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">Offline Mode</div>
+                    <h2 class="text-3xl font-black mb-4 tracking-tight">SMS Service (Bina Internet)</h2>
+                    <p class="text-white/80 font-medium mb-6">Agar internet nahi hai, toh apne simple phone se stock check karein.</p>
+                    
+                    <div class="bg-black/20 backdrop-blur-md rounded-2xl p-6 border border-white/10 font-mono text-sm leading-relaxed">
+                        <p class="mb-2"><span class="text-sky-300">TYPE:</span> STOCK [Product] [PinCode]</p>
+                        <p class="mb-2"><span class="text-sky-300">EX:</span> STOCK UREA 201301</p>
+                        <p><span class="text-sky-300">SEND TO:</span> 1800-XXX-XXXX</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:block w-px h-48 bg-white/10"></div>
+
+                <div class="flex-1">
+                    <div class="bg-white/10 p-6 rounded-3xl border border-white/10">
+                        <span class="material-symbols-outlined text-4xl mb-4">network_locked</span>
+                        <p class="text-sm italic text-white/90">
+                            "Yeh suvidha Jayant aur Manish dwara rural connectivity ko badhane ke liye banayi gayi hai."
+                        </p>
+                        <p class="text-[10px] font-bold uppercase mt-4 text-sky-200">Sharda University Rubrics Compliant</p>
+                    </div>
+                </div>
             </div>
-            <p style="font-size: 12px; color: #555; margin-top: 10px;">*Yeh suvidha Jayant aur Manish dwara rural connectivity ke liye banayi gayi hai.</p>
+            <div class="absolute -bottom-20 -right-20 size-64 bg-white/5 rounded-full blur-3xl"></div>
         </div>
 
-        
+    </main>
 
-        <div style="text-align: center; margin-top: 50px;">
-            <a href="index.html" style="color: var(--dark); font-weight: bold; text-decoration: none;">← Back to Home Page</a>
-        </div>
-    </div>
-
-    <footer style="text-align: center; padding: 40px; color: #888; font-size: 13px;">
-        Jaymani Krishi Sewa Support System | Sharda University DCL Project
+    <footer class="py-12 text-center border-t border-slate-200 dark:border-white/5">
+        <p class="text-xs font-bold text-slate-400 tracking-widest uppercase mb-2">Jaymani Krishi Sewa Support System</p>
+        <p class="text-[10px] font-medium text-slate-400">© 2026 Developed by Manish Pandey & Jayant Raj | Sharda University DCL Project</p>
     </footer>
 
 </body>
