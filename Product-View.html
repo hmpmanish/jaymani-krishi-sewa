@@ -1,116 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details | Jaymani Krishi Sewa</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Product Details | Jaymani Krishi</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2f7f33",
+                        "background-dark": "#0a110b",
+                    }
+                },
+            },
+        }
+    </script>
     <style>
-        :root {
-            --primary: #2d6a4f;
-            --dark: #1b4332;
-            --bg: #f4f7f6;
-            --white: #ffffff;
-            --accent: #ff9f43;
-        }
-
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); }
-
-        header { background: var(--dark); color: white; padding: 15px 5%; display: flex; align-items: center; }
-        .back-btn { color: white; text-decoration: none; font-size: 20px; margin-right: 20px; }
-
-        .container { padding: 20px 5%; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
-
-        .product-image-box {
-            background: white; padding: 40px; border-radius: 20px;
-            width: 300px; text-align: center; font-size: 80px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-
-        .details-box { background: white; padding: 30px; border-radius: 20px; flex: 1; min-width: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-
-        .prod-title { font-size: 28px; font-weight: bold; color: var(--dark); margin-bottom: 5px; }
-        .vendor-tag { background: #e8f5e9; color: var(--primary); padding: 5px 12px; border-radius: 15px; font-size: 14px; font-weight: bold; }
-
-        .section-title { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 25px; color: #555; font-size: 18px; }
-        
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-        .info-item b { display: block; color: #888; font-size: 12px; text-transform: uppercase; }
-
-        .order-section { margin-top: 30px; background: #fff8e1; padding: 20px; border-radius: 15px; border: 1px dashed var(--accent); }
-
-        .btn-whatsapp {
-            background: #25D366; color: white; border: none; padding: 15px;
-            width: 100%; border-radius: 10px; font-weight: bold; font-size: 16px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Lexend', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3); }
+        .dark .glass-card { background: rgba(15, 23, 16, 0.8); border: 1px solid rgba(255,255,255,0.05); }
     </style>
 </head>
-<body>
+<body class="bg-[#f8fafc] dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
 
-    <header>
-        <a href="Marketplace.html" class="back-btn">←</a>
-        <h2>Dawai ki Jankari</h2>
+    <header class="flex items-center gap-6 border-b border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl px-6 md:px-12 py-4 sticky top-0 z-50">
+        <a href="Marketplace.html" class="size-10 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white transition-all">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
+        <h2 class="text-xl font-black tracking-tight">Product <span class="text-primary">Intelligence</span></h2>
     </header>
 
-    <div class="container">
-        <div class="product-image-box" id="prodIcon">📦</div>
-
-        <div class="details-box">
-            <span class="vendor-tag" id="vendorName">Retailer Name</span>
-            <div class="prod-title" id="prodTitle">Product Name</div>
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        <div class="flex flex-col lg:flex-row gap-12 items-start">
             
-            <div class="section-title">Technical Specification</div>
-            <div class="info-grid">
-                <div class="info-item"><b>Chemical Name</b><span id="chemical">Loading...</span></div>
-                <div class="info-item"><b>Fasal (Crops)</b><span id="crops">Rice, Wheat, Maize</span></div>
-                <div class="info-item"><b>Matra (Dose)</b><span>150ml / Acre</span></div>
-                <div class="info-item"><b>Expiry Date</b><span>Oct 2027</span></div>
+            <div class="w-full lg:w-1/3 sticky top-28">
+                <div class="glass-card rounded-[3rem] p-12 text-center shadow-2xl relative overflow-hidden group">
+                    <div id="prodIcon" class="text-8xl md:text-9xl mb-4 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6">📦</div>
+                    <div class="absolute -bottom-10 -right-10 size-40 bg-primary/10 rounded-full blur-3xl"></div>
+                </div>
+                
+                <div class="mt-8 flex gap-4">
+                    <div class="flex-1 bg-white dark:bg-slate-900 p-4 rounded-3xl text-center border border-slate-100 dark:border-white/5">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Quality</p>
+                        <p class="text-sm font-bold text-primary">Certified</p>
+                    </div>
+                    <div class="flex-1 bg-white dark:bg-slate-900 p-4 rounded-3xl text-center border border-slate-100 dark:border-white/5">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Stock</p>
+                        <p class="text-sm font-bold text-primary">In Hand</p>
+                    </div>
+                </div>
             </div>
 
-            
-
-            <div class="section-title">Istemal ka Tarika (Usage)</div>
-            <p style="color: #666; font-size: 14px;">15 litre paani ki tanki mein 15ml dawai milayein aur dhyaan rahe ki hawa ki disha mein hi spray karein.</p>
-
-            <div class="order-section">
-                <p style="margin-top: 0; font-weight: bold;">Order Summary:</p>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                    <span>Price Per Unit:</span>
-                    <b id="price">₹ 0.00</b>
+            <div class="flex-1 space-y-10">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span id="vendorName" class="px-4 py-1.5 bg-primary/10 text-primary rounded-full text-[10px] font-black uppercase tracking-widest">Retailer Name</span>
+                        <span class="size-1.5 bg-slate-300 rounded-full"></span>
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">SKU: JK-2026-X</span>
+                    </div>
+                    <h1 id="prodTitle" class="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-none">Product Title</h1>
                 </div>
-                <button class="btn-whatsapp" onclick="sendWhatsApp()">
-                    Order via WhatsApp
-                </button>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-100 dark:border-white/5">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Technical Name</p>
+                        <p id="chemical" class="font-bold text-slate-800 dark:text-slate-200">Loading Specification...</p>
+                    </div>
+                    <div class="p-6 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-100 dark:border-white/5">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Target Crops</p>
+                        <p id="crops" class="font-bold text-slate-800 dark:text-slate-200">Rice, Wheat, Maize</p>
+                    </div>
+                    <div class="p-6 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-100 dark:border-white/5">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Recommended Dose</p>
+                        <p class="font-bold text-slate-800 dark:text-slate-200">150ml - 200ml / Acre</p>
+                    </div>
+                    <div class="p-6 bg-white dark:bg-slate-900 rounded-[2rem] border border-slate-100 dark:border-white/5">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Expiry Window</p>
+                        <p class="font-bold text-slate-800 dark:text-slate-200 text-primary">Best before Oct 2027</p>
+                    </div>
+                </div>
+
+                <div class="p-8 bg-slate-900 text-white rounded-[2.5rem] relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h4 class="flex items-center gap-2 font-black uppercase text-xs tracking-widest mb-4">
+                            <span class="material-symbols-outlined text-primary text-lg">tips_and_updates</span> Usage Guide
+                        </h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            15 litre paani ki tanki mein 15ml dawai milayein. Acche se mix karein aur dhyaan rahe ki hawa ki disha mein hi spray karein taaki dawai aapke chehre par na aaye. Subah ya shaam ka samay spray ke liye sabse behtar hai.
+                        </p>
+                    </div>
+                    <div class="absolute -top-10 -right-10 size-40 bg-primary/20 rounded-full blur-3xl"></div>
+                </div>
+
+                <div class="p-8 bg-white dark:bg-slate-900 rounded-[2.5rem] border-2 border-primary/20 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Market Price</p>
+                        <h2 id="price" class="text-4xl font-black text-primary">₹ 0.00</h2>
+                    </div>
+                    <button onclick="sendWhatsApp()" class="w-full md:w-auto px-10 py-5 bg-[#25D366] text-white font-black rounded-2xl shadow-lg shadow-[#25D366]/30 flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all">
+                        <span class="material-symbols-outlined">chat</span> ORDER VIA WHATSAPP
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <footer class="py-12 text-center border-t border-slate-200 dark:border-white/5">
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">Jaymani Product Intelligence Unit</p>
+    </footer>
 
     <script>
-        // Getting data from previous page (sessionStorage)
-        const pName = sessionStorage.getItem("selectedProduct") || "Product";
-        const vName = sessionStorage.getItem("selectedVendor") || "Local Dealer";
+        // Data Retrieval Logic
+        const pName = sessionStorage.getItem("selectedProduct") || "Premium Product";
+        const vName = sessionStorage.getItem("selectedVendor") || "Pandey Traders";
 
         document.getElementById("prodTitle").innerText = pName;
         document.getElementById("vendorName").innerText = "🏪 " + vName;
 
-        // Simple Data Logic based on product name
-        if(pName.includes("Mission")) {
+        // Dynamic Product Mapping
+        if(pName.toLowerCase().includes("mission")) {
             document.getElementById("chemical").innerText = "Chlorantraniliprole 18.5% SC";
             document.getElementById("price").innerText = "₹ 1,850";
             document.getElementById("prodIcon").innerText = "🛡️";
-            document.getElementById("crops").innerText = "Paddy, Sugarcane";
-        } else if(pName.includes("Urea")) {
-            document.getElementById("chemical").innerText = "Nitrogen 46%";
+            document.getElementById("crops").innerText = "Paddy, Sugarcane, Soyabean";
+        } else if(pName.toLowerCase().includes("urea")) {
+            document.getElementById("chemical").innerText = "Nitrogen 46% (Granular)";
             document.getElementById("price").innerText = "₹ 266";
             document.getElementById("prodIcon").innerText = "🌱";
-        } else {
-            document.getElementById("chemical").innerText = "Standard Agri Formula";
-            document.getElementById("price").innerText = "₹ 500";
+            document.getElementById("crops").innerText = "All Major Crops (Rice, Wheat, Corn)";
+        } else if(pName.toLowerCase().includes("aikido")) {
+            document.getElementById("chemical").innerText = "Dinotefuran 20% SG";
+            document.getElementById("price").innerText = "₹ 890";
+            document.getElementById("prodIcon").innerText = "🪲";
+            document.getElementById("crops").innerText = "Rice (BPH), Cotton, Chillies";
         }
 
         function sendWhatsApp() {
-            const phone = "919876543210"; // Pandey Traders Number
-            const msg = `Namaste ${vName}, main Jaymani Krishi Sewa se bol raha hoon. Mujhe ${pName} ki zarurat hai. Kripya stock confirm karein.`;
+            const phone = "919876543210"; // Placeholder for Pandey Traders
+            const msg = `Namaste ${vName}, main Jaymani Krishi Sewa App se bol raha hoon. \n\nMujhe *${pName}* ki zarurat hai. \nKripya order confirm karein aur delivery ka samay batayein.`;
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         }
     </script>
