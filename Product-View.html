@@ -19,6 +19,23 @@
                 },
             },
         }
+
+        <script>
+    // --- SECURITY GUARD: BINA LOGIN KE ACCESS ROKNE KE LIYE ---
+    (function checkAccess() {
+        const loggedUser = sessionStorage.getItem("loggedUser");
+        
+        // Agar user logged in nahi hai, toh login page par redirect karein
+        if (!loggedUser) {
+            alert("Kripya pehle Login karein!"); // Optional: User ko message dikhane ke liye
+            window.location.href = "Login.html";
+        }
+    })();
+
+    // Baki aapka purana marketplace logic yahan se shuru hoga...
+    let cartItems = 0;
+    // ... baki code
+</script>
     </script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
