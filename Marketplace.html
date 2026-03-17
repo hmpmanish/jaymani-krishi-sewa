@@ -1,176 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Marketplace | Jaymani Krishi Sewa</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2f7f33",
+                        "background-light": "#f8faf8",
+                        "background-dark": "#0a110b",
+                    }
+                },
+            },
+        }
+    </script>
     <style>
-        :root {
-            --primary: #2d6a4f;
-            --secondary: #40916c;
-            --dark: #1b4332;
-            --bg: #f4f7f6;
-            --white: #ffffff;
-            --accent: #ff9f43;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0; background: var(--bg);
-        }
-
-        /* --- Global Header --- */
-        header {
-            background: var(--dark);
-            color: white;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky; top: 0; z-index: 1000;
-        }
-
-        .search-container {
-            padding: 20px 5%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-
-        #searchInput {
-            width: 100%; max-width: 600px;
-            padding: 12px 20px;
-            border: 2px solid var(--primary);
-            border-radius: 25px;
-            outline: none;
-        }
-
-        /* --- Product Grid --- */
-        .market-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 30px 5%;
-        }
-
-        .card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            border: 1px solid #eee;
-        }
-
-        .card:hover { transform: translateY(-5px); }
-
-        .product-img {
-            height: 150px;
-            background: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-        }
-
-        .content { padding: 20px; }
-
-        .tag {
-            font-size: 10px;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 5px;
-            text-transform: uppercase;
-        }
-
-        .tag-pesticide { background: #ffeaa7; color: #d35400; }
-        .tag-fertilizer { background: #dff9fb; color: #0984e3; }
-
-        .title { font-size: 18px; font-weight: bold; margin: 10px 0 5px; }
-        
-        /* Multi-Vendor Info */
-        .vendor-info {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px 0;
-            font-size: 12px;
-        }
-
-        .stock-status { color: var(--primary); font-weight: bold; }
-
-        .btn-order {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .btn-order:hover { background: var(--secondary); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { font-family: 'Lexend', sans-serif; }
+        .product-card:hover .product-icon { transform: scale(1.1) rotate(5deg); }
     </style>
 </head>
-<body>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
 
-    <header>
-        <div style="font-size: 20px; font-weight: bold;">Jaymani <span>Market</span></div>
-        <div id="userGreeting" style="font-size: 14px;">Namaste, Farmer</div>
-        <a href="index.html" style="color:white; text-decoration:none; font-size:12px;">Logout</a>
+    <header class="flex items-center justify-between border-b border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl px-4 md:px-10 py-4 sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="bg-primary p-1.5 rounded-lg text-white shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-2xl">shopping_basket</span>
+            </div>
+            <h2 class="text-primary text-xl font-extrabold tracking-tight hidden sm:block">Jaymani Market</h2>
+        </div>
+        
+        <div class="flex-1 max-w-xl mx-4 md:mx-10">
+            <div class="relative group">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+                <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search seeds, fertilizers, or Pandey Traders..." 
+                class="w-full pl-12 pr-4 py-2.5 bg-slate-100 dark:bg-white/5 border-none rounded-2xl ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary outline-none text-sm transition-all">
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <div class="hidden md:block text-right">
+                <p id="userGreeting" class="text-xs font-bold text-slate-500 uppercase tracking-widest">Namaste, Farmer</p>
+            </div>
+            <button onclick="window.location.href='index.html'" class="p-2 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-600 border border-red-100 dark:border-red-900/30">
+                <span class="material-symbols-outlined">logout</span>
+            </button>
+        </div>
     </header>
 
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search products (e.g. Urea, Mission, Pandey Traders)..." onkeyup="filterProducts()">
-    </div>
+    <div class="flex flex-col md:flex-row max-w-[1600px] mx-auto">
+        <aside class="w-full md:w-64 p-6 border-r border-primary/5 sticky top-[73px] h-fit bg-white/50 dark:bg-transparent">
+            <h3 class="font-black text-xs uppercase tracking-[0.2em] text-slate-400 mb-6">Categories</h3>
+            <nav class="space-y-2">
+                <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined text-xl">all_inclusive</span> All Items
+                </button>
+                <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 font-medium text-sm transition-all">
+                    <span class="material-symbols-outlined text-xl">potted_plant</span> Seeds
+                </button>
+                <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 font-medium text-sm transition-all">
+                    <span class="material-symbols-outlined text-xl">compost</span> Fertilizers
+                </button>
+                <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white dark:hover:bg-white/5 text-slate-600 dark:text-slate-400 font-medium text-sm transition-all">
+                    <span class="material-symbols-outlined text-xl">pest_control</span> Pesticides
+                </button>
+            </nav>
+        </aside>
 
-    
-
-    <div class="market-grid" id="marketGrid">
-        
-        <div class="card" data-search="mission insecticide rice borer pandey traders">
-            <div class="product-img">🛡️</div>
-            <div class="content">
-                <span class="tag tag-pesticide">Insecticide</span>
-                <div class="title">IIL Mission</div>
-                <div class="vendor-info">
-                    🏪 Vendor: <b>Pandey Traders</b><br>
-                    📦 Stock: <span class="stock-status">45 Units Available</span>
-                </div>
-                <div style="font-size: 14px; margin-bottom: 15px;">Best for Rice Stem Borer control.</div>
-                <button class="btn-order" onclick="openProduct('IIL Mission', 'Pandey Traders')">View Details</button>
+        <main class="flex-1 p-6 md:p-10">
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-2xl font-black tracking-tight">Available <span class="text-primary">Supplies</span></h1>
+                <p class="text-xs font-medium text-slate-400">Showing all verified local stock</p>
             </div>
-        </div>
 
-        <div class="card" data-search="urea fertilizer iffco kisan seva kendra">
-            <div class="product-img">🌱</div>
-            <div class="content">
-                <span class="tag tag-fertilizer">Fertilizer</span>
-                <div class="title">Urea (IFFCO)</div>
-                <div class="vendor-info">
-                    🏪 Vendor: <b>Kisan Seva Kendra</b><br>
-                    📦 Stock: <span class="stock-status">120 Bags Available</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="marketGrid">
+                
+                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl hover:border-primary/30 transition-all duration-500" data-search="mission insecticide rice borer pandey traders">
+                    <div class="h-48 bg-slate-100 dark:bg-white/5 flex items-center justify-center relative overflow-hidden">
+                        <span class="product-icon material-symbols-outlined text-6xl text-primary transition-transform duration-500">shield_with_heart</span>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[10px] font-black uppercase rounded-lg">Insecticide</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-black mb-1 group-hover:text-primary transition-colors">IIL Mission</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Ultimate control for Rice Stem Borer.</p>
+                        
+                        <div class="bg-slate-50 dark:bg-white/5 rounded-2xl p-3 mb-6 space-y-2">
+                            <div class="flex items-center gap-2 text-[11px] font-bold text-slate-600 dark:text-slate-300">
+                                <span class="material-symbols-outlined text-sm text-primary">storefront</span> 
+                                <span>Pandey Traders</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-[11px] font-bold text-green-600">
+                                <span class="material-symbols-outlined text-sm">inventory_2</span> 
+                                <span>45 Units in Stock</span>
+                            </div>
+                        </div>
+
+                        <button onclick="openProduct('IIL Mission', 'Pandey Traders')" class="w-full py-3 bg-primary text-white text-xs font-black rounded-xl hover:bg-primary-dark transition-all active:scale-95 shadow-lg shadow-primary/20">
+                            VIEW DETAILS
+                        </button>
+                    </div>
                 </div>
-                <div style="font-size: 14px; margin-bottom: 15px;">High-quality Nitrogen fertilizer.</div>
-                <button class="btn-order" onclick="openProduct('Urea', 'Kisan Seva Kendra')">View Details</button>
-            </div>
-        </div>
 
-        <div class="card" data-search="aikido insecticide bph rice pandey traders">
-            <div class="product-img">🪲</div>
-            <div class="content">
-                <span class="tag tag-pesticide">Insecticide</span>
-                <div class="title">IIL Aikido</div>
-                <div class="vendor-info">
-                    🏪 Vendor: <b>Pandey Traders</b><br>
-                    📦 Stock: <span class="stock-status">22 Units Available</span>
+                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl hover:border-primary/30 transition-all duration-500" data-search="urea fertilizer iffco kisan seva kendra">
+                    <div class="h-48 bg-slate-100 dark:bg-white/5 flex items-center justify-center relative overflow-hidden">
+                        <span class="product-icon material-symbols-outlined text-6xl text-primary transition-transform duration-500">grass</span>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-black uppercase rounded-lg">Fertilizer</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-black mb-1 group-hover:text-primary transition-colors">Urea (IFFCO)</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Essential Nitrogen for healthy crop growth.</p>
+                        
+                        <div class="bg-slate-50 dark:bg-white/5 rounded-2xl p-3 mb-6 space-y-2">
+                            <div class="flex items-center gap-2 text-[11px] font-bold text-slate-600 dark:text-slate-300">
+                                <span class="material-symbols-outlined text-sm text-primary">storefront</span> 
+                                <span>Kisan Seva Kendra</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-[11px] font-bold text-green-600">
+                                <span class="material-symbols-outlined text-sm">inventory_2</span> 
+                                <span>120 Bags in Stock</span>
+                            </div>
+                        </div>
+
+                        <button onclick="openProduct('Urea', 'Kisan Seva Kendra')" class="w-full py-3 bg-primary text-white text-xs font-black rounded-xl hover:bg-primary-dark transition-all active:scale-95 shadow-lg shadow-primary/20">
+                            VIEW DETAILS
+                        </button>
+                    </div>
                 </div>
-                <div style="font-size: 14px; margin-bottom: 15px;">Effective against BPH in Paddy.</div>
-                <button class="btn-order" onclick="openProduct('Aikido', 'Pandey Traders')">View Details</button>
-            </div>
-        </div>
 
+                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl hover:border-primary/30 transition-all duration-500" data-search="aikido insecticide bph rice pandey traders">
+                    <div class="h-48 bg-slate-100 dark:bg-white/5 flex items-center justify-center relative overflow-hidden">
+                        <span class="product-icon material-symbols-outlined text-6xl text-primary transition-transform duration-500">bug_report</span>
+                        <div class="absolute top-4 left-4">
+                            <span class="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[10px] font-black uppercase rounded-lg">Insecticide</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-black mb-1 group-hover:text-primary transition-colors">IIL Aikido</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">The expert choice for BPH control in Paddy.</p>
+                        
+                        <div class="bg-slate-50 dark:bg-white/5 rounded-2xl p-3 mb-6 space-y-2">
+                            <div class="flex items-center gap-2 text-[11px] font-bold text-slate-600 dark:text-slate-300">
+                                <span class="material-symbols-outlined text-sm text-primary">storefront</span> 
+                                <span>Pandey Traders</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-[11px] font-bold text-green-600">
+                                <span class="material-symbols-outlined text-sm">inventory_2</span> 
+                                <span>22 Units in Stock</span>
+                            </div>
+                        </div>
+
+                        <button onclick="openProduct('Aikido', 'Pandey Traders')" class="w-full py-3 bg-primary text-white text-xs font-black rounded-xl hover:bg-primary-dark transition-all active:scale-95 shadow-lg shadow-primary/20">
+                            VIEW DETAILS
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
     </div>
 
     <script>
@@ -181,11 +178,15 @@
         // Search Filter Logic
         function filterProducts() {
             let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card');
+            let cards = document.getElementsByClassName('product-card');
             
             for (let i = 0; i < cards.length; i++) {
                 let text = cards[i].getAttribute('data-search');
-                cards[i].style.display = text.includes(input) ? "" : "none";
+                if (text.includes(input)) {
+                    cards[i].classList.remove('hidden');
+                } else {
+                    cards[i].classList.add('hidden');
+                }
             }
         }
 
