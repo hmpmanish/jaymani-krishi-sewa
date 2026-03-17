@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>JAYMANI | Marketplace</title>
+    <title>JAYMANI | Premium Marketplace</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -29,7 +29,7 @@
         .price-gradient { background: linear-gradient(135deg, #2f7f33 0%, #1b4d1f 100%); }
     </style>
 </head>
-<body class="bg-[#f8fafc] dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<body class="bg-[#f8fafc] dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
 
     <header class="flex items-center justify-between border-b border-primary/10 bg-white/90 dark:bg-background-dark/90 backdrop-blur-2xl px-6 md:px-12 py-4 sticky top-0 z-50">
         <div class="flex items-center gap-4 cursor-pointer" onclick="window.location.href='index.html'">
@@ -46,12 +46,12 @@
             <div class="relative group">
                 <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">manage_search</span>
                 <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search products or Pandey Traders..." 
-                class="w-full pl-14 pr-6 py-3.5 bg-slate-100 dark:bg-white/5 border-none rounded-[1.5rem] ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary outline-none text-sm transition-all">
+                class="w-full pl-14 pr-6 py-3.5 bg-slate-100 dark:bg-white/5 border-none rounded-[1.5rem] ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary outline-none text-sm shadow-inner transition-all">
             </div>
         </div>
 
         <div class="flex items-center gap-6">
-            <div class="relative cursor-pointer group" onclick="alert('Cart functionality coming soon!')">
+            <div class="relative cursor-pointer group" onclick="toggleCart()">
                 <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-primary transition-colors">shopping_cart</span>
                 <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white dark:border-background-dark transition-all">0</span>
             </div>
@@ -61,149 +61,155 @@
                     <p id="userGreeting" class="text-xs font-black text-slate-800 dark:text-white uppercase">HMP</p>
                     <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Verified Farmer</p>
                 </div>
-                <div class="size-10 rounded-full border-2 border-primary/30 overflow-hidden shadow-lg bg-slate-200">
+                <div class="size-10 rounded-full border-2 border-primary/30 overflow-hidden shadow-lg">
                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="flex max-w-[1800px] mx-auto">
-        <aside class="hidden xl:block w-72 p-8 border-r border-slate-200 dark:border-white/5 h-[calc(100vh-81px)] sticky top-[81px]">
+    <div class="flex max-w-[1800px] mx-auto min-h-[calc(100vh-81px)]">
+        <aside class="hidden xl:block w-72 p-8 border-r border-slate-200 dark:border-white/5 sticky top-[81px] h-fit">
             <h3 class="font-black text-[11px] uppercase tracking-[0.25em] text-slate-400 mb-6">Product Categories</h3>
             <nav class="space-y-1">
-                <button onclick="filterProducts('')" class="w-full flex items-center justify-between px-4 py-3 bg-primary/10 text-primary rounded-2xl font-bold text-sm mb-2">All Items</button>
-                <button onclick="filterProducts('seeds')" class="w-full flex items-center justify-between px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Seeds</button>
-                <button onclick="filterProducts('fertilizer')" class="w-full flex items-center justify-between px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Fertilizers</button>
-                <button onclick="filterProducts('pesticide')" class="w-full flex items-center justify-between px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Pesticides</button>
+                <button onclick="filterProducts('')" class="w-full text-left px-4 py-3 bg-primary/10 text-primary rounded-2xl font-bold text-sm">All Items</button>
+                <button onclick="filterProducts('seed')" class="w-full text-left px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Seeds</button>
+                <button onclick="filterProducts('fertilizer')" class="w-full text-left px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Fertilizers</button>
+                <button onclick="filterProducts('insecticide')" class="w-full text-left px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Pesticides</button>
             </nav>
         </aside>
 
         <main class="flex-1 p-6 md:p-12">
-            <div class="mb-12 flex justify-between items-end">
-                <div>
-                    <h1 class="text-3xl font-black text-slate-900 dark:text-white">Farmer <span class="text-primary">Marketplace</span></h1>
-                    <p class="text-slate-500 dark:text-slate-400 mt-2">Exclusive rates from <span class="text-primary font-bold">Pandey Traders</span></p>
-                </div>
-                <button class="flex items-center gap-2 px-4 py-2 bg-white rounded-xl shadow-sm text-xs font-bold"><span class="material-symbols-outlined text-sm">sort</span> Sort By</button>
+            <div class="mb-12">
+                <h1 class="text-3xl font-black text-slate-900 dark:text-white">Farmer <span class="text-primary">Marketplace</span></h1>
+                <p class="text-slate-500 dark:text-slate-400 mt-2">Verified local stock from <span class="text-primary font-bold">Pandey Traders</span></p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="marketGrid">
                 
-                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden p-4 shadow-sm" data-search="mission insecticide rice borer pandey traders pesticide">
-                    <div class="h-56 bg-slate-50 dark:bg-white/5 rounded-[2rem] flex items-center justify-center relative transition-colors group-hover:bg-primary/5">
-                        <span class="material-symbols-outlined text-7xl text-primary transition-transform duration-700 group-hover:scale-110">pest_control</span>
-                        <div class="absolute bottom-4 right-4 price-gradient text-white px-4 py-2 rounded-2xl font-black text-sm shadow-xl">₹549 <span class="text-[10px] opacity-70">/ 500ml</span></div>
+                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden p-4 shadow-sm" data-search="mission insecticide rice borer pandey traders">
+                    <div class="h-56 bg-slate-50 dark:bg-white/5 rounded-[2rem] flex items-center justify-center relative">
+                        <span class="material-symbols-outlined text-7xl text-primary group-hover:scale-110 transition-transform duration-500">pest_control</span>
+                        <div class="absolute bottom-4 right-4 price-gradient text-white px-4 py-2 rounded-2xl font-black text-sm shadow-xl">₹549</div>
                     </div>
-                    <div class="mt-6 px-2">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-black group-hover:text-primary transition-colors">IIL Mission</h3>
-                            <span class="material-symbols-outlined text-primary text-lg">verified</span>
-                        </div>
+                    <div class="mt-6 px-2 pb-2">
+                        <h3 class="text-lg font-black group-hover:text-primary transition-colors">IIL Mission</h3>
                         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Insecticide</p>
-                        <p class="text-[11px] font-bold text-slate-500 my-4 flex items-center gap-2">
+                        <div class="flex items-center gap-2 my-4 text-[11px] font-bold text-slate-500">
                              <span class="size-2 bg-green-500 rounded-full animate-pulse"></span> Vendor: <b>Pandey Traders</b>
-                        </p>
+                        </div>
                         <div class="flex gap-3">
-                            <button onclick="addToCart(this)" class="flex-1 py-4 bg-primary text-white text-xs font-black rounded-2xl hover:bg-primary-dark transition-all active:scale-95 shadow-lg shadow-primary/20">ADD TO CART</button>
-                            <button onclick="openProduct('IIL Mission', 'Pandey Traders')" class="px-4 py-4 bg-slate-100 dark:bg-white/10 rounded-2xl hover:bg-slate-200 transition-all">
-                                <span class="material-symbols-outlined text-lg">visibility</span>
-                            </button>
+                            <button onclick="addToCart(this, 'IIL Mission', 549)" class="flex-1 py-4 bg-primary text-white text-xs font-black rounded-2xl hover:shadow-lg transition-all active:scale-95">ADD TO CART</button>
+                            <button class="px-4 py-4 bg-slate-100 dark:bg-white/10 rounded-2xl"><span class="material-symbols-outlined text-lg">visibility</span></button>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden p-4 shadow-sm" data-search="urea fertilizer iffco kisan seva kendra fertilizer">
-                    <div class="h-56 bg-slate-50 dark:bg-white/5 rounded-[2rem] flex items-center justify-center relative transition-colors group-hover:bg-primary/5">
-                        <span class="material-symbols-outlined text-7xl text-primary transition-transform duration-700 group-hover:scale-110">compost</span>
-                        <div class="absolute bottom-4 right-4 price-gradient text-white px-4 py-2 rounded-2xl font-black text-sm shadow-xl">₹266 <span class="text-[10px] opacity-70">/ 45kg Bag</span></div>
+                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden p-4 shadow-sm" data-search="urea fertilizer iffco kisan kendra">
+                    <div class="h-56 bg-slate-50 dark:bg-white/5 rounded-[2rem] flex items-center justify-center relative">
+                        <span class="material-symbols-outlined text-7xl text-primary group-hover:scale-110 transition-transform duration-500">compost</span>
+                        <div class="absolute bottom-4 right-4 price-gradient text-white px-4 py-2 rounded-2xl font-black text-sm shadow-xl">₹266</div>
                     </div>
                     <div class="mt-6 px-2">
                         <h3 class="text-lg font-black group-hover:text-primary transition-colors">Urea (IFFCO)</h3>
                         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Fertilizer</p>
-                        <p class="text-[11px] font-bold text-slate-500 my-4 flex items-center gap-2">
+                        <div class="flex items-center gap-2 my-4 text-[11px] font-bold text-slate-500">
                              <span class="size-2 bg-green-500 rounded-full animate-pulse"></span> Vendor: <b>Kisan Kendra</b>
-                        </p>
+                        </div>
                         <div class="flex gap-3">
-                            <button onclick="addToCart(this)" class="flex-1 py-4 bg-primary text-white text-xs font-black rounded-2xl hover:bg-primary-dark transition-all active:scale-95 shadow-lg shadow-primary/20">ADD TO CART</button>
-                            <button onclick="openProduct('Urea', 'Kisan Kendra')" class="px-4 py-4 bg-slate-100 dark:bg-white/10 rounded-2xl hover:bg-slate-200 transition-all">
-                                <span class="material-symbols-outlined text-lg">visibility</span>
-                            </button>
+                            <button onclick="addToCart(this, 'Urea (IFFCO)', 266)" class="flex-1 py-4 bg-primary text-white text-xs font-black rounded-2xl hover:shadow-lg transition-all active:scale-95">ADD TO CART</button>
+                            <button class="px-4 py-4 bg-slate-100 dark:bg-white/10 rounded-2xl"><span class="material-symbols-outlined text-lg">visibility</span></button>
                         </div>
                     </div>
                 </div>
-
-                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden p-4 shadow-sm" data-search="aikido insecticide bph rice pandey traders pesticide">
-                    <div class="h-56 bg-slate-50 dark:bg-white/5 rounded-[2rem] flex items-center justify-center relative transition-colors group-hover:bg-primary/5">
-                        <span class="material-symbols-outlined text-7xl text-primary transition-transform duration-700 group-hover:scale-110">eco</span>
-                        <div class="absolute bottom-4 right-4 price-gradient text-white px-4 py-2 rounded-2xl font-black text-sm shadow-xl">₹890 <span class="text-[10px] opacity-70">/ Unit</span></div>
-                    </div>
-                    <div class="mt-6 px-2">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-black group-hover:text-primary transition-colors">IIL Aikido</h3>
-                            <span class="material-symbols-outlined text-primary text-lg">verified</span>
-                        </div>
-                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Bio-Insecticide</p>
-                        <p class="text-[11px] font-bold text-slate-500 my-4 flex items-center gap-2">
-                             <span class="size-2 bg-green-500 rounded-full animate-pulse"></span> Vendor: <b>Pandey Traders</b>
-                        </p>
-                        <div class="flex gap-3">
-                            <button onclick="addToCart(this)" class="flex-1 py-4 bg-primary text-white text-xs font-black rounded-2xl hover:bg-primary-dark transition-all active:scale-95 shadow-lg shadow-primary/20">ADD TO CART</button>
-                            <button onclick="openProduct('Aikido', 'Pandey Traders')" class="px-4 py-4 bg-slate-100 dark:bg-white/10 rounded-2xl hover:bg-slate-200 transition-all">
-                                <span class="material-symbols-outlined text-lg">visibility</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </main>
     </div>
 
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white dark:bg-slate-900 shadow-[-20px_0_50px_rgba(0,0,0,0.1)] z-[100] translate-x-full transition-transform duration-500 border-l border-primary/10">
+        <div class="p-8 h-full flex flex-col">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-black tracking-tight">Your <span class="text-primary">Cart</span></h2>
+                <button onclick="toggleCart()" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div id="cart-items-list" class="flex-1 overflow-y-auto space-y-4">
+                <p class="text-slate-400 text-sm text-center py-20">Your cart is empty.</p>
+            </div>
+            <div class="border-t border-slate-100 dark:border-white/5 pt-6 space-y-4">
+                <div class="flex justify-between font-black text-lg"><span>Total:</span><span id="cart-total" class="text-primary">₹0</span></div>
+                <button onclick="checkout()" class="w-full py-4 bg-primary text-white font-black rounded-2xl shadow-lg active:scale-95 transition-all">CONFIRM ORDER</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        let cartItems = 0;
+        let cart = [];
+        let total = 0;
 
-        // FIXED: ADD TO CART LOGIC
-        function addToCart(btn) {
-            cartItems++;
-            const count = document.getElementById('cart-count');
-            count.innerText = cartItems;
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('translate-x-full');
+        }
+
+        function addToCart(btn, name, price) {
+            cart.push({ name, price });
+            total += price;
             
-            // Animation for feedback
+            const count = document.getElementById('cart-count');
+            count.innerText = cart.length;
             count.classList.add('scale-150', 'bg-accent');
+            
             btn.innerText = "ADDED!";
-            btn.classList.add('bg-slate-800');
-
             setTimeout(() => {
                 count.classList.remove('scale-150', 'bg-accent');
                 btn.innerText = "ADD TO CART";
-                btn.classList.remove('bg-slate-800');
             }, 800);
+
+            updateCartUI();
         }
 
-        // FIXED: SEARCH & CATEGORY LOGIC
-        function filterProducts(category = null) {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            if(category) input = category; // If category button clicked
+        function updateCartUI() {
+            const list = document.getElementById('cart-items-list');
+            const totalDisplay = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                list.innerHTML = `<p class="text-slate-400 text-sm text-center py-20">Your cart is empty.</p>`;
+            } else {
+                list.innerHTML = cart.map((item, index) => `
+                    <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-white/5 rounded-2xl">
+                        <div><p class="font-bold text-sm">${item.name}</p><p class="text-xs text-primary font-bold">₹${item.price}</p></div>
+                        <button onclick="removeItem(${index})" class="text-red-400"><span class="material-symbols-outlined">delete</span></button>
+                    </div>
+                `).join('');
+            }
+            totalDisplay.innerText = `₹${total}`;
+        }
 
+        function removeItem(index) {
+            total -= cart[index].price;
+            cart.splice(index, 1);
+            document.getElementById('cart-count').innerText = cart.length;
+            updateCartUI();
+        }
+
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('product-card');
             for (let i = 0; i < cards.length; i++) {
-                let text = cards[i].getAttribute('data-search').toLowerCase();
-                if (text.includes(input)) {
-                    cards[i].style.display = "block";
-                } else {
-                    cards[i].style.display = "none";
-                }
+                let text = cards[i].getAttribute('data-search');
+                cards[i].classList.toggle('hidden', !text.includes(input));
             }
         }
 
-        function openProduct(name, vendor) {
-            sessionStorage.setItem("selectedProduct", name);
-            sessionStorage.setItem("selectedVendor", vendor);
-            window.location.href = "Product-View.html";
+        function checkout() {
+            if (cart.length === 0) return;
+            alert(`Order Placed Successfully!\nTotal Amount: ₹${total}\nPandey Traders will contact you soon.`);
+            cart = []; total = 0;
+            document.getElementById('cart-count').innerText = "0";
+            updateCartUI(); toggleCart();
         }
 
-        // Set name from session
         const user = sessionStorage.getItem("loggedUser") || "HMP";
         document.getElementById("userGreeting").innerText = user.toUpperCase();
     </script>
