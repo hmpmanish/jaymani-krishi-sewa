@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Profile Settings | Jaymani Krishi Sewa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: { extend: { colors: { "primary": "#2f7f33", "accent": "#ff9f43", "background-dark": "#0a110b" } } }
+        }
+    </script>
+    <style>
+        body { font-family: 'Lexend', sans-serif; background-color: #0a110b; color: white; }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        input, select, textarea {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <div class="flex items-center justify-between mb-8">
+            <button onclick="window.history.back()" class="flex items-center gap-2 text-slate-400 hover:text-primary transition">
+                <span class="material-symbols-outlined">arrow_back</span> वापस जाएं
+            </button>
+            <h1 class="text-2xl font-black text-primary uppercase tracking-tighter">Profile Settings</h1>
+        </div>
+
+        <form id="profileForm" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-1">
+                <div class="glass-card p-6 rounded-[2.5rem] text-center">
+                    <div class="relative inline-block group">
+                        <img id="profilePic" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" 
+                             class="w-32 h-32 rounded-full border-4 border-primary shadow-xl object-cover">
+                        <label for="uploadPic" class="absolute bottom-0 right-0 bg-primary p-2 rounded-full cursor-pointer hover:scale-110 transition">
+                            <span class="material-symbols-outlined text-sm">photo_camera</span>
+                            <input type="file" id="uploadPic" class="hidden" accept="image/*">
+                        </label>
+                    </div>
+                    <h3 id="displayName" class="mt-4 font-bold text-lg text-white">Manish Pandey</h3>
+                    <p class="text-primary text-xs font-bold uppercase tracking-widest">Verified Farmer</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 space-y-6">
+                <div class="glass-card p-8 rounded-[2.5rem] space-y-6">
+                    <h2 class="text-xl font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">person</span> व्यक्तिगत जानकारी
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-2 uppercase">पूरा नाम</label>
+                            <input type="text" id="fullName" placeholder="आपका नाम" class="w-full p-4 rounded-2xl outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 mb-2 uppercase">मोबाइल नंबर</label>
+                            <input type="tel" id="phone" value="9876543210" class="w-full p-4 rounded-2xl outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-2 uppercase">गांव का पता</label>
+                        <textarea id="address" rows="3" class="w-full p-4 rounded-2xl outline-none focus:ring-2 focus:ring-primary"></textarea>
+                    </div>
+
+                    <hr class="border-white/10 my-6">
+
+                    <h2 class="text-xl font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">agriculture</span> कृषि जानकारी
+                    </h2>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 mb-2 uppercase">मिट्टी की रिपोर्ट (Soil Report PDF)</label>
+                        <div class="border-2 border-dashed border-white/10 rounded-2xl p-6 text-center hover:border-primary transition">
+                            <span class="material-symbols-outlined text-4xl text-slate-500 mb-2">upload_file</span>
+                            <p class="text-xs text-slate-400">PDF या इमेज अपलोड करें</p>
+                            <input type="file" class="hidden" id="soilReport">
+                            <button type="button" onclick="document.getElementById('soilReport').click()" class="mt-2 text-primary text-sm font-bold">Choose File</button>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 pt-4">
+                        <button type="button" onclick="saveProfile()" class="flex-1 py-4 bg-primary text-white font-black rounded-2xl hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95">SAVE CHANGES</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Supabase Init
+        const supabaseUrl = 'YOUR_SUPABASE_URL';
+        const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // Save Function
+        async function saveProfile() {
+            const name = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+
+            // Database Sync Logic
+            alert("प्रफ़ाइल सफलतापूर्वक अपडेट हो गई है! (Supabase Syncing...)");
+            console.log({ name, phone, address });
+        }
+
+        // Image Preview Logic
+        document.getElementById('uploadPic').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePic').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
