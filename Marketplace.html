@@ -27,6 +27,7 @@
         .product-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .product-card:hover { transform: translateY(-8px); }
         .price-gradient { background: linear-gradient(135deg, #2f7f33 0%, #1b4d1f 100%); }
+        .glass-sidebar { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); }
     </style>
 </head>
 <body class="bg-[#f8fafc] dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen relative overflow-x-hidden">
@@ -56,12 +57,12 @@
                 <span id="cart-count" class="absolute -top-2 -right-2 bg-primary text-white text-[10px] font-black w-5 h-5 flex items-center justify-center rounded-full border-2 border-white dark:border-background-dark transition-all">0</span>
             </div>
             <div class="h-8 w-[1px] bg-slate-200 dark:bg-white/10"></div>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='Profile-Settings.html'">
                 <div class="text-right hidden sm:block">
                     <p id="userGreeting" class="text-xs font-black text-slate-800 dark:text-white uppercase">HMP</p>
                     <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Verified Farmer</p>
                 </div>
-                <div class="size-10 rounded-full border-2 border-primary/30 overflow-hidden shadow-lg">
+                <div class="size-10 rounded-full border-2 border-primary/30 overflow-hidden shadow-lg hover:border-primary transition-all">
                     <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" class="w-full h-full object-cover">
                 </div>
             </div>
@@ -72,11 +73,26 @@
         <aside class="hidden xl:block w-72 p-8 border-r border-slate-200 dark:border-white/5 sticky top-[81px] h-fit">
             <h3 class="font-black text-[11px] uppercase tracking-[0.25em] text-slate-400 mb-6">Product Categories</h3>
             <nav class="space-y-1">
-                <button onclick="filterProducts('')" class="w-full text-left px-4 py-3 bg-primary/10 text-primary rounded-2xl font-bold text-sm">All Items</button>
-                <button onclick="filterProducts('seed')" class="w-full text-left px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Seeds</button>
-                <button onclick="filterProducts('fertilizer')" class="w-full text-left px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Fertilizers</button>
-                <button onclick="filterProducts('insecticide')" class="w-full text-left px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Pesticides</button>
+                <button onclick="filterByCategory('')" class="cat-btn w-full text-left px-4 py-3 bg-primary/10 text-primary rounded-2xl font-bold text-sm">All Items</button>
+                <button onclick="filterByCategory('seed')" class="cat-btn w-full text-left px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Seeds</button>
+                <button onclick="filterByCategory('fertilizer')" class="cat-btn w-full text-left px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Fertilizers</button>
+                <button onclick="filterByCategory('insecticide')" class="cat-btn w-full text-left px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">Pesticides</button>
             </nav>
+
+            <div class="mt-10 pt-10 border-t border-slate-100 dark:border-white/5">
+                <h3 class="font-black text-[11px] uppercase tracking-[0.25em] text-slate-400 mb-6">Farmer Services</h3>
+                <nav class="space-y-1">
+                    <button onclick="window.location.href='Order-History.html'" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">
+                        <span class="material-symbols-outlined text-lg">history</span> Order History
+                    </button>
+                    <button onclick="window.location.href='Farmer-BahiKhata.html'" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">
+                        <span class="material-symbols-outlined text-lg">menu_book</span> Digital Khata
+                    </button>
+                    <button onclick="window.location.href='Profile-Settings.html'" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white dark:hover:bg-white/5 text-slate-500 rounded-2xl font-medium text-sm transition-all">
+                        <span class="material-symbols-outlined text-lg">settings</span> Account Settings
+                    </button>
+                </nav>
+            </div>
         </aside>
 
         <main class="flex-1 p-6 md:p-12">
@@ -86,8 +102,7 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="marketGrid">
-                
-                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden p-4 shadow-sm" data-search="mission insecticide rice borer pandey traders">
+                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden p-4 shadow-sm" data-category="insecticide" data-search="mission insecticide rice borer pandey traders">
                     <div class="h-56 bg-slate-50 dark:bg-white/5 rounded-[2rem] flex items-center justify-center relative">
                         <span class="material-symbols-outlined text-7xl text-primary group-hover:scale-110 transition-transform duration-500">pest_control</span>
                         <div class="absolute bottom-4 right-4 price-gradient text-white px-4 py-2 rounded-2xl font-black text-sm shadow-xl">₹549</div>
@@ -100,12 +115,12 @@
                         </div>
                         <div class="flex gap-3">
                             <button onclick="addToCart(this, 'IIL Mission', 549)" class="flex-1 py-4 bg-primary text-white text-xs font-black rounded-2xl hover:shadow-lg transition-all active:scale-95">ADD TO CART</button>
-                            <button class="px-4 py-4 bg-slate-100 dark:bg-white/10 rounded-2xl"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                            <button onclick="window.location.href='Product-View.html'" class="px-4 py-4 bg-slate-100 dark:bg-white/10 rounded-2xl"><span class="material-symbols-outlined text-lg">visibility</span></button>
                         </div>
                     </div>
                 </div>
 
-                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden p-4 shadow-sm" data-search="urea fertilizer iffco kisan kendra">
+                <div class="product-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] overflow-hidden p-4 shadow-sm" data-category="fertilizer" data-search="urea fertilizer iffco kisan kendra">
                     <div class="h-56 bg-slate-50 dark:bg-white/5 rounded-[2rem] flex items-center justify-center relative">
                         <span class="material-symbols-outlined text-7xl text-primary group-hover:scale-110 transition-transform duration-500">compost</span>
                         <div class="absolute bottom-4 right-4 price-gradient text-white px-4 py-2 rounded-2xl font-black text-sm shadow-xl">₹266</div>
@@ -118,7 +133,7 @@
                         </div>
                         <div class="flex gap-3">
                             <button onclick="addToCart(this, 'Urea (IFFCO)', 266)" class="flex-1 py-4 bg-primary text-white text-xs font-black rounded-2xl hover:shadow-lg transition-all active:scale-95">ADD TO CART</button>
-                            <button class="px-4 py-4 bg-slate-100 dark:bg-white/10 rounded-2xl"><span class="material-symbols-outlined text-lg">visibility</span></button>
+                            <button onclick="window.location.href='Product-View.html'" class="px-4 py-4 bg-slate-100 dark:bg-white/10 rounded-2xl"><span class="material-symbols-outlined text-lg">visibility</span></button>
                         </div>
                     </div>
                 </div>
@@ -193,21 +208,42 @@
             updateCartUI();
         }
 
+        // --- Category & Search Sync ---
+        function filterByCategory(category) {
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === '' || cardCat === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
         function filterProducts() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('product-card');
             for (let i = 0; i < cards.length; i++) {
-                let text = cards[i].getAttribute('data-search');
+                let text = cards[i].getAttribute('data-search').toLowerCase();
                 cards[i].classList.toggle('hidden', !text.includes(input));
             }
         }
 
+        // --- Checkout & Success Redirection ---
         function checkout() {
             if (cart.length === 0) return;
-            alert(`Order Placed Successfully!\nTotal Amount: ₹${total}\nPandey Traders will contact you soon.`);
-            cart = []; total = 0;
-            document.getElementById('cart-count').innerText = "0";
-            updateCartUI(); toggleCart();
+            
+            // Save order data for Invoice-Gen.html
+            localStorage.setItem('latestOrder', JSON.stringify({
+                items: cart,
+                total: total,
+                orderId: 'JMS-' + Math.floor(Math.random() * 9000 + 1000),
+                date: new Date().toLocaleDateString('hi-IN')
+            }));
+
+            // Redirect to Success Page
+            window.location.href = 'Order-Success.html';
         }
 
         const user = sessionStorage.getItem("loggedUser") || "HMP";
