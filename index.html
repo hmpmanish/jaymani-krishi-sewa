@@ -8,21 +8,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#2f7f33",
-                        "primary-dark": "#1b4d1f",
-                        "background-light": "#f8faf8",
-                        "background-dark": "#0a110b",
-                    }
-                },
-            },
-        }
-    </script>
+    
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         body { font-family: 'Lexend', sans-serif; opacity: 0; transition: opacity 0.8s ease-in-out; overflow-x: hidden; }
@@ -43,92 +29,74 @@
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-500">
+<body class="bg-slate-50 dark:bg-[#0a110b] text-slate-900 dark:text-slate-100 transition-colors duration-500">
 
-    <header class="flex items-center justify-between border-b border-white/5 bg-white/70 dark:bg-background-dark/70 backdrop-blur-xl px-6 md:px-12 py-4 sticky top-0 z-50">
+    <header class="flex items-center justify-between border-b border-white/5 bg-white/70 dark:bg-black/70 backdrop-blur-xl px-6 md:px-12 py-4 sticky top-0 z-50">
         <div class="flex items-center gap-3">
-            <div class="bg-primary p-2 rounded-xl text-white shadow-xl shadow-primary/30 rotate-3">
+            <div class="bg-[#2f7f33] p-2 rounded-xl text-white shadow-xl rotate-3">
                 <span class="material-symbols-outlined text-2xl">agriculture</span>
             </div>
             <div>
-                <h2 class="text-primary text-xl font-black tracking-[0.05em] leading-none uppercase">Jaymani Krishi</h2>
+                <h2 class="text-[#2f7f33] text-xl font-black tracking-tighter leading-none uppercase">Jaymani Krishi</h2>
                 <div class="flex items-center gap-1.5 mt-1">
                     <span class="size-1.5 bg-green-500 rounded-full pulse-live"></span>
-                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Platform Active</span>
+                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Gonda Mandi Live</span>
                 </div>
             </div>
         </div>
         
         <div class="flex items-center gap-6">
             <nav class="hidden md:flex gap-8">
-                <a class="font-bold text-primary border-b-2 border-primary py-1" href="index.html">Home</a>
-                <a class="font-medium hover:text-primary transition-all text-sm py-1" href="About-DCL.html">Intelligence</a>
-                <a class="font-medium hover:text-primary transition-all text-sm py-1" href="Support.html">Support</a>
+                <a class="font-bold text-[#2f7f33] border-b-2 border-[#2f7f33] py-1" href="index.html">Home</a>
+                <a class="font-medium hover:text-[#2f7f33] transition-all text-sm py-1" href="About-DCL.html">Intelligence</a>
+                <a class="font-medium hover:text-[#2f7f33] transition-all text-sm py-1" href="Marketplace.html">Market</a>
             </nav>
-            <button onclick="document.documentElement.classList.toggle('dark')" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 border border-slate-200 dark:border-white/10 transition-all hover:scale-110 active:scale-95">
+            <button onclick="speakWelcome()" class="p-2.5 rounded-xl bg-primary/10 text-[#2f7f33] border border-[#2f7f33]/20 hover:scale-110 transition-all">
+                <span class="material-symbols-outlined">volume_up</span>
+            </button>
+            <button onclick="document.documentElement.classList.toggle('dark')" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 border border-slate-200 dark:border-white/10 transition-all">
                 <span class="material-symbols-outlined">light_mode</span>
             </button>
         </div>
     </header>
 
     <main>
-        <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-background-dark">
+        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-background-dark">
             <div class="absolute inset-0 z-0">
                 <img class="w-full h-full object-cover opacity-40 scale-110" src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=1470&auto=format&fit=crop" alt="Agriculture">
                 <div class="absolute inset-0 hero-gradient"></div>
             </div>
 
             <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
-                <div data-aos="zoom-in" data-aos-duration="1000">
-                    <span class="px-4 py-1.5 rounded-full bg-primary/20 text-primary text-[10px] font-black uppercase tracking-widest border border-primary/30 mb-8 inline-block">
-                        Sharda University • CSE Research Lab • 2026
+                <div data-aos="zoom-in">
+                    <span class="px-4 py-1.5 rounded-full bg-[#2f7f33]/20 text-[#2f7f33] text-[10px] font-black uppercase tracking-widest border border-[#2f7f33]/30 mb-8 inline-block">
+                        Sharda University • DCL Project • 2026
                     </span>
-                    <h1 class="text-4xl md:text-8xl font-black mb-8 leading-[1.1] tracking-tighter">
+                    <h1 class="text-5xl md:text-8xl font-black mb-8 leading-[1.1] tracking-tighter">
                         <span class="text-gradient">Modern Farming,</span><br/>
-                        <span class="text-primary">Digital Identity</span>
+                        <span class="text-[#2f7f33]">Digital Identity</span>
                     </h1>
-                    <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-16 font-light leading-relaxed">
-                        <b>JAYMANI KRISHI SEWA</b> bridges the gap between farmers and verified retailers like <span class="text-white font-semibold underline decoration-primary decoration-2 underline-offset-8">Pandey Traders</span> using intelligent procurement tools.
+                    <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-16 font-light">
+                        Bridging the gap for farmers in Gonda with verified retailers like <b>Pandey Traders</b> through intelligent cloud procurement.
                     </p>
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-8 justify-center items-stretch" data-aos="fade-up" data-aos-delay="300">
-                    <a href="Login.html?role=farmer" class="glass-card group p-10 rounded-[2.5rem] w-full md:w-80 hover:bg-white transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(47,127,51,0.4)] hover:-translate-y-3">
-                        <div class="bg-primary/20 group-hover:bg-primary text-primary group-hover:text-white size-16 rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-110 group-hover:rotate-6">
+                    <a href="Login.html?role=farmer" class="glass-card group p-10 rounded-[2.5rem] w-full md:w-80 hover:bg-white transition-all duration-500 hover:-translate-y-3">
+                        <div class="bg-[#2f7f33]/20 group-hover:bg-[#2f7f33] text-[#2f7f33] group-hover:text-white size-16 rounded-2xl flex items-center justify-center mb-8 transition-all">
                             <span class="material-symbols-outlined text-4xl">agriculture</span>
                         </div>
                         <h3 class="text-white group-hover:text-slate-900 text-2xl font-black mb-4 text-left">Farmer Portal</h3>
-                        <p class="text-slate-400 group-hover:text-slate-600 text-sm leading-relaxed text-left">Access Digital Ledger (Bahi-Khata), inventory requests, and smart analytics.</p>
+                        <p class="text-slate-400 group-hover:text-slate-600 text-sm text-left">Check live stock at Pandey Traders & manage your Digital Ledger.</p>
                     </a>
 
-                    <a href="Login.html?role=vendor" class="glass-card group p-10 rounded-[2.5rem] w-full md:w-80 hover:bg-white transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(47,127,51,0.4)] hover:-translate-y-3">
-                        <div class="bg-primary/20 group-hover:bg-primary text-primary group-hover:text-white size-16 rounded-2xl flex items-center justify-center mb-8 transition-all group-hover:scale-110 group-hover:rotate-6">
+                    <a href="Login.html?role=vendor" class="glass-card group p-10 rounded-[2.5rem] w-full md:w-80 hover:bg-white transition-all duration-500 hover:-translate-y-3">
+                        <div class="bg-[#2f7f33]/20 group-hover:bg-[#2f7f33] text-[#2f7f33] group-hover:text-white size-16 rounded-2xl flex items-center justify-center mb-8 transition-all">
                             <span class="material-symbols-outlined text-4xl">storefront</span>
                         </div>
                         <h3 class="text-white group-hover:text-slate-900 text-2xl font-black mb-4 text-left">Retailer Hub</h3>
-                        <p class="text-slate-400 group-hover:text-slate-600 text-sm leading-relaxed text-left">Manage live stock levels, track regional demand, and verify procurements.</p>
+                        <p class="text-slate-400 group-hover:text-slate-600 text-sm text-left">Update inventory in real-time & analyze regional demand patterns.</p>
                     </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-20 px-6 bg-slate-50 dark:bg-black/20">
-            <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center" data-aos="fade-up">
-                    <h4 class="text-4xl font-black text-primary">5k+</h4>
-                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-2">Active Farmers</p>
-                </div>
-                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                    <h4 class="text-4xl font-black text-primary">120+</h4>
-                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-2">Verified Shops</p>
-                </div>
-                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                    <h4 class="text-4xl font-black text-primary">99%</h4>
-                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-2">Supply Accuracy</p>
-                </div>
-                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                    <h4 class="text-4xl font-black text-primary">24/7</h4>
-                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-2">Digital Support</p>
                 </div>
             </div>
         </section>
@@ -136,89 +104,47 @@
         <section class="py-32 px-6 bg-white dark:bg-[#0d150e]">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-20" data-aos="fade-up">
-                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">System Architecture</h2>
-                    <div class="w-24 h-1.5 bg-primary mx-auto rounded-full"></div>
+                    <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-6">System Architecture Leaders</h2>
+                    <div class="w-24 h-1.5 bg-[#2f7f33] mx-auto rounded-full"></div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div class="group p-10 bg-slate-50 dark:bg-white/5 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-primary transition-all duration-500 shadow-sm">
-                        <div class="flex justify-between items-start mb-6">
-                            <span class="text-primary font-black text-[10px] tracking-[0.2em] uppercase block">Lead Engineer</span>
-                            <div class="flex gap-2 opacity-30 group-hover:opacity-100 transition-opacity text-primary">
-                                <span class="material-symbols-outlined text-sm">code</span>
-                                <span class="material-symbols-outlined text-sm">terminal</span>
-                            </div>
-                        </div>
-                        <h4 class="text-3xl font-black text-slate-900 dark:text-white leading-tight">Manish Pandey</h4>
-                        <p class="text-slate-500 mt-2 font-medium uppercase text-xs tracking-widest">ID: 2025266286</p>
+                    <div class="group p-10 bg-slate-50 dark:bg-white/5 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-[#2f7f33] transition-all">
+                        <span class="text-[#2f7f33] font-black text-[10px] tracking-widest uppercase block mb-4">Lead Developer</span>
+                        <h4 class="text-3xl font-black text-slate-900 dark:text-white">Manish Pandey</h4>
+                        <p class="text-slate-500 mt-2 text-xs">Student ID: 2025266283</p>
                     </div>
 
-                    <div class="group p-10 bg-slate-50 dark:bg-white/5 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-primary transition-all duration-500 shadow-sm">
-                        <div class="flex justify-between items-start mb-6">
-                            <span class="text-primary font-black text-[10px] tracking-[0.2em] uppercase block">UI/UX Researcher</span>
-                            <div class="flex gap-2 opacity-30 group-hover:opacity-100 transition-opacity text-primary">
-                                <span class="material-symbols-outlined text-sm">palette</span>
-                                <span class="material-symbols-outlined text-sm">draw</span>
-                            </div>
-                        </div>
-                        <h4 class="text-3xl font-black text-slate-900 dark:text-white leading-tight">Jayant Raj</h4>
-                        <p class="text-slate-500 mt-2 font-medium uppercase text-xs tracking-widest">ID: 2025298708</p>
+                    <div class="group p-10 bg-slate-50 dark:bg-white/5 rounded-[2rem] border border-slate-200 dark:border-white/5 hover:border-[#2f7f33] transition-all">
+                        <span class="text-[#2f7f33] font-black text-[10px] tracking-widest uppercase block mb-4">UX Researcher</span>
+                        <h4 class="text-3xl font-black text-slate-900 dark:text-white">Jayant Raj</h4>
+                        <p class="text-slate-500 mt-2 text-xs">Student ID: 2025298708</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-background-dark py-20 px-6 border-t border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                <div class="space-y-6">
-                    <h2 class="text-white text-xl font-black tracking-tighter uppercase">Jaymani Krishi</h2>
-                    <p class="text-slate-500 text-sm leading-relaxed">Pioneering digital agricultural infrastructure for rural India. Built with precision and farmer-first empathy.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-8">Navigation</h4>
-                    <ul class="space-y-4 text-slate-500 text-sm font-medium">
-                        <li><a href="Marketplace.html" class="hover:text-primary transition-colors">Digital Marketplace</a></li>
-                        <li><a href="Login.html" class="hover:text-primary transition-colors">Access Portal</a></li>
-                        <li><a href="Signup.html" class="hover:text-primary transition-colors">Join the Network</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-8">Resources</h4>
-                    <ul class="space-y-4 text-slate-500 text-sm font-medium">
-                        <li><a href="Support.html" class="hover:text-primary transition-colors">Help Center</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Procurement</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Data Privacy</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold text-xs uppercase tracking-[0.2em] mb-8">Inquiries</h4>
-                    <div class="space-y-4">
-                        <a href="tel:+9118001234567" class="flex items-center gap-3 text-slate-500 text-sm hover:text-white transition-all"><span class="material-symbols-outlined text-primary text-lg">call</span> +91 1800 123 4567</a>
-                        <div class="pt-4">
-                            <p class="text-[8px] text-slate-500 font-black uppercase mb-2">Native App Status</p>
-                            <div class="px-4 py-2 bg-white/5 rounded-xl border border-white/10 text-white text-[10px] font-bold">Android Build v1.0.4</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                <p class="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em]">© 2026 Jaymani Krishi Sewa Private Limited. All rights reserved.</p>
-                <div class="flex items-center gap-2">
-                    <span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Global Server: Active</span>
-                </div>
-            </div>
-        </div>
+    <footer class="bg-black py-10 px-6 text-center border-t border-white/10">
+        <p class="text-slate-600 text-[10px] font-black uppercase tracking-[0.2em]">© 2026 Jaymani Krishi Sewa • Sharda University DCL Project</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
-            AOS.init({ duration: 1000, once: true, easing: 'ease-out-back' });
+            AOS.init({ duration: 1000, once: true });
         });
+
+        function speakWelcome() {
+            if ('speechSynthesis' in window) {
+                const msg = new SpeechSynthesisUtterance();
+                msg.text = "नमस्ते! जयमानी कृषि सेवा में आपका स्वागत है। किसान भाई यहाँ से पांडे ट्रेडर्स का स्टॉक देख सकते हैं।";
+                msg.lang = 'hi-IN';
+                msg.rate = 0.9;
+                window.speechSynthesis.speak(msg);
+            }
+        }
     </script>
 </body>
 </html>
