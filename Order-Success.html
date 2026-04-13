@@ -7,36 +7,87 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&display=swap" rel="stylesheet"/>
     <script>
-        tailwind.config = { theme: { extend: { colors: { "primary": "#2f7f33", "background-dark": "#0a110b" } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        "primary": "#2f7f33", 
+                        "background-dark": "#0a110b" 
+                    } 
+                } 
+            } 
+        }
     </script>
     <style>
-        body { font-family: 'Lexend', sans-serif; background-color: #0a110b; color: white; }
-        .success-icon { animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes scaleIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        body { font-family: 'Lexend', sans-serif; background-color: #0a110b; color: white; overflow: hidden; }
+        .success-icon { animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+        
+        @keyframes scaleIn { 
+            from { transform: scale(0); opacity: 0; } 
+            to { transform: scale(1); opacity: 1; } 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-6">
+
     <div class="max-w-md w-full text-center bg-white/5 backdrop-blur-xl p-10 rounded-[3rem] border border-white/10 shadow-2xl">
         <div class="success-icon bg-primary w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg shadow-primary/30">
             <span class="text-5xl text-white">✓</span>
         </div>
         
-        <h1 class="text-3xl font-black text-white mb-2 uppercase">Order Reserved!</h1>
-        <p class="text-slate-400 text-sm mb-8">आपका स्टॉक **Pandey Traders** पर सुरक्षित कर लिया गया है।</p>
+        <div class="fade-in" style="animation-delay: 0.3s;">
+            <h1 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">Order Reserved!</h1>
+            <p class="text-slate-400 text-sm mb-8">बधाई हो! आपका स्टॉक **Pandey Traders** पर सुरक्षित कर लिया गया है।</p>
+        </div>
 
-        <div class="bg-white/5 rounded-2xl p-6 mb-8 text-left space-y-3">
-            <div class="flex justify-between text-xs font-bold uppercase tracking-widest text-slate-500">
-                <span>Order ID:</span> <span class="text-white">#JMS-9920</span>
+        <div class="fade-in bg-white/5 rounded-2xl p-6 mb-8 text-left space-y-3 border border-white/5" style="animation-delay: 0.5s;">
+            <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                <span>Transaction ID:</span> <span class="text-white">#JMS-9920</span>
             </div>
-            <div class="flex justify-between text-xs font-bold uppercase tracking-widest text-slate-500">
+            <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                <span>Status:</span> <span class="text-primary">Stock Secured</span>
+            </div>
+            <div class="h-px bg-white/10 my-2"></div>
+            <div class="flex justify-between text-xs font-bold uppercase tracking-widest text-slate-400">
                 <span>Total Amount:</span> <span class="text-primary text-lg">₹1,330</span>
             </div>
         </div>
 
-        <div class="space-y-4">
-            <button onclick="window.location.href='Invoice-Gen.html'" class="w-full py-4 bg-primary text-white font-black rounded-2xl hover:shadow-lg transition-all active:scale-95">VIEW INVOICE</button>
-            <button onclick="window.location.href='Marketplace.html'" class="w-full py-4 bg-white/5 text-slate-300 font-bold rounded-2xl border border-white/10 hover:bg-white/10 transition">Back to Market</button>
+        <div class="fade-in space-y-4" style="animation-delay: 0.7s;">
+            <button onclick="window.location.href='Invoice-Gen.html'" class="w-full py-4 bg-primary hover:bg-primary/90 text-white font-black rounded-2xl shadow-xl shadow-primary/20 transition-all active:scale-95 flex items-center justify-center gap-2">
+                VIEW INVOICE
+            </button>
+            <button onclick="window.location.href='Marketplace.html'" class="w-full py-4 bg-white/5 text-slate-300 font-bold rounded-2xl border border-white/10 hover:bg-white/10 transition active:scale-95">
+                Back to Market
+            </button>
         </div>
+
+        <p class="mt-8 text-[10px] text-slate-600 font-bold uppercase tracking-[0.2em]">Jaymani Krishi Intelligence</p>
     </div>
+
+    <script>
+        // Automatic Voice Notification on Page Load
+        window.addEventListener('load', () => {
+            if ('speechSynthesis' in window) {
+                // Cancel any pending speech to avoid overlapping
+                window.speechSynthesis.cancel();
+
+                const text = "बधाई हो! आपका ऑर्डर पांडे ट्रेडers पर सफलतापूर्वक रिज़र्व कर लिया गया है। कृपया अपना डिजिटल बिल दिखाने के लिए व्यू इनवॉइस बटन पर क्लिक करें।";
+                const msg = new SpeechSynthesisUtterance();
+                msg.text = text;
+                msg.lang = 'hi-IN';
+                msg.rate = 0.85; // Slightly slower for better clarity
+                msg.pitch = 1;
+                
+                // Start speech
+                window.speechSynthesis.speak(msg);
+            }
+        });
+    </script>
 </body>
 </html>
