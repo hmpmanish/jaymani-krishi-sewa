@@ -86,7 +86,6 @@
     </div>
 
     <script>
-        // --- AAPKA DATABASE ---
         const validUsers = {
             "manish": "pandey", 
             "jayant": "raj123", 
@@ -99,7 +98,6 @@
 
         function switchRole(role) {
             currentRole = role;
-            // Update UI
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('bg-primary', 'text-white');
                 btn.classList.add('text-slate-500', 'dark:text-slate-400');
@@ -107,9 +105,29 @@
             const activeBtn = document.getElementById('tab-' + role);
             activeBtn.classList.remove('text-slate-500', 'dark:text-slate-400');
             activeBtn.classList.add('bg-primary', 'text-white');
-            
             document.getElementById('role-text').innerText = role.toUpperCase() + " ACCESS";
             document.getElementById('error-msg').classList.add('hidden');
+        }
+
+        // Updated Voice Welcome with Callback
+        function speakWelcome(name, role, callback) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop any current voice
+                const msg = new SpeechSynthesisUtterance();
+                let roleHindi = role === 'farmer' ? 'किसान भाई' : (role === 'vendor' ? 'विक्रेता महोदय' : 'एडमिन');
+                msg.text = `नमस्ते ${name}! जयमानी कृषि सेवा में आपका स्वागत है। आप ${roleHindi} के रूप में लॉगिन हो चुके हैं।`;
+                msg.lang = 'hi-IN';
+                msg.rate = 0.9;
+                
+                // This ensures the page redirects ONLY after the voice finishes
+                msg.onend = function() {
+                    callback();
+                };
+                
+                window.speechSynthesis.speak(msg);
+            } else {
+                callback(); // If no voice support, redirect immediately
+            }
         }
 
         document.getElementById('loginBtn').onclick = () => {
@@ -119,22 +137,31 @@
             if (validUsers[id] && validUsers[id] === pass) {
                 sessionStorage.setItem("loggedUser", id);
                 
-                if (currentRole === 'admin' && (id === 'manish' || id === 'jayant')) {
-                    window.location.href = "Admin-Panel.html";
-                } 
-                else if (currentRole === 'vendor') {
-                    window.location.href = "Vendor-Dashboard.html";
-                } 
-                else if (currentRole === 'farmer') {
-                    window.location.href = "Marketplace.html";
-                } 
-                else {
-                    alert("Kripya sahi Role select karein!");
-                }
+                // Show a "Logging in..." state on button
+                document.getElementById('loginBtn').innerText = " लॉगिन हो रहा है...";
+                document.getElementById('loginBtn').classList.add('opacity-75');
+
+                // Speak and then redirect
+                speakWelcome(id, currentRole, () => {
+                    if (currentRole === 'admin' && (id === 'manish' || id === 'jayant')) {
+                        window.location.href = "Admin-Panel.html";
+                    } 
+                    else if (currentRole === 'vendor') {
+                        window.location.href = "Vendor-Dashboard.html";
+                    } 
+                    else if (currentRole === 'farmer') {
+                        window.location.href = "Marketplace.html";
+                    } 
+                });
+                
             } else {
                 document.getElementById('error-msg').classList.remove('hidden');
             }
         };
+
+        document.getElementById('userPass').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') document.getElementById('loginBtn').click();
+        });
     </script>
 </body>
 </html>
