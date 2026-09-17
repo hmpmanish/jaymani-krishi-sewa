@@ -112,21 +112,30 @@
         // Updated Voice Welcome with Callback
         function speakWelcome(name, role, callback) {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // Stop any current voice
+                window.speechSynthesis.cancel(); 
                 const msg = new SpeechSynthesisUtterance();
                 let roleHindi = role === 'farmer' ? 'किसान भाई' : (role === 'vendor' ? 'विक्रेता महोदय' : 'एडमिन');
                 msg.text = `नमस्ते ${name}! जयमानी कृषि सेवा में आपका स्वागत है। आप ${roleHindi} के रूप में लॉगिन हो चुके हैं।`;
                 msg.lang = 'hi-IN';
                 msg.rate = 0.9;
                 
-                // This ensures the page redirects ONLY after the voice finishes
-                msg.onend = function() {
-                    callback();
+                let called = false;
+                const safeCallback = () => {
+                    if(!called){
+                        called = true;
+                        callback();
+                    }
                 };
+
+                msg.onend = safeCallback;
+                msg.onerror = safeCallback;
+                
+                // Fallback timer: agar browser awaz na nikal paye toh 3 sec baad redirect kar do
+                setTimeout(safeCallback, 3000);
                 
                 window.speechSynthesis.speak(msg);
             } else {
-                callback(); // If no voice support, redirect immediately
+                callback(); 
             }
         }
 
