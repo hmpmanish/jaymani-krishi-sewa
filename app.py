@@ -64,14 +64,17 @@ with app.app_context():
 # --- ROUTES ---
 
 @app.route('/')
+@app.route('/index.html')
 def home():
     return render_template('index.html')
 
 @app.route('/login')
+@app.route('/Login.html')
 def login_page():
     return render_template('Login.html')
 
 @app.route('/signup')
+@app.route('/Signup.html')
 def signup_page():
     return render_template('Signup.html')
 
@@ -115,6 +118,7 @@ def auth():
             return "Invalid Credentials. Try again."
 
 @app.route('/marketplace')
+@app.route('/Marketplace.html')
 def marketplace():
     if 'user' not in session or session.get('role') != 'farmer':
         return redirect(url_for('login_page'))
@@ -122,6 +126,7 @@ def marketplace():
     return render_template('Marketplace.html', products=products)
 
 @app.route('/vendor/dashboard')
+@app.route('/Vendor-Dashboard.html')
 def vendor_dashboard():
     if 'user' not in session or session.get('role') != 'vendor':
         return redirect(url_for('login_page'))
@@ -129,6 +134,7 @@ def vendor_dashboard():
     return render_template('Vendor-Dashboard.html', products=products)
 
 @app.route('/farmer/bahi-khata')
+@app.route('/Farmer-BahiKhata.html')
 def farmer_bahi_khata():
     if 'user' not in session or session.get('role') != 'farmer':
         return redirect(url_for('login_page'))
