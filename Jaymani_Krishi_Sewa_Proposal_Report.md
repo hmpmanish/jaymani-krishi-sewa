@@ -65,7 +65,7 @@ colorlinks: true
 
 ---
 
-## 🚀 5. EXECUTIVE ABSTRACT
+## 🚀 5. EXECUTIVE ABSTRACT & METHODOLOGY (PO1)
 
 <div style="background-color: #eff6ff; padding: 25px; border-radius: 10px; border-left: 6px solid #3b82f6; font-size: 1.15em; line-height: 1.6;">
 Farmers frequently face significant challenges in the local agricultural supply chain, primarily dealing with local price fluctuations, stock uncertainty, and the limitations of traditional, paper-based <em>Bahi-Khata</em> (credit ledgers). These inefficiencies lead to wasted time, increased fuel costs, and potential crop losses. 
@@ -79,7 +79,7 @@ Furthermore, it integrates a digital <em>Bahi-Khata</em> system, replacing manua
 
 ---
 
-## 🎯 7. PROBLEM STATEMENT (PO1)
+## 🎯 7. PROBLEM STATEMENT & OBJECTIVES (PO1)
 
 <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 20px 0;">
   
@@ -125,7 +125,7 @@ Furthermore, it integrates a digital <em>Bahi-Khata</em> system, replacing manua
 
 ---
 
-## 🌟 10. PROPOSED PROJECT CONCEPT (PO4)
+## 🌟 10. IDENTIFICATION OF THE MODULES (PO2)
 
 **Jaymani Krishi Sewa** is conceptualized as a **Hyper-Local Digital Agritech Marketplace**. 
 
@@ -149,7 +149,7 @@ graph LR
 
 ---
 
-## 🔄 11. PROPOSED SYSTEM WORKFLOW
+## 🔄 11. WORKING WITH LOW LEVEL DESIGN (PO4)
 
 ```mermaid
 graph TD
@@ -197,7 +197,7 @@ graph TD
 
 ---
 
-## ⚙️ 16. TECHNOLOGY STACK
+## ⚙️ 16. IDENTIFICATION OF NECESSARY TOOLS (PO5)
 
 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
   <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-left: 5px solid #e34c26;">
@@ -222,7 +222,7 @@ graph TD
 
 ---
 
-## 🏗️ 17. SYSTEM ARCHITECTURE
+## 🏗️ 17. WORKING WITH HIGH LEVEL DESIGN (PO3)
 
 ```mermaid
 graph TD
@@ -257,7 +257,7 @@ graph TD
 
 ---
 
-## 📅 20. PROJECT ROADMAP (PO11)
+## 📅 20. PROJECT DESIGN REPORT & ROADMAP (PO12)
 
 <div style="background-color: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #cbd5e1;">
   <p><strong>Phase 1-2:</strong> Problem Identification & Requirement Analysis <em>(Weeks 1-4)</em></p>
@@ -275,7 +275,7 @@ graph TD
 
 ---
 
-## 👥 21. DISTRIBUTION OF WORK (PO11)
+## 👥 21. COMMUNICATION (PRESENTATION) & TEAMWORK (PO10)
 
 | Team Member | Primary Responsibilities | Supporting Responsibilities |
 | :--- | :--- | :--- |
