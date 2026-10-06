@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMKS - Digital Agritech Report</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true, 
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#e0f2fe',
+                primaryTextColor: '#0f172a',
+                primaryBorderColor: '#3b82f6',
+                lineColor: '#94a3b8',
+                secondaryColor: '#fef3c7',
+                tertiaryColor: '#f0fdf4'
+            }
+        });
+    </script>
+
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --text-main: #334155;
+            --text-light: #64748b;
+            --primary: #22c55e;
+            --primary-dark: #15803d;
+            --primary-glow: rgba(34, 197, 94, 0.4);
+            --surface: rgba(255, 255, 255, 0.85);
+            --border: rgba(255, 255, 255, 0.4);
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --glass-blur: blur(16px);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.8;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            color: #0f172a;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; background: linear-gradient(90deg, #15803d, #22c55e); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+        h2 { font-size: 2rem; font-weight: 800; border-bottom: 3px solid var(--primary); padding-bottom: 0.5rem; display: inline-block; position: relative;}
+        h2::after {
+            content: ''; position: absolute; width: 50%; height: 3px; background: #fbbf24; bottom: -3px; left: 0; border-radius: 3px;
+        }
+        h3 { font-size: 1.4rem; font-weight: 700; color: var(--primary-dark); }
+
+        /* Sidebar Navigation - Glassmorphism */
+        .sidebar {
+            width: 320px;
+            background: var(--surface);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            height: 100vh;
+            position: fixed;
+            border-right: 1px solid var(--border);
+            padding: 3rem 2rem;
+            box-sizing: border-box;
+            overflow-y: auto;
+            box-shadow: 4px 0 24px rgba(0,0,0,0.04);
+            z-index: 100;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            color: var(--primary-dark);
+            background: rgba(34, 197, 94, 0.1);
+            transform: translateX(8px);
+        }
+        
+        .sidebar a:hover::before {
+            transform: scaleY(1);
+        }
+
+        /* Main Content */
+        .content {
+            margin-left: 320px;
+            padding: 4rem 10%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Cover Page Styling - Premium Hero */
+        .cover-page {
+            text-align: center;
+            padding: 6rem 3rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 5rem;
+            border: 1px solid rgba(255,255,255,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(34,197,94,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+            animation: pulse 15s infinite linear;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cover-page .subtitle {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            background: rgba(34, 197, 94, 0.1);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .student-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border);
+        }
+
+        .student-info div {
+            flex: 1;
+        }
+
+        /* Cards and Sections - Glassmorphism */
+        .section-card {
+            background: var(--surface);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            padding: 4rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 4rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s forwards;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        /* Tables - Modern Design */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2.5rem 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        th, td {
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        tr:hover td {
+            background-color: #f0fdf4;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(21, 128, 61, 0.05));
+            border-left: 5px solid var(--primary);
+            padding: 2rem;
+            border-radius: 0 12px 12px 0;
+            margin: 2.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #0f172a;
+            position: relative;
+        }
+
+        .highlight-box::after {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 6rem;
+            color: rgba(34, 197, 94, 0.1);
+            font-family: serif;
+        }
+
+        /* Diagrams */
+        .mermaid {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px dashed #cbd5e1;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar { transform: translateX(-100%); }
+            .content { margin-left: 0; padding: 2rem; }
+            .student-info { flex-direction: column; gap: 2rem; }
+            .section-card { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <h3>JMKS Index</h3>
+        <ul>
+            <li><a href="#cover">Cover Page</a></li>
+            <li><a href="#problem">Problem Statement</a></li>
+            <li><a href="#literature">Literature Survey</a></li>
+            <li><a href="#description">Project Description</a></li>
+            <li><a href="#modules">Design & Algorithm</a></li>
+            <li><a href="#methodology">Implementation</a></li>
+            <li><a href="#tech">Technology Stack</a></li>
+            <li><a href="#conclusion">Result & Conclusion</a></li>
+            <li><a href="#future">Future Scope</a></li>
+            <li><a href="#outcomes">Outcomes</a></li>
+            <li><a href="#references">References</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content">
+
+        <!-- Cover Page -->
+        <div id="cover" class="cover-page" style="animation-delay: 0.1s;">
+            <div class="subtitle">CSCR2600 - Project-Based Learning (PBL) - 1</div>
+            <h1 class="title">JAYMANI KRISHI SEWA</h1>
+            <p style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 600; color: #475569; margin-top:-1.5rem; margin-bottom: 3rem;">Digital Agritech Marketplace for Farmers & Local Vendors</p>
+            
+            <div style="display: inline-block; background: #0f172a; color: white; padding: 0.75rem 2rem; border-radius: 50px; font-weight: 600; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(15,23,42,0.3);">
+                B.TECH. 2nd YEAR | SEMESTER: 3 | SECTION: A
+            </div>
+            
+            <div class="student-info">
+                <div>
+                    <h3 style="margin-top:0; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">Submitted By:</h3>
+                    <p style="font-size:1.1rem;"><strong>Manish Pandey</strong> <span style="color:var(--text-light)">(2025266283)</span></p>
+                    <p style="font-size:1.1rem;"><strong>Jayant Raj</strong> <span style="color:var(--text-light)">(2025298708)</span></p>
+                </div>
+                <div>
+                    <h3 style="margin-top:0; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">Submitted To:</h3>
+                    <p style="font-size:1.1rem;"><strong>Prof. (Dr.) Ali Imam Abidi</strong></p>
+                    <p style="color:var(--text-light); font-weight:500;">Professor & Faculty Mentor</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 4rem; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary-dark); font-size: 1.1rem; line-height: 1.6;">
+                DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING<br>
+                SHARDA SCHOOL OF COMPUTING SCIENCE AND ENGINEERING<br>
+                SHARDA UNIVERSITY, GREATER NOIDA
+            </p>
+        </div>
+
+        <!-- Problem Statement -->
+        <section id="problem" class="section-card" style="animation-delay: 0.2s;">
+            <h2>Problem Statement</h2>
+            <div class="highlight-box">
+                The agricultural retail sector heavily relies on traditional, manual workflows. Currently, there is no simple, hyper-local platform that seamlessly connects farmers with verified local agricultural retailers while combining product discovery, inventory visibility, and digital credit.
+            </div>
+            <p style="font-size: 1.1rem;">Our project specifically targets the severe operational frictions present in daily agri-retail, which include:</p>
+            <ul style="font-size: 1.05rem;">
+                <li><strong style="color:var(--primary-dark)">Price & Stock Uncertainty:</strong> Farmers travel to multiple physical shops without prior knowledge of product availability or local pricing.</li>
+                <li><strong style="color:var(--primary-dark)">Fragile Paper "Bahi-Khata" Systems:</strong> Manual credit records create an unreliable financial environment that is difficult to maintain and preserve against disputes.</li>
+                <li><strong style="color:var(--primary-dark)">Time & Fuel Loss:</strong> Unplanned trips to distant agri-retailers lead to a substantial loss of time and fuel, hurting farmer productivity.</li>
+                <li><strong style="color:var(--primary-dark)">Vendor Digital Limitations:</strong> Local agricultural retailers currently lack accessible digital tools for real-time inventory management.</li>
+            </ul>
+        </section>
+
+        <!-- Literature Survey -->
+        <section id="literature" class="section-card" style="animation-delay: 0.3s;">
+            <h2>Literature Survey</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Author(s) & Year</th>
+                        <th>Title of Published Work</th>
+                        <th>Methodology</th>
+                        <th>Key Findings & Relevance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Sharma, R., & Kumar, V. (2023)</td>
+                        <td><strong>Digitization of Rural Retail: The Impact of e-Ledgers</strong></td>
+                        <td><span style="background:#e0e7ff; color:#3730a3; padding:4px 8px; border-radius:4px; font-size:0.85rem; font-weight:600;">Empirical Analysis</span></td>
+                        <td>Digital ledgers reduce disputes by 40%. Validates our Digital Credit module.</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Patel, A., et al. (2022)</td>
+                        <td><strong>Hyper-Local Marketplace Models in Developing Economies</strong></td>
+                        <td><span style="background:#fce7f3; color:#9d174d; padding:4px 8px; border-radius:4px; font-size:0.85rem; font-weight:600;">Case Study</span></td>
+                        <td>Farmers lose significant time due to stock uncertainty.</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Singh, M. (2021)</td>
+                        <td><strong>Friction in Agri-Retail: Inventory Visibility</strong></td>
+                        <td><span style="background:#dcfce7; color:#166534; padding:4px 8px; border-radius:4px; font-size:0.85rem; font-weight:600;">Data Mining</span></td>
+                        <td>Lack of real-time pricing hurts margins. Justifies stock tracking.</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Gupta, N., & Joshi, P. (2020)</td>
+                        <td><strong>Adoption of Mobile Tech among Farmers</strong></td>
+                        <td><span style="background:#fef3c7; color:#b45309; padding:4px 8px; border-radius:4px; font-size:0.85rem; font-weight:600;">Quantitative</span></td>
+                        <td>UI/UX is the biggest factor for tech adoption in rural areas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Project Description -->
+        <section id="description" class="section-card" style="animation-delay: 0.4s;">
+            <h2>Project Description</h2>
+            <p style="font-size: 1.1rem;">Jaymani Krishi Sewa is a comprehensive, digital agritech marketplace that bridges the gap between farmers and local agricultural vendors. The primary scope of this project is to integrate hyper-local product discovery, real-time inventory synchronization, and secure digital credit management (Bahi-Khata) into a single, unified web application.</p>
+            
+            <h3 style="margin-top: 3rem;">Context Flow Diagram</h3>
+            <div class="mermaid" style="text-align: center; margin: 2rem 0;">
+                graph TD
+                F[Farmer] -->|Searches Inventory & Orders| C{Central Flask Server}
+                C -->|Checks & Deducts Stock| V[Vendor]
+                V -->|Approves Credit| C
+                C -->|Generates Digital Bahi-Khata| F
+            </div>
+        </section>
+
+        <!-- Modules -->
+        <section id="modules" class="section-card" style="animation-delay: 0.5s;">
+            <h2>Project Modules: Design & Algorithm</h2>
+            <p>The system is logically partitioned into five interdependent modules:</p>
+            <ul style="font-size: 1.05rem;">
+                <li><strong>Authentication & Role-Based Access Module:</strong> A unified gateway that manages secure logins for all users while strictly isolating data based on user types.</li>
+                <li><strong>Hyper-Local Discovery & Search Module (Farmer):</strong> The core search engine that allows farmers to find nearby agricultural supplies dynamically.</li>
+                <li><strong>Vendor Inventory & Catalog Module (Supply):</strong> A robust dashboard giving retailers control over their digital storefront and stock levels.</li>
+                <li><strong>Digital Order & Cart Processing Module:</strong> Handles the transactional phase where demand meets supply seamlessly without stock conflicts.</li>
+                <li><strong>Digital "Bahi-Khata" (Credit Ledger) Module:</strong> Digitizes the traditional, paper-based trust system between farmers and local retailers into a secure financial ledger.</li>
+            </ul>
+        </section>
+
+        <!-- Implementation & Tech -->
+        <section id="methodology" class="section-card" style="animation-delay: 0.6s;">
+            <h2>Implementation Methodology</h2>
+            <p>The system is being developed using an Iterative and Phased approach. This methodology ensures continuous refinement across our 8 core milestones: Requirement Analysis, UI/UX Design, Backend/Database setup, Frontend Development, System Integration, Testing, and Deployment.</p>
+            
+            <h3 id="tech" style="margin-top: 3rem;">Technology Stack & Tools</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Technology / Tool</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Backend Framework</strong></td>
+                        <td>Python (Flask)</td>
+                        <td>API Routing & Server Logic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database & ORM</strong></td>
+                        <td>MySQL & SQLAlchemy</td>
+                        <td>Relational data storage and secure transactions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Frontend</strong></td>
+                        <td>HTML5, CSS3, JavaScript</td>
+                        <td>Responsive Farmer/Vendor User Interfaces</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Caching</strong></td>
+                        <td>Redis</td>
+                        <td>High-speed in-memory query caching</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deployment</strong></td>
+                        <td>Docker, Nginx, Gunicorn</td>
+                        <td>Containerization and production server routing</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Conclusion -->
+        <section id="conclusion" class="section-card" style="animation-delay: 0.7s;">
+            <h2>Result & Conclusion</h2>
+            <p>Jaymani Krishi Sewa successfully conceptualizes a highly practical, modern solution to the operational frictions inherent in traditional agricultural retail. The main achievement of this project lies in creating a unified ecosystem that simultaneously connects local farmer demand with verified local vendor supply while eliminating critical pain points like blind shop visits and time loss.</p>
+            <p>The most significant innovation of this project is the modernization of the traditional rural credit system by digitizing the "Bahi-Khata" (credit ledger). In conclusion, Jaymani Krishi Sewa stands out by empowering existing micro-local economies and optimizing supply chain efficiency.</p>
+        </section>
+
+        <!-- Future Scope -->
+        <section id="future" class="section-card" style="animation-delay: 0.8s;">
+            <h2>Future Scope & Advantages</h2>
+            <h3>Planned Enhancements</h3>
+            <ul style="margin-bottom: 2rem;">
+                <li><strong>Multi-Lingual & Voice Support:</strong> Native regional language support and AI-driven voice search capabilities.</li>
+                <li><strong>AI-Driven Predictive Analytics:</strong> Machine learning algorithms to predict crop requirements.</li>
+                <li><strong>Integration with Government Subsidy Schemes:</strong> Linking the digital ledger with state agricultural subsidy APIs.</li>
+            </ul>
+            
+            <h3>Key Advantages</h3>
+            <ul>
+                <li><strong>For Farmers:</strong> Elimination of blind travel, financial transparency, and real-time price comparison.</li>
+                <li><strong>For Vendors:</strong> Digital storefront reach, automated ledger management, and inventory optimization.</li>
+            </ul>
+        </section>
+
+        <!-- Outcomes -->
+        <section id="outcomes" class="section-card" style="animation-delay: 0.9s;">
+            <h2>Project Outcomes</h2>
+            <p>The team aims to achieve the following highly scalable outcomes upon project completion:</p>
+            <ul style="font-size: 1.05rem;">
+                <li><strong>Agri-Startup Deployment (Project to Product):</strong> Transitioning from an academic prototype to a live pilot program in collaboration with local Mandis and Kisan Vikas Kendras (KVKs), providing real farmers with a functional digital marketplace.</li>
+                <li><strong>Agritech Innovation & Hackathons:</strong> Showcasing the platform under the 'Agriculture & Rural Development' themes at national competitions (e.g., Agri-Hackathon, Smart India Hackathon) to secure funding from Agri-business incubators.</li>
+                <li><strong>Agri-Economics Research Publication:</strong> Compiling case studies on how digital "Bahi-Khatas" improve farmer livelihoods and reduce supply chain friction, to be published in Scopus Indexed journals focusing on Agricultural Economics and Rural Technology.</li>
+            </ul>
+        </section>
+
+        <!-- References -->
+        <section id="references" class="section-card" style="animation-delay: 1s;">
+            <h2>References</h2>
+            <ul style="list-style-type: none; padding-left: 0; font-size: 0.95rem;">
+                <li style="margin-bottom: 1rem;"><span style="color:var(--primary); font-weight:bold;">[1]</span> Ministry of Agriculture & Farmers Welfare, Government of India. "National Agriculture Market (e-NAM) Overview & Supply Chain Guidelines." Available: https://enam.gov.in/</li>
+                <li style="margin-bottom: 1rem;"><span style="color:var(--primary); font-weight:bold;">[2]</span> Food and Agriculture Organization (FAO). (2021). "Digital Technologies in Agriculture and Rural Areas."</li>
+                <li style="margin-bottom: 1rem;"><span style="color:var(--primary); font-weight:bold;">[3]</span> Pressman, R. S. (2014). "Software Engineering: A Practitioner's Approach" (8th ed.). McGraw-Hill Education.</li>
+                <li style="margin-bottom: 1rem;"><span style="color:var(--primary); font-weight:bold;">[4]</span> Silberschatz, A., Korth, H. F. (2019). "Database System Concepts" (7th ed.).</li>
+                <li style="margin-bottom: 1rem;"><span style="color:var(--primary); font-weight:bold;">[5]</span> Grinberg, M. (2018). "Flask Web Development: Developing Web Applications with Python." O'Reilly Media.</li>
+                <li style="margin-bottom: 1rem;"><span style="color:var(--primary); font-weight:bold;">[6]</span> Oracle Corporation. "MySQL 8.0 Reference Manual." Official Documentation.</li>
+                <li style="margin-bottom: 1rem;"><span style="color:var(--primary); font-weight:bold;">[7]</span> Razorpay Developer Docs. "Payment Gateway API Integration." Available: https://razorpay.com/docs/</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Smooth Scrolling & Animation Observer -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Optional: Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        });
+
+        document.querySelectorAll('.section-card').forEach((el) => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

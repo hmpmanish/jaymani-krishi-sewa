@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaymani Krishi Sewa | Digital Agritech Marketplace</title>
+    <meta name="description" content="A hyper-local digital marketplace empowering farmers and local agricultural vendors with seamless product discovery and inventory management.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-leaf">🌱</span>
+                <h1>Jaymani Krishi Sewa</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-btn active" data-target="home-view">Home</a></li>
+                <li><a href="#" class="nav-btn" data-target="marketplace-view">Marketplace</a></li>
+                <li><a href="#" class="nav-btn btn-primary" id="login-btn" data-target="login-view">Login / Join</a></li>
+                <li><a href="#" class="nav-btn btn-danger hidden" id="logout-btn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app-container">
+        
+        <!-- View: Home / Landing Page -->
+        <section id="home-view" class="view active-view">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h2 class="hero-title">Empowering Local Agriculture, <br><span class="highlight">Digitally.</span></h2>
+                    <p class="hero-subtitle">Connect with nearby suppliers, discover agricultural products, and manage digital credit records—all in one secure platform.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-large navigate-btn" data-target="marketplace-view">Explore Marketplace</button>
+                        <button class="btn btn-outline btn-large navigate-btn" data-target="login-view">Vendor Portal</button>
+                    </div>
+                </div>
+                <div class="hero-graphics">
+                    <!-- Glassmorphism decorative cards -->
+                    <div class="glass-card float-anim delay-1">
+                        <div class="icon-box">🌾</div>
+                        <div>
+                            <h4>Premium Seeds</h4>
+                            <p>Available at Local Vendors</p>
+                        </div>
+                    </div>
+                    <div class="glass-card float-anim delay-2">
+                        <div class="icon-box">🚜</div>
+                        <div>
+                            <h4>Fertilizers</h4>
+                            <p>Real-time pricing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View: Login -->
+        <section id="login-view" class="view hidden-view">
+            <div class="auth-container">
+                <div class="auth-card glass-panel">
+                    <h2>Welcome Back</h2>
+                    <p>Login to access your dashboard</p>
+                    <form id="login-form">
+                        <div class="input-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required placeholder="farmer@jaymani.com">
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" required placeholder="••••••••">
+                        </div>
+                        <div class="error-msg hidden" id="login-error">Invalid credentials.</div>
+                        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                    </form>
+                    <div class="demo-creds">
+                        <small><strong>Demo:</strong> farmer@jaymani.com / farmer123</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View: Marketplace (Farmer Dashboard) -->
+        <section id="marketplace-view" class="view hidden-view">
+            <div class="dashboard-header">
+                <h2>Hyper-Local Marketplace</h2>
+                <p>Discover agricultural supplies near you.</p>
+            </div>
+            
+            <div class="filters">
+                <input type="text" id="search-input" class="search-bar" placeholder="Search for seeds, fertilizers...">
+                <select id="category-filter" class="dropdown">
+                    <option value="All">All Categories</option>
+                    <option value="Seeds">Seeds</option>
+                    <option value="Fertilizer">Fertilizer</option>
+                </select>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be injected here via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">
+        <span id="toast-message">Notification message</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

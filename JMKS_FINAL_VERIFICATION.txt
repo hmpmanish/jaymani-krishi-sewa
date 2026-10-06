@@ -1,0 +1,26 @@
+FINAL VERIFICATION REPORT: JAYMANI KRISHI SEWA
+
+1. Master Template Comparison: Passed. `JMKS_FINAL.docx` was built directly by injecting validated text into `Report format.docx`. All margins, page dimensions, heading styles, and cover-page formats are completely preserved. Unnecessary `<Guidelines>` tags were stripped.
+
+2. Student Information Verification: Passed. Manish Pandey (2025266283) and Jayant Raj (2025298708) correctly assigned to the cover page and Team Formation table. The unused third student slot was cleanly removed.
+
+3. Project Information Verification: Passed. The title "JAYMANI KRISHI SEWA — Digital Agritech Marketplace for Farmers & Local Vendors" is consistent across the cover page and internal sections.
+
+4. Section Verification: Passed. Missing or incorrectly ordered sections in `JMKS.docx` were resolved by adhering strictly to the Master Template's section order (Problem Statement -> Literature Survey -> Project Description -> Modules -> Methodology -> Conclusion -> Future Scope -> Advantages -> Outcome -> References).
+
+5. Table Verification: Passed.
+   - Team Formation Table: Populated with correct Roll/System IDs and mapped roles (Tester & Developer / Designer & Developer).
+   - Literature Survey Table: Created as a native Word table with 5 rows detailing the academic relevance of the study.
+
+6. Diagram Verification: Passed. An ASCII-based Context Diagram was injected into the Project Description section clearly illustrating the Farmer <-> Central Flask Server <-> Vendor workflow.
+
+7. TOC Verification: Pending.
+   - `MANUAL TOC UPDATE REQUIRED`: The Table of Contents structure is perfectly intact, but since it was generated programmatically, MS Word requires you to right-click the TOC and select "Update Field -> Update Entire Table" to calculate the correct page numbers.
+
+8. Reference Verification: Passed. Standardized academic and technical references (e-NAM guidelines, Flask docs, MySQL docs, Software Engineering books) were successfully appended in the correct format.
+
+9. Formatting Verification: Passed. Fonts standardized to Times New Roman, Size 12. No orphan headings, broken tables, or cropped diagrams remain. 
+
+10. Remaining Issues: None, other than the standard right-click TOC update.
+
+FINAL STATUS: READY FOR SUBMISSION
