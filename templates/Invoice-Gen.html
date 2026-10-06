@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Invoice | Jaymani Krishi Sewa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print { .no-print { display: none; } body { background: white; color: black; } }
+    </style>
+</head>
+<body class="bg-slate-50 p-4 md:p-10 text-slate-900">
+    <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-slate-200">
+        <div class="flex justify-between items-start border-b border-slate-100 pb-8 mb-8">
+            <div>
+                <h1 class="text-2xl font-black text-green-700">JAYMANI KRISHI SEWA</h1>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Digital Order Receipt</p>
+            </div>
+            <div class="text-right">
+                <p class="font-bold">Pandey Traders</p>
+                <p class="text-xs text-slate-500">Itia Thok, Gonda, UP</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 mb-10 text-sm">
+            <div>
+                <p class="text-xs font-bold text-slate-400 uppercase mb-1">Bill To:</p>
+                <p class="font-bold">Manish Pandey</p>
+                <p class="text-slate-500">Mobile: 9876543210</p>
+            </div>
+            <div class="text-right">
+                <p class="text-xs font-bold text-slate-400 uppercase mb-1">Order Date:</p>
+                <p class="font-bold">April 08, 2026</p>
+                <p class="text-green-700 font-black">Status: RESERVED</p>
+            </div>
+        </div>
+
+        <table class="w-full mb-10">
+            <thead>
+                <tr class="border-b border-slate-100 text-left text-xs font-bold text-slate-400 uppercase">
+                    <th class="py-3">Item Name</th>
+                    <th class="py-3 text-center">Qty</th>
+                    <th class="py-3 text-right">Price</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm font-medium">
+                <tr class="border-b border-slate-50">
+                    <td class="py-4">Urea (IFFCO) - 45kg Bag</td>
+                    <td class="py-4 text-center">5</td>
+                    <td class="py-4 text-right">₹1,330</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="flex justify-between items-center bg-slate-50 p-6 rounded-2xl">
+            <span class="font-bold uppercase text-xs text-slate-500">Total Payable at Shop:</span>
+            <span class="text-2xl font-black text-slate-900">₹1,330</span>
+        </div>
+
+        <div class="mt-12 flex gap-4 no-print">
+            <button onclick="window.print()" class="flex-1 py-4 bg-slate-900 text-white font-bold rounded-2xl">Download / Print PDF</button>
+            <button onclick="window.location.href='Marketplace.html'" class="flex-1 py-4 border border-slate-200 text-slate-500 font-bold rounded-2xl">Back to Market</button>
+        </div>
+        
+        <p class="text-center text-[10px] text-slate-400 mt-8 uppercase tracking-[0.2em]">© 2026 Sharda University Project - CSE Dept</p>
+    </div>
+</body>
+</html>

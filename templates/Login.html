@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Jaymani Krishi | Secure Access</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2f7f33",
+                        "background-dark": "#0a110b",
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { 
+            font-family: 'Lexend', sans-serif; 
+            background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-panel {
+            background: rgba(10, 17, 11, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="glass-panel w-full max-w-[420px] rounded-[2.5rem] shadow-2xl overflow-hidden p-8 md:p-10 transition-all duration-500">
+        <div class="text-center mb-8">
+            <div class="bg-primary/10 text-primary size-14 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <span class="material-symbols-outlined text-3xl">lock_open</span>
+            </div>
+            <h2 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Jaymani Krishi</h2>
+            <p id="role-text" class="text-primary font-semibold text-sm uppercase tracking-widest mt-1">Farmer Access</p>
+        </div>
+
+        <div class="flex bg-slate-200/50 dark:bg-white/5 p-1 rounded-2xl mb-8">
+            <button onclick="switchRole('farmer')" id="tab-farmer" class="tab-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all bg-primary text-white">Kisan</button>
+            <button onclick="switchRole('vendor')" id="tab-vendor" class="tab-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-500 dark:text-slate-400">Vendor</button>
+            <button onclick="switchRole('admin')" id="tab-admin" class="tab-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-500 dark:text-slate-400">Admin</button>
+        </div>
+
+        <div id="error-msg" class="hidden mb-6 p-4 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-2xl text-xs font-bold flex items-center gap-2">
+            <span class="material-symbols-outlined text-sm">warning</span> 
+            ⚠ ID ya Password galat hai!
+        </div>
+
+        <div class="space-y-4">
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">person</span>
+                <input type="text" id="userId" placeholder="Username / Mobile" class="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-900 border-none rounded-2xl ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary outline-none text-slate-900 dark:text-white transition-all">
+            </div>
+
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">key</span>
+                <input type="password" id="userPass" placeholder="Password" class="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-900 border-none rounded-2xl ring-1 ring-slate-200 dark:ring-white/10 focus:ring-2 focus:ring-primary outline-none text-slate-900 dark:text-white transition-all">
+            </div>
+        </div>
+
+        <button id="loginBtn" class="w-full mt-8 py-4 bg-primary hover:bg-primary/90 text-white font-black rounded-2xl shadow-lg shadow-primary/20 transition-all active:scale-95">
+            SIGN IN
+        </button>
+
+        <div class="mt-10 text-center border-t border-slate-200 dark:border-white/5 pt-6">
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                SHARDA UNIVERSITY DCL PROJECT<br/>
+                <span class="text-primary">Dev by Manish Pandey & Jayant Raj</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const validUsers = {
+            "manish": "pandey", 
+            "jayant": "raj123", 
+            "farmer01": "khet123", 
+            "hmp": "hmp", 
+            "9876543210": "bihar2026"
+        };
+
+        let currentRole = 'farmer';
+
+        function switchRole(role) {
+            currentRole = role;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('text-slate-500', 'dark:text-slate-400');
+            });
+            const activeBtn = document.getElementById('tab-' + role);
+            activeBtn.classList.remove('text-slate-500', 'dark:text-slate-400');
+            activeBtn.classList.add('bg-primary', 'text-white');
+            document.getElementById('role-text').innerText = role.toUpperCase() + " ACCESS";
+            document.getElementById('error-msg').classList.add('hidden');
+        }
+
+        // Updated Voice Welcome with Callback
+        function speakWelcome(name, role, callback) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); 
+                const msg = new SpeechSynthesisUtterance();
+                let roleHindi = role === 'farmer' ? 'किसान भाई' : (role === 'vendor' ? 'विक्रेता महोदय' : 'एडमिन');
+                msg.text = `नमस्ते ${name}! जयमानी कृषि सेवा में आपका स्वागत है। आप ${roleHindi} के रूप में लॉगिन हो चुके हैं।`;
+                msg.lang = 'hi-IN';
+                msg.rate = 0.9;
+                
+                let called = false;
+                const safeCallback = () => {
+                    if(!called){
+                        called = true;
+                        callback();
+                    }
+                };
+
+                msg.onend = safeCallback;
+                msg.onerror = safeCallback;
+                
+                // Fallback timer: agar browser awaz na nikal paye toh 3 sec baad redirect kar do
+                setTimeout(safeCallback, 3000);
+                
+                window.speechSynthesis.speak(msg);
+            } else {
+                callback(); 
+            }
+        }
+
+        document.getElementById('loginBtn').onclick = () => {
+            const id = document.getElementById('userId').value.trim().toLowerCase();
+            const pass = document.getElementById('userPass').value.trim();
+
+            if (validUsers[id] && validUsers[id] === pass) {
+                sessionStorage.setItem("loggedUser", id);
+                
+                // Show a "Logging in..." state on button
+                document.getElementById('loginBtn').innerText = " लॉगिन हो रहा है...";
+                document.getElementById('loginBtn').classList.add('opacity-75');
+
+                // Speak and then redirect
+                speakWelcome(id, currentRole, () => {
+                    if (currentRole === 'admin' && (id === 'manish' || id === 'jayant')) {
+                        window.location.href = "Admin-Panel.html";
+                    } 
+                    else if (currentRole === 'vendor') {
+                        window.location.href = "Vendor-Dashboard.html";
+                    } 
+                    else if (currentRole === 'farmer') {
+                        window.location.href = "Marketplace.html";
+                    } 
+                });
+                
+            } else {
+                document.getElementById('error-msg').classList.remove('hidden');
+            }
+        };
+
+        document.getElementById('userPass').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') document.getElementById('loginBtn').click();
+        });
+    </script>
+</body>
+</html>
