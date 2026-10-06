@@ -37,21 +37,18 @@ graph TD
 ## 🧩 3. Identification of the Modules (PO2) - 5 Marks
 
 ```mermaid
-mindmap
-  root((JAYMANI KRISHI SEWA))
-    User Authentication
-      Admin
-      Farmer
-      Vendor
-    Hyper-Local Discovery
-      Search Products
-      Check Availability
-    Inventory Management
-      Add Stock
-      Update Prices
-    Digital Credit System
-      Place Order
-      Track Bahi-Khata
+graph LR
+    A((JAYMANI KRISHI SEWA)) --> B[User Authentication]
+    B --> B1(Admin) & B2(Farmer) & B3(Vendor)
+    
+    A --> C[Hyper-Local Discovery]
+    C --> C1(Search Products) & C2(Check Availability)
+    
+    A --> D[Inventory Management]
+    D --> D1(Add Stock) & D2(Update Prices)
+    
+    A --> E[Digital Credit System]
+    E --> E1(Place Order) & E2(Track Bahi-Khata)
 ```
 
 ---
@@ -117,7 +114,7 @@ sequenceDiagram
 *   **Mode of Communication:** Simple, intuitive UI (React) and professional Viva PPTX.
 
 ```mermaid
-pie title "Presentation & Communication Breakdown"
+pie title Presentation and Communication Breakdown
     "Visual Diagrams (Architecture, Flow)" : 60
     "Concise Text (Bullet Points)" : 30
     "Live Demo / Verbal" : 10
