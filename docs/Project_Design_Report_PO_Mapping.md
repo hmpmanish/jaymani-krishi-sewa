@@ -121,4 +121,25 @@ pie title Presentation and Communication Breakdown
 ```
 
 ---
+
+## 📄 7. Project Design Report (PO12) - 5 Marks
+
+This entire markdown document serves as the comprehensive **Project Design Report**. It has been systematically structured to satisfy all programmatic outcomes (POs) required for a complete architectural and structural overview of the Jaymani Krishi Sewa system.
+
+---
+
+## 📊 Summary Evaluation Matrix
+
+| Rubric Criteria | PO Mapping | Marks Allocated |
+| :--- | :---: | :---: |
+| Objectives and Methodology of Project Proposal | PO1 | 5 |
+| Identification of Necessary Tools/ Formulas | PO5 | 5 |
+| Identification of the modules | PO2 | 5 |
+| Working with High Level Design | PO3 | 5 |
+| Working with low level Design (for each module) | PO4 | 5 |
+| Communication (Presentation) | PO10 | 5 |
+| Project Design Report | PO12 | 5 |
+| **Total Marks** | | **35** |
+
+---
 *Generated mapping perfectly aligns with the Program Outcomes (PO) mapping syllabus.*
